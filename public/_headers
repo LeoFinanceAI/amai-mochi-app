@@ -1,0 +1,10 @@
+# Security headers served by Cloudflare Pages (see .claude/rules/web-security.md).
+# connect-src names the production Supabase project: update it if the project changes.
+# 'unsafe-inline' styles are needed by the inline <style> in index.html and React style props.
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://aarlhgulwzolhjxvnevb.supabase.co wss://aarlhgulwzolhjxvnevb.supabase.co; worker-src 'self'; manifest-src 'self'; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'
