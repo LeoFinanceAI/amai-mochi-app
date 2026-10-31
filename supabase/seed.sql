@@ -101,3 +101,14 @@ INSERT INTO favicons_excluded_domains (domain) VALUES
     ('bigpond.net.au'),
     ('online.de'),
     ('apple.com');
+
+-- Amai Mochi: test flavors for local development (not pushed by db push)
+insert into public.sabor (nombre, color)
+values
+    ('Fresa', '#EE8FA8'),
+    ('Mango', '#F3C443'),
+    ('Taro', '#A985D1'),
+    ('Chocolate', '#8A5A3C'),
+    ('Oreo', '#6E6E6E'),
+    ('Vainilla', '#E3CC8A')
+on conflict (nombre) do nothing;
