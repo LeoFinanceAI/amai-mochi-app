@@ -6,10 +6,11 @@ afterEach(() => {
 });
 
 describe("i18nProvider", () => {
-  it("registers en and fr locales", () => {
+  it("registers en, fr and es locales", () => {
     expect(i18nProvider.getLocales?.()).toEqual([
       { locale: "en", name: "English" },
       { locale: "fr", name: "Français" },
+      { locale: "es", name: "Español" },
     ]);
   });
 
@@ -20,7 +21,7 @@ describe("i18nProvider", () => {
   });
 
   it("falls back to english for unknown locales", async () => {
-    await i18nProvider.changeLocale("es");
+    await i18nProvider.changeLocale("de");
 
     expect(i18nProvider.translate("crm.language")).toBe("Language");
   });
@@ -54,10 +55,33 @@ describe("i18nProvider", () => {
     expect(getInitialLocale()).toBe("fr");
   });
 
+  it("translates the Amai navigation in spanish", async () => {
+    await i18nProvider.changeLocale("es");
+
+    expect(i18nProvider.translate("amai.navigation.new_order")).toBe(
+      "Nuevo pedido",
+    );
+  });
+
+  it("falls back to english for crm keys not yet translated to spanish", async () => {
+    await i18nProvider.changeLocale("es");
+
+    expect(i18nProvider.translate("crm.language")).toBe("Language");
+  });
+
+  it("uses browser spanish locale for es-MX", () => {
+    vi.stubGlobal("navigator", {
+      language: "es-MX",
+      languages: ["es-MX", "en-US"],
+    });
+
+    expect(getInitialLocale()).toBe("es");
+  });
+
   it("falls back to english when browser locale is unsupported", () => {
     vi.stubGlobal("navigator", {
-      language: "es-ES",
-      languages: ["es-ES", "pt-BR"],
+      language: "pt-BR",
+      languages: ["pt-BR", "de-DE"],
     });
 
     expect(getInitialLocale()).toBe("en");

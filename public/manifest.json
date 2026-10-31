@@ -1,6 +1,6 @@
 {
-  "short_name": "Atomic CRM",
-  "name": "Atomic CRM",
+  "short_name": "Amai Mochi",
+  "name": "Amai Mochi",
   "icons": [
     {
       "src": "favicon.ico",
@@ -69,6 +69,7 @@
   "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#B23A62",
+  "background_color": "#FBF5E3",
+  "lang": "es-MX"
 }

@@ -22,7 +22,7 @@ import {
  * @see {@link https://marmelab.com/shadcn-admin-kit/docs/security Security documentation}
  */
 export const LoginPage = (props: { redirectTo?: string }) => {
-  const { darkModeLogo, title } = useConfigurationContext();
+  const { darkModeLogo, lightModeLogo, title } = useConfigurationContext();
   const { redirectTo } = props;
   const [loading, setLoading] = useState(false);
   const hasDisplayedRecoveryNotification = useRef(false);
@@ -101,6 +101,17 @@ export const LoginPage = (props: { redirectTo?: string }) => {
         <div className="flex flex-col justify-center w-full p-4 lg:p-8">
           <div className="w-full space-y-6 lg:mx-auto lg:w-[350px]">
             <div className="text-center">
+              {/* The side panel holding the logo is desktop-only: show it here on small screens. */}
+              <img
+                className="[.light_&]:hidden mx-auto mb-6 h-20 lg:hidden"
+                src={darkModeLogo}
+                alt={title}
+              />
+              <img
+                className="[.dark_&]:hidden mx-auto mb-6 h-20 lg:hidden"
+                src={lightModeLogo}
+                alt={title}
+              />
               <h1 className="text-2xl font-semibold tracking-tight">
                 {translate("ra.auth.sign_in")}
               </h1>

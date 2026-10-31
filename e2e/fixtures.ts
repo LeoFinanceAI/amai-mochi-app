@@ -196,15 +196,29 @@ async function createContact({
   return data;
 }
 
-// Both the desktop sidebar and the mobile bottom bar expose navigation as links,
-// so they are announced as links on every viewport.
-const getMenuMethod = ({ page }: { page: Page }) => ({
+// On desktop the header exposes the CRM pages as links. On mobile the bottom bar
+// only links the Amai Mochi screens, so the CRM pages are reached by URL.
+const getMenuMethod = ({
+  page,
+  isMobile,
+}: {
+  page: Page;
+  isMobile: boolean;
+}) => ({
   goToDashboard: async () => {
-    await page.getByRole("link", { name: "Dashboard" }).click();
+    if (isMobile) {
+      await page.goto("/#/");
+    } else {
+      await page.getByRole("link", { name: "Dashboard" }).click();
+    }
     await page.waitForLoadState("networkidle");
   },
   goToContacts: async () => {
-    await page.getByRole("link", { name: "Contacts" }).click();
+    if (isMobile) {
+      await page.goto("/#/contacts");
+    } else {
+      await page.getByRole("link", { name: "Contacts" }).click();
+    }
     await page.waitForLoadState("networkidle");
   },
 });
@@ -256,8 +270,8 @@ export const test = base.extend<{
   createNotes: async ({}, cb) => {
     await cb(createNotes);
   },
-  menu: async ({ page }, cb) => {
-    await cb(getMenuMethod({ page }));
+  menu: async ({ page, isMobile }, cb) => {
+    await cb(getMenuMethod({ page, isMobile }));
   },
   dismissToast: async ({ page }, cb) => {
     await cb((content: string) => dismissToast(page, content));

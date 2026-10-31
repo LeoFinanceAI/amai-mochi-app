@@ -45,7 +45,7 @@ test.describe("user adding a task", () => {
     await page.getByLabel("Password").fill("password");
     await page.getByRole("button", { name: "Sign in" }).click();
 
-    await expect(page).toHaveTitle(/Atomic CRM/);
+    await expect(page).toHaveTitle(/Amai Mochi/);
     await expect(page.getByText("Latest Activity")).toBeVisible();
 
     await menu.goToContacts();
@@ -55,8 +55,8 @@ test.describe("user adding a task", () => {
     await page.waitForLoadState("networkidle");
 
     if (isMobile) {
-      await page.getByRole("button", { name: "Create" }).click();
-      await page.getByRole("menuitem", { name: "Task" }).click();
+      await page.getByRole("tab", { name: "0 tasks" }).click();
+      await page.getByRole("button", { name: "Add task" }).click();
     } else {
       await page.getByRole("button", { name: "Add Task" }).click();
     }
