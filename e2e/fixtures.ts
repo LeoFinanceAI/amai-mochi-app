@@ -197,31 +197,40 @@ async function createContact({
 }
 
 // On desktop the header exposes the CRM pages as links. On mobile the bottom bar
-// only links the Amai Mochi screens, so the CRM pages are reached by URL.
+// only links the Amai Mochi screens, so the CRM pages are reached by URL, once the
+// bottom bar shows that sign-in has completed (the link click used to wait for it).
 const getMenuMethod = ({
   page,
   isMobile,
 }: {
   page: Page;
   isMobile: boolean;
-}) => ({
-  goToDashboard: async () => {
-    if (isMobile) {
-      await page.goto("/#/");
-    } else {
-      await page.getByRole("link", { name: "Dashboard" }).click();
-    }
-    await page.waitForLoadState("networkidle");
-  },
-  goToContacts: async () => {
-    if (isMobile) {
-      await page.goto("/#/contacts");
-    } else {
-      await page.getByRole("link", { name: "Contacts" }).click();
-    }
-    await page.waitForLoadState("networkidle");
-  },
-});
+}) => {
+  const goToMobilePage = async (hash: string) => {
+    await expect(
+      page.getByRole("navigation", { name: "Amai Mochi navigation" }),
+    ).toBeVisible();
+    await page.goto(`/${hash}`);
+  };
+  return {
+    goToDashboard: async () => {
+      if (isMobile) {
+        await goToMobilePage("#/");
+      } else {
+        await page.getByRole("link", { name: "Dashboard" }).click();
+      }
+      await page.waitForLoadState("networkidle");
+    },
+    goToContacts: async () => {
+      if (isMobile) {
+        await goToMobilePage("#/contacts");
+      } else {
+        await page.getByRole("link", { name: "Contacts" }).click();
+      }
+      await page.waitForLoadState("networkidle");
+    },
+  };
+};
 
 const dismissToast = async (page: Page, content: string) => {
   await expect(page.getByText(content)).toBeVisible();
