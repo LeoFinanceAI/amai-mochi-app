@@ -4,6 +4,7 @@ import englishMessages from "ra-language-english";
 import frenchMessages from "ra-language-french";
 import { raSupabaseEnglishMessages } from "ra-supabase-language-english";
 import { raSupabaseFrenchMessages } from "ra-supabase-language-french";
+import { englishAmaiMessages, spanishAmaiMessages } from "./amaiMessages";
 import { englishCrmMessages } from "./englishCrmMessages";
 import { frenchCrmMessages } from "./frenchCrmMessages";
 
@@ -47,6 +48,7 @@ const englishCatalog = mergeTranslations(
   raSupabaseEnglishMessages,
   raSupabaseEnglishMessagesOverride,
   englishCrmMessages,
+  englishAmaiMessages,
 );
 
 const frenchCatalog = mergeTranslations(
@@ -57,7 +59,10 @@ const frenchCatalog = mergeTranslations(
   frenchCrmMessages,
 );
 
-export const getInitialLocale = (): "en" | "fr" => {
+// Only the Amai Mochi keys are in Spanish so far; everything else falls back to English.
+const spanishCatalog = mergeTranslations(englishCatalog, spanishAmaiMessages);
+
+export const getInitialLocale = (): "en" | "fr" | "es" => {
   if (typeof navigator === "undefined") {
     return "en";
   }
@@ -65,6 +70,9 @@ export const getInitialLocale = (): "en" | "fr" => {
   const browserLocale = navigator.languages?.[0] ?? navigator.language;
   if (browserLocale?.toLowerCase().startsWith("fr")) {
     return "fr";
+  }
+  if (browserLocale?.toLowerCase().startsWith("es")) {
+    return "es";
   }
 
   return "en";
@@ -75,12 +83,16 @@ export const i18nProvider = polyglotI18nProvider(
     if (locale === "fr") {
       return frenchCatalog;
     }
+    if (locale === "es") {
+      return spanishCatalog;
+    }
     return englishCatalog;
   },
   getInitialLocale(),
   [
     { locale: "en", name: "English" },
     { locale: "fr", name: "Français" },
+    { locale: "es", name: "Español" },
   ],
   { allowMissing: true },
 );

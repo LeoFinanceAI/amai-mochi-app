@@ -59,6 +59,7 @@ import { ContactListMobile } from "../contacts/ContactList.tsx";
 import { ContactShow } from "../contacts/ContactShow.tsx";
 import { CompanyShow } from "../companies/CompanyShow.tsx";
 import { NoteShowPage } from "../notes/NoteShowPage.tsx";
+import { AMAI_PATHS, ComingSoonPage } from "../amai/ComingSoonPage.tsx";
 
 const defaultStore = localStorageStore(undefined, "CRM");
 
@@ -336,6 +337,27 @@ const MobileAdmin = (
             element={<SettingsPageMobile />}
           />
           <Route path={ChangelogPage.path} element={<ChangelogPage />} />
+          <Route
+            path={AMAI_PATHS.newOrder}
+            element={
+              <ComingSoonPage titleKey="amai.navigation.new_order" stage={2} />
+            }
+          />
+          <Route
+            path={AMAI_PATHS.receivables}
+            element={
+              <ComingSoonPage
+                titleKey="amai.navigation.receivables"
+                stage={3}
+              />
+            }
+          />
+          <Route
+            path={AMAI_PATHS.summary}
+            element={
+              <ComingSoonPage titleKey="amai.navigation.summary" stage={4} />
+            }
+          />
         </CustomRoutes>
         <Resource
           name="contacts"

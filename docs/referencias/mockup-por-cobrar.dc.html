@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Por cobrar</title>
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap"
+        />
+        <style>
+          body {
+            margin: 0;
+          }
+          a {
+            color: #a3345a;
+          }
+          a:hover {
+            color: #7e2445;
+          }
+          button {
+            font-family: inherit;
+          }
+        </style>
+      </helmet>
+      <div
+        style="
+          width: 390px;
+          height: 1400px;
+          box-sizing: border-box;
+          background: #fbf5e3;
+          color: #2a2320;
+          font-family: Quicksand, system-ui, sans-serif;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        "
+      >
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 20px 8px;
+          "
+        >
+          <a
+            href="Main.dc.html"
+            aria-label="Regresar"
+            style="
+              width: 44px;
+              height: 44px;
+              box-sizing: border-box;
+              border-radius: 22px;
+              border: 1px solid #e9dcc0;
+              background: #ffffff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#2A2320"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M15 6l-6 6l6 6"></path>
+            </svg>
+          </a>
+          <img
+            src="/_blob/63e1c6a5ff4bb26880daed988434846a"
+            alt="Amai Mochi"
+            style="width: 120px; height: auto; display: block"
+          />
+          <span style="width: 44px"></span>
+        </div>
+
+        <div style="padding: 4px 20px 0">
+          <h1
+            style="
+              margin: 0;
+              font-family: &quot;Bebas Neue&quot;, Impact, sans-serif;
+              font-weight: 400;
+              font-size: 44px;
+              line-height: 1;
+              color: #b23a62;
+              letter-spacing: 0.5px;
+            "
+          >
+            Por cobrar
+          </h1>
+        </div>
+
+        <div style="padding: 14px 20px 0">
+          <div
+            style="
+              background: #2a2320;
+              color: #fbf5e3;
+              border-radius: 20px;
+              padding: 18px 20px;
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+            "
+          >
+            <span style="font-size: 14px; font-weight: 600; color: #e9dcc0"
+              >Te deben en total</span
+            >
+            <span style="font-size: 38px; font-weight: 700; line-height: 1"
+              >{{totalTexto}}</span
+            >
+            <div style="display: flex; gap: 8px; flex-wrap: wrap">
+              <span
+                style="
+                  background: #3d3430;
+                  border-radius: 999px;
+                  padding: 6px 12px;
+                  font-size: 13px;
+                  font-weight: 600;
+                "
+                >{{numPedidos}}</span
+              >
+              <span
+                style="
+                  background: #f3c9a0;
+                  color: #6b3608;
+                  border-radius: 999px;
+                  padding: 6px 12px;
+                  font-size: 13px;
+                  font-weight: 700;
+                "
+                >{{numVencidos}}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div style="padding: 16px 20px 0; display: flex; gap: 8px">
+          <sc-for list="{{filtros}}" as="f" hint-placeholder-count="2">
+            <button onClick="{{f.pick}}" style="{{f.style}}">
+              {{f.label}}
+            </button>
+          </sc-for>
+        </div>
+
+        <div
+          style="
+            padding: 14px 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+          "
+        >
+          <sc-for list="{{clientes}}" as="c" hint-placeholder-count="4">
+            <div
+              style="
+                background: #ffffff;
+                border: 1px solid #e9dcc0;
+                border-radius: 18px;
+                padding: 14px 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: flex-start;
+                  gap: 8px;
+                "
+              >
+                <div style="display: flex; flex-direction: column; gap: 2px">
+                  <span style="font-size: 16px; font-weight: 700"
+                    >{{c.nombre}}</span
+                  >
+                  <span style="font-size: 13px; color: #5e5249"
+                    >{{c.zona}}</span
+                  >
+                </div>
+                <span style="font-size: 20px; font-weight: 700"
+                  >{{c.montoTexto}}</span
+                >
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 4px">
+                <sc-for list="{{c.pedidos}}" as="p" hint-placeholder-count="1">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      font-size: 13px;
+                      color: #5e5249;
+                    "
+                  >
+                    <span>{{p.fecha}} · {{p.piezas}} pzs</span>
+                    <span style="{{p.diasStyle}}">{{p.dias}}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display: flex; gap: 8px">
+                <button onClick="{{c.recordar}}" style="{{c.recordarStyle}}">
+                  {{c.recordarLabel}}
+                </button>
+                <button
+                  onClick="{{c.pagar}}"
+                  style="
+                    flex-grow: 1;
+                    min-height: 44px;
+                    border-radius: 12px;
+                    border: none;
+                    background: #b23a62;
+                    color: #ffffff;
+                    font-size: 14px;
+                    font-weight: 700;
+                    cursor: pointer;
+                  "
+                >
+                  Registrar pago
+                </button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{hayCobrados}}" hint-placeholder-val="{{ false }}">
+          <div
+            style="
+              padding: 20px 20px 0;
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            "
+          >
+            <span style="font-size: 13px; font-weight: 700; color: #5e5249"
+              >Cobrado hoy</span
+            >
+            <sc-for list="{{cobrados}}" as="k" hint-placeholder-count="1">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  background: #e7efd2;
+                  color: #3e4a14;
+                  border-radius: 12px;
+                  padding: 12px 14px;
+                  font-size: 14px;
+                  font-weight: 600;
+                "
+              >
+                <span>{{k.nombre}}</span>
+                <button
+                  onClick="{{k.deshacer}}"
+                  style="
+                    border: none;
+                    background: transparent;
+                    color: #3e4a14;
+                    font-size: 13px;
+                    font-weight: 700;
+                    text-decoration: underline;
+                    cursor: pointer;
+                    min-height: 44px;
+                  "
+                >
+                  Deshacer
+                </button>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <div
+          style="
+            margin-top: auto;
+            background: #ffffff;
+            border-top: 1px solid #e9dcc0;
+            display: flex;
+            padding: 8px 12px 20px;
+          "
+        >
+          <a
+            href="Main.dc.html"
+            style="
+              flex-grow: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 4px;
+              padding: 8px;
+              text-decoration: none;
+              color: #5e5249;
+              font-size: 12px;
+              font-weight: 600;
+            "
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 5v14"></path>
+              <path d="M5 12h14"></path>
+            </svg>
+            Nuevo pedido
+          </a>
+          <a
+            href="Cobranza.dc.html"
+            style="
+              flex-grow: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 4px;
+              padding: 8px;
+              text-decoration: none;
+              color: #b23a62;
+              font-size: 12px;
+              font-weight: 700;
+            "
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"
+              ></path>
+              <path d="M3 10h18"></path>
+              <path d="M7 15h3"></path>
+            </svg>
+            Por cobrar
+          </a>
+          <a
+            href="Resumen.dc.html"
+            style="
+              flex-grow: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 4px;
+              padding: 8px;
+              text-decoration: none;
+              color: #5e5249;
+              font-size: 12px;
+              font-weight: 600;
+            "
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 20h16"></path>
+              <path d="M7 16v-4"></path>
+              <path d="M12 16v-9"></path>
+              <path d="M17 16v-6"></path>
+            </svg>
+            Resumen
+          </a>
+        </div>
+      </div>
+    </x-dc>
+    <script
+      type="text/x-dc"
+      data-dc-script
+      data-props='{"precioPieza":{"editor":"int","default":0,"min":0,"max":200,"section":"Negocio"},"diasAlerta":{"editor":"int","default":7,"min":1,"max":60,"section":"Negocio"},"$preview":{"width":390,"height":1400}}'
+    >
+      class Component extends DCLogic {
+        constructor(props) {
+          super(props);
+          this.state = { filtro: 'todos', pagados: {}, recordados: {} };
+        }
+        renderVals() {
+          const precio = this.props.precioPieza ?? 0;
+          const alerta = this.props.diasAlerta ?? 7;
+          const st = this.state;
+          const money = (pzs) => precio > 0 ? '$' + (pzs * precio).toLocaleString('es-MX') : pzs + ' pzs';
+          const data = [
+            { id: 'd3', nombre: '[Distribuidor 3]', zona: 'Tepetitlán', pedidos: [{ fecha: 'Vie 16 oct', piezas: 40, dias: 14 }] },
+            { id: 'd1', nombre: '[Distribuidor 1]', zona: 'Guadalajara', pedidos: [{ fecha: 'Jue 22 oct', piezas: 40, dias: 8 }, { fecha: 'Lun 26 oct', piezas: 48, dias: 4 }] },
+            { id: 'vd', nombre: 'Venta directa', zona: 'Evento', pedidos: [{ fecha: 'Sáb 24 oct', piezas: 44, dias: 6 }] },
+            { id: 'd2', nombre: '[Distribuidor 2]', zona: 'Colima', pedidos: [{ fecha: 'Mar 27 oct', piezas: 60, dias: 3 }] }
+          ];
+          const pendientes = data.filter((c) => !st.pagados[c.id]);
+          const vencido = (c) => c.pedidos.some((p) => p.dias > alerta);
+          const visibles = st.filtro === 'vencidos' ? pendientes.filter(vencido) : pendientes;
+          const pzsTotal = pendientes.reduce((a, c) => a + c.pedidos.reduce((b, p) => b + p.piezas, 0), 0);
+          const nPed = pendientes.reduce((a, c) => a + c.pedidos.length, 0);
+          const nVenc = pendientes.filter(vencido).length;
+          const chip = (on) => 'flex-grow: 1; min-height: 44px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; ' + (on ? 'background: #2A2320; color: #FFFFFF; border: 1px solid #2A2320' : 'background: #FFFFFF; color: #2A2320; border: 1px solid #E9DCC0');
+          const clientes = visibles.map((c) => {
+            const pzs = c.pedidos.reduce((b, p) => b + p.piezas, 0);
+            const rec = !!st.recordados[c.id];
+            return {
+              nombre: c.nombre, zona: c.zona, montoTexto: money(pzs),
+              pedidos: c.pedidos.map((p) => ({ fecha: p.fecha, piezas: p.piezas, dias: 'hace ' + p.dias + ' días', diasStyle: p.dias > alerta ? 'color: #9A4F0E; font-weight: 700' : 'color: #5E5249' })),
+              recordarLabel: rec ? 'Recordado' : 'Recordar',
+              recordarStyle: 'min-height: 44px; padding: 0 14px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; ' + (rec ? 'background: #E7EFD2; color: #3E4A14; border: 1px solid #C9D7A3' : 'background: #FFFFFF; color: #2A2320; border: 1px solid #E9DCC0'),
+              recordar: () => this.setState({ recordados: Object.assign({}, st.recordados, { [c.id]: true }) }),
+              pagar: () => this.setState({ pagados: Object.assign({}, st.pagados, { [c.id]: true }) })
+            };
+          });
+          const cobrados = data.filter((c) => st.pagados[c.id]).map((c) => ({
+            nombre: c.nombre + ' · ' + money(c.pedidos.reduce((b, p) => b + p.piezas, 0)),
+            deshacer: () => { const n = Object.assign({}, st.pagados); delete n[c.id]; this.setState({ pagados: n }); }
+          }));
+          return {
+            totalTexto: pendientes.length ? money(pzsTotal) : 'Todo cobrado',
+            numPedidos: nPed + (nPed === 1 ? ' pedido' : ' pedidos'),
+            numVencidos: nVenc + ' con más de ' + alerta + ' días',
+            filtros: [['todos', 'Todos'], ['vencidos', 'Más de ' + alerta + ' días']].map(([id, label]) => ({ label, style: chip(st.filtro === id), pick: () => this.setState({ filtro: id }) })),
+            clientes, cobrados, hayCobrados: cobrados.length > 0
+          };
+        }
+      }
+    </script>
+  </body>
+</html>

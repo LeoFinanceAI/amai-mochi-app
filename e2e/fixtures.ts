@@ -196,18 +196,41 @@ async function createContact({
   return data;
 }
 
-// Both the desktop sidebar and the mobile bottom bar expose navigation as links,
-// so they are announced as links on every viewport.
-const getMenuMethod = ({ page }: { page: Page }) => ({
-  goToDashboard: async () => {
-    await page.getByRole("link", { name: "Dashboard" }).click();
-    await page.waitForLoadState("networkidle");
-  },
-  goToContacts: async () => {
-    await page.getByRole("link", { name: "Contacts" }).click();
-    await page.waitForLoadState("networkidle");
-  },
-});
+// On desktop the header exposes the CRM pages as links. On mobile the bottom bar
+// only links the Amai Mochi screens, so the CRM pages are reached by URL, once the
+// bottom bar shows that sign-in has completed (the link click used to wait for it).
+const getMenuMethod = ({
+  page,
+  isMobile,
+}: {
+  page: Page;
+  isMobile: boolean;
+}) => {
+  const goToMobilePage = async (hash: string) => {
+    await expect(
+      page.getByRole("navigation", { name: "Amai Mochi navigation" }),
+    ).toBeVisible();
+    await page.goto(`/${hash}`);
+  };
+  return {
+    goToDashboard: async () => {
+      if (isMobile) {
+        await goToMobilePage("#/");
+      } else {
+        await page.getByRole("link", { name: "Dashboard" }).click();
+      }
+      await page.waitForLoadState("networkidle");
+    },
+    goToContacts: async () => {
+      if (isMobile) {
+        await goToMobilePage("#/contacts");
+      } else {
+        await page.getByRole("link", { name: "Contacts" }).click();
+      }
+      await page.waitForLoadState("networkidle");
+    },
+  };
+};
 
 const dismissToast = async (page: Page, content: string) => {
   await expect(page.getByText(content)).toBeVisible();
@@ -256,8 +279,8 @@ export const test = base.extend<{
   createNotes: async ({}, cb) => {
     await cb(createNotes);
   },
-  menu: async ({ page }, cb) => {
-    await cb(getMenuMethod({ page }));
+  menu: async ({ page, isMobile }, cb) => {
+    await cb(getMenuMethod({ page, isMobile }));
   },
   dismissToast: async ({ page }, cb) => {
     await cb((content: string) => dismissToast(page, content));

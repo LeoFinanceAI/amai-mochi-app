@@ -31,6 +31,7 @@ import { CRM } from "@/components/atomic-crm/root/CRM";
  *    />
  * );
  */
-const App = () => <CRM />;
+// No usage ping to marmelab: the app's domain is the business's to share.
+const App = () => <CRM disableTelemetry />;
 
 export default App;

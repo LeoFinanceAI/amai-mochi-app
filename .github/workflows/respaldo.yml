@@ -1,0 +1,54 @@
+# Respaldo de la base de Amai Mochi + ping para que Supabase Free no pause el proyecto.
+# Corre cada 3 días (el plan Free pausa tras 7 días sin actividad) y también a mano.
+#
+# Secrets necesarios (Settings → Secrets and variables → Actions):
+#   SUPABASE_DB_URL    Connection string del "Session pooler" (Project → Connect).
+#                      Usa el pooler: la conexión directa es solo IPv6 y los runners de GitHub usan IPv4.
+#   SUPABASE_URL       https://<ref>.supabase.co
+#   SUPABASE_ANON_KEY  Llave pública (anon / publishable)
+#
+# Los respaldos se guardan como artifacts del workflow durante 90 días (no se suben al repo,
+# para no dejar datos de clientes en el historial de git). Descárgalos desde la pestaña Actions.
+
+name: Respaldo Supabase
+
+on:
+  schedule:
+    - cron: "0 9 */3 * *"   # 09:00 UTC (03:00 en Guadalajara), cada 3 días
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  respaldo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Ping a la API (cuenta como actividad)
+        run: |
+          curl -fsS "${{ secrets.SUPABASE_URL }}/rest/v1/sabor?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" > /dev/null
+          echo "Ping OK"
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Volcar roles, esquema y datos
+        env:
+          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          mkdir -p respaldo
+          supabase db dump --db-url "$DB_URL" -f respaldo/roles.sql --role-only
+          supabase db dump --db-url "$DB_URL" -f respaldo/esquema.sql
+          supabase db dump --db-url "$DB_URL" -f respaldo/datos.sql --data-only --use-copy
+          ls -lh respaldo
+
+      - name: Guardar respaldo (90 días)
+        uses: actions/upload-artifact@v4
+        with:
+          name: respaldo-${{ github.run_id }}
+          path: respaldo/
+          retention-days: 90

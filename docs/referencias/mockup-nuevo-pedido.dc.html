@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Registrar pedido</title>
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Fraunces:opsz,wght@9..144,600&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap"
+        />
+        <style>
+          body {
+            margin: 0;
+          }
+          a {
+            color: #a3345a;
+          }
+          a:hover {
+            color: #7e2445;
+          }
+          input,
+          select,
+          textarea,
+          button {
+            font-family: inherit;
+          }
+        </style>
+      </helmet>
+      <div
+        style="
+          width: 390px;
+          height: 1260px;
+          box-sizing: border-box;
+          background: #fbf5e3;
+          color: #2a2320;
+          font-family: Quicksand, system-ui, sans-serif;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        "
+      >
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 20px 8px;
+          "
+        >
+          <button
+            aria-label="Regresar"
+            style="
+              width: 44px;
+              height: 44px;
+              border-radius: 22px;
+              border: 1px solid #e9dcc0;
+              background: #ffffff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+            "
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#2A2320"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M15 6l-6 6l6 6"></path>
+            </svg>
+          </button>
+          <img
+            src="/_blob/63e1c6a5ff4bb26880daed988434846a"
+            alt="Amai Mochi"
+            style="width: 120px; height: auto; display: block"
+          />
+          <span style="width: 44px"></span>
+        </div>
+
+        <div style="padding: 4px 20px 0">
+          <h1
+            style="
+              margin: 0;
+              font-family: &quot;Bebas Neue&quot;, Impact, sans-serif;
+              font-weight: 400;
+              font-size: 44px;
+              line-height: 1;
+              color: #b23a62;
+              letter-spacing: 0.5px;
+            "
+          >
+            Nuevo pedido
+          </h1>
+        </div>
+
+        <div style="padding: 14px 20px 0">
+          <button
+            style="
+              width: 100%;
+              min-height: 48px;
+              border-radius: 14px;
+              border: 1.5px dashed #b23a62;
+              background: #fdeef2;
+              color: #8e2b4d;
+              font-size: 15px;
+              font-weight: 600;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              cursor: pointer;
+            "
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#8E2B4D"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+              ></path>
+              <path d="M9 3h6v4h-6z"></path>
+            </svg>
+            Pegar mensaje de WhatsApp
+          </button>
+        </div>
+
+        <div
+          style="
+            padding: 18px 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+          "
+        >
+          <label
+            for="cliente"
+            style="font-size: 13px; font-weight: 700; color: #5e5249"
+            >Cliente</label
+          >
+          <select
+            id="cliente"
+            style="
+              height: 48px;
+              border-radius: 12px;
+              border: 1px solid #e9dcc0;
+              background: #ffffff;
+              padding: 0 14px;
+              font-size: 15px;
+              color: #2a2320;
+            "
+          >
+            <option>[Distribuidor 1] · GDL</option>
+            <option>[Distribuidor 2] · Colima</option>
+            <option>[Distribuidor 3] · Tepetitlán</option>
+            <option>Venta directa / evento</option>
+            <option>+ Nuevo cliente</option>
+          </select>
+        </div>
+
+        <div
+          style="
+            padding: 18px 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+          "
+        >
+          <span style="font-size: 13px; font-weight: 700; color: #5e5249"
+            >Entrega</span
+          >
+          <div style="display: flex; gap: 8px">
+            <sc-for list="{{fechas}}" as="f" hint-placeholder-count="3">
+              <button onClick="{{f.pick}}" style="{{f.style}}">
+                {{f.label}}
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div
+          style="
+            padding: 20px 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: baseline;
+            "
+          >
+            <span style="font-size: 13px; font-weight: 700; color: #5e5249"
+              >Sabores</span
+            >
+            <span style="font-size: 13px; color: #5e5249">piezas</span>
+          </div>
+          <div
+            style="
+              background: #ffffff;
+              border-radius: 16px;
+              border: 1px solid #e9dcc0;
+              display: flex;
+              flex-direction: column;
+            "
+          >
+            <sc-for list="{{sabores}}" as="s" hint-placeholder-count="6">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  padding: 10px 14px;
+                  border-bottom: 1px solid #f3eada;
+                "
+              >
+                <span style="{{s.dot}}"></span>
+                <span style="flex-grow: 1; font-size: 16px; font-weight: 600"
+                  >{{s.nombre}}</span
+                >
+                <button
+                  onClick="{{s.dec}}"
+                  aria-label="Quitar 1"
+                  style="
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 20px;
+                    border: 1px solid #e9dcc0;
+                    background: #fbf5e3;
+                    font-size: 20px;
+                    color: #2a2320;
+                    cursor: pointer;
+                  "
+                >
+                  −
+                </button>
+                <span
+                  style="
+                    width: 34px;
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: 700;
+                  "
+                  >{{s.qty}}</span
+                >
+                <button
+                  onClick="{{s.inc}}"
+                  aria-label="Agregar 5"
+                  style="
+                    height: 40px;
+                    padding: 0 10px;
+                    border-radius: 20px;
+                    border: none;
+                    background: #f9d3dc;
+                    font-size: 14px;
+                    font-weight: 700;
+                    color: #7e2445;
+                    cursor: pointer;
+                  "
+                >
+                  +5
+                </button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div
+          style="
+            padding: 14px 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+          "
+        >
+          <div
+            style="
+              height: 10px;
+              border-radius: 5px;
+              background: #efe3c9;
+              overflow: hidden;
+            "
+          >
+            <div style="{{barra}}"></div>
+          </div>
+          <span style="{{avisoStyle}}">{{aviso}}</span>
+        </div>
+
+        <div
+          style="
+            padding: 18px 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+          "
+        >
+          <span style="font-size: 13px; font-weight: 700; color: #5e5249"
+            >Pago al recibir</span
+          >
+          <div style="display: flex; gap: 8px">
+            <sc-for list="{{metodos}}" as="m" hint-placeholder-count="2">
+              <button onClick="{{m.pick}}" style="{{m.style}}">
+                {{m.label}}
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div
+          style="
+            padding: 18px 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+          "
+        >
+          <label
+            for="notas"
+            style="font-size: 13px; font-weight: 700; color: #5e5249"
+            >Notas y ubicación</label
+          >
+          <textarea
+            id="notas"
+            placeholder="Pega aquí la ubicación que mandó por WhatsApp"
+            style="
+              min-height: 72px;
+              border-radius: 12px;
+              border: 1px solid #e9dcc0;
+              background: #ffffff;
+              padding: 12px 14px;
+              font-size: 14px;
+              color: #2a2320;
+              resize: none;
+            "
+          ></textarea>
+        </div>
+
+        <div
+          style="
+            margin-top: auto;
+            padding: 16px 20px 16px;
+            background: #ffffff;
+            border-top: 1px solid #e9dcc0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+          "
+        >
+          <sc-if value="{{guardado}}" hint-placeholder-val="{{ false }}">
+            <div
+              style="
+                border-radius: 12px;
+                background: #e7efd2;
+                color: #3e4a14;
+                padding: 10px 14px;
+                font-size: 14px;
+                font-weight: 600;
+              "
+            >
+              Pedido guardado. Queda pendiente de entrega y cobro.
+            </div>
+          </sc-if>
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: baseline;
+            "
+          >
+            <span style="font-size: 15px; color: #5e5249">{{resumen}}</span>
+            <span style="font-size: 22px; font-weight: 700"
+              >{{totalTexto}}</span
+            >
+          </div>
+          <button
+            onClick="{{guardar}}"
+            style="
+              height: 54px;
+              border-radius: 16px;
+              border: none;
+              background: #b23a62;
+              color: #ffffff;
+              font-size: 17px;
+              font-weight: 700;
+              cursor: pointer;
+            "
+          >
+            Guardar pedido
+          </button>
+        </div>
+
+        <div
+          style="
+            background: #ffffff;
+            border-top: 1px solid #e9dcc0;
+            display: flex;
+            padding: 8px 12px 20px;
+          "
+        >
+          <a
+            href="Main.dc.html"
+            style="
+              flex-grow: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 4px;
+              padding: 8px;
+              text-decoration: none;
+              color: #b23a62;
+              font-size: 12px;
+              font-weight: 700;
+            "
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 5v14"></path>
+              <path d="M5 12h14"></path>
+            </svg>
+            Nuevo pedido
+          </a>
+          <a
+            href="Cobranza.dc.html"
+            style="
+              flex-grow: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 4px;
+              padding: 8px;
+              text-decoration: none;
+              color: #5e5249;
+              font-size: 12px;
+              font-weight: 600;
+            "
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"
+              ></path>
+              <path d="M3 10h18"></path>
+              <path d="M7 15h3"></path>
+            </svg>
+            Por cobrar
+          </a>
+          <a
+            href="Resumen.dc.html"
+            style="
+              flex-grow: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 4px;
+              padding: 8px;
+              text-decoration: none;
+              color: #5e5249;
+              font-size: 12px;
+              font-weight: 600;
+            "
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 20h16"></path>
+              <path d="M7 16v-4"></path>
+              <path d="M12 16v-9"></path>
+              <path d="M17 16v-6"></path>
+            </svg>
+            Resumen
+          </a>
+        </div>
+      </div>
+    </x-dc>
+    <script
+      type="text/x-dc"
+      data-dc-script
+      data-props='{"precioPieza":{"editor":"int","default":0,"min":0,"max":200,"section":"Negocio"},"minimo":{"editor":"int","default":40,"min":1,"max":200,"section":"Negocio"},"$preview":{"width":390,"height":1260}}'
+    >
+      class Component extends DCLogic {
+        constructor(props) {
+          super(props);
+          this.state = { qty: { fresa: 0, mango: 0, taro: 0, chocolate: 0, oreo: 0, vainilla: 0 }, fecha: 'manana', metodo: 'efectivo', guardado: false };
+        }
+        renderVals() {
+          const minimo = this.props.minimo ?? 40;
+          const precio = this.props.precioPieza ?? 0;
+          const st = this.state;
+          const defs = [
+            { id: 'fresa', nombre: 'Fresa', color: '#EE8FA8' },
+            { id: 'mango', nombre: 'Mango', color: '#F3C443' },
+            { id: 'taro', nombre: 'Taro', color: '#A985D1' },
+            { id: 'chocolate', nombre: 'Chocolate', color: '#8A5A3C' },
+            { id: 'oreo', nombre: 'Oreo', color: '#6E6E6E' },
+            { id: 'vainilla', nombre: 'Vainilla', color: '#EBD9A6' }
+          ];
+          const setQty = (id, v) => this.setState({ qty: Object.assign({}, st.qty, { [id]: Math.max(0, v) }), guardado: false });
+          const sabores = defs.map((d) => ({
+            nombre: d.nombre,
+            qty: st.qty[d.id],
+            dot: 'width: 14px; height: 14px; border-radius: 7px; flex-shrink: 0; background: ' + d.color,
+            dec: () => setQty(d.id, st.qty[d.id] - 1),
+            inc: () => setQty(d.id, st.qty[d.id] + 5)
+          }));
+          const total = defs.reduce((a, d) => a + st.qty[d.id], 0);
+          const cumple = total >= minimo;
+          const pct = Math.min(100, Math.round((total / minimo) * 100));
+          const chip = (on) => 'flex-grow: 1; min-height: 44px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; ' + (on ? 'background: #2A2320; color: #FFFFFF; border: 1px solid #2A2320' : 'background: #FFFFFF; color: #2A2320; border: 1px solid #E9DCC0');
+          const fechas = [['manana', 'Mañana'], ['pasado', 'Pasado mañana'], ['otra', 'Otra fecha']].map(([id, label]) => ({ label, style: chip(st.fecha === id), pick: () => this.setState({ fecha: id }) }));
+          const metodos = [['efectivo', 'Efectivo'], ['transferencia', 'Transferencia']].map(([id, label]) => ({ label, style: chip(st.metodo === id), pick: () => this.setState({ metodo: id }) }));
+          return {
+            sabores, fechas, metodos,
+            barra: 'height: 10px; border-radius: 5px; width: ' + pct + '%; background: ' + (cumple ? '#7C8C2E' : '#E58F35'),
+            aviso: cumple ? 'Cumple el mínimo de ' + minimo + ' piezas' : 'Faltan ' + (minimo - total) + ' piezas para el mínimo de ' + minimo,
+            avisoStyle: 'font-size: 13px; font-weight: 600; color: ' + (cumple ? '#4F5A1B' : '#9A4F0E'),
+            resumen: total + ' piezas',
+            totalTexto: precio > 0 ? '$' + (precio * total).toLocaleString('es-MX') : '$ [precio]',
+            guardado: st.guardado,
+            guardar: () => this.setState({ guardado: true })
+          };
+        }
+      }
+    </script>
+  </body>
+</html>
