@@ -15,6 +15,9 @@ __screenshots__
 # production
 /build
 
+# Downloaded database backups (customer data, see docs/RESTORE.md)
+respaldo/
+
 # misc
 .DS_Store
 .env.local
