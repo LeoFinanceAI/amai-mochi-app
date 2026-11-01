@@ -4,12 +4,13 @@ import { expect, test } from "./fixtures";
 
 // Runs in English (the browser locale of the e2e projects). Made-up data only.
 
-// Tomorrow as YYYY-MM-DD in the browser's local time zone.
-const tomorrow = () => {
+// A date `offset` days from today as YYYY-MM-DD, in local time.
+const day = (offset: number) => {
   const date = new Date();
-  date.setDate(date.getDate() + 1);
+  date.setDate(date.getDate() + offset);
   return date.toLocaleDateString("en-CA");
 };
+const tomorrow = () => day(1);
 
 test.describe("orders", () => {
   test.beforeEach(async ({ createSales }) => {
@@ -88,5 +89,40 @@ test.describe("orders", () => {
           total: 720,
         }),
       ]);
+  });
+
+  test("shows today's deliveries with a Maps link", async ({
+    page,
+    amai,
+    dismissToast,
+  }) => {
+    // Arrange
+    const fresa = await amai.createSabor("Fresa");
+    const cliente = await amai.createCliente("Tienda Centro", "Guadalajara");
+    await amai.createPedido(
+      cliente.id,
+      day(0),
+      [{ saborId: fresa.id, cantidad: 40 }],
+      "Av. Juárez 100",
+    );
+    await signInToOrders(page);
+
+    // Act
+    await page.getByRole("link", { name: "Today's deliveries" }).click();
+
+    // Assert
+    await expect(
+      page.getByText("0 of 1 delivered · 40 pieces to go"),
+    ).toBeVisible();
+    const maps = page.getByRole("link", {
+      name: "Open Av. Juárez 100 in Maps",
+    });
+    const href = new URL((await maps.getAttribute("href")) ?? "");
+    expect(href.searchParams.get("query")).toBe("Av. Juárez 100, Guadalajara");
+    await page.getByRole("button", { name: "Delivered" }).click();
+    await dismissToast("Order marked as delivered");
+    await expect(
+      page.getByText("1 of 1 delivered · 0 pieces to go"),
+    ).toBeVisible();
   });
 });

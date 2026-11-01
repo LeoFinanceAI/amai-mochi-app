@@ -22,7 +22,11 @@ const Header = () => {
     {
       to: AMAI_PATHS.orders,
       label: translate("amai.navigation.orders"),
-      activeOn: [AMAI_PATHS.orders, `${AMAI_PATHS.orders}/:id/edit`],
+      activeOn: [
+        AMAI_PATHS.orders,
+        AMAI_PATHS.deliveriesToday,
+        `${AMAI_PATHS.orders}/:id/edit`,
+      ],
     },
     {
       to: AMAI_PATHS.receivables,

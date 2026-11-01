@@ -99,6 +99,14 @@ export const englishAmaiMessages = {
       save_changes: "Save changes",
       updated: "Order updated",
       only_pending: "Only pending orders can be edited.",
+      open_maps: "Open %{address} in Maps",
+    },
+    deliveries: {
+      title: "Today's deliveries",
+      progress: "%{done} of %{total} delivered · %{pieces} pieces to go",
+      overdue: "Overdue",
+      empty: "No deliveries for today.",
+      all_orders: "See all orders",
     },
     clients: {
       add: "New client",
@@ -234,6 +242,14 @@ export const spanishAmaiMessages = {
       save_changes: "Guardar cambios",
       updated: "Pedido actualizado",
       only_pending: "Solo se pueden editar pedidos pendientes.",
+      open_maps: "Abrir %{address} en Maps",
+    },
+    deliveries: {
+      title: "Entregas de hoy",
+      progress: "%{done} de %{total} entregados · faltan %{pieces} piezas",
+      overdue: "Atrasados",
+      empty: "No hay entregas para hoy.",
+      all_orders: "Ver todos los pedidos",
     },
     clients: {
       add: "Nuevo cliente",

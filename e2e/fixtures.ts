@@ -263,10 +263,11 @@ const amai = {
     clienteId: number,
     fechaEntrega: string,
     lineas: Array<{ saborId: number; cantidad: number }>,
+    direccion: string | null = null,
   ) {
     const { data: pedido, error } = await adminSupabase
       .from("pedido")
-      .insert({ cliente_id: clienteId, fecha_entrega: fechaEntrega })
+      .insert({ cliente_id: clienteId, fecha_entrega: fechaEntrega, direccion })
       .select()
       .single();
     if (error) throw new Error(`Failed to create pedido: ${error.message}`);

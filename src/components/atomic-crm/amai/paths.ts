@@ -2,6 +2,7 @@
 // the header on desktop. Each one shows a placeholder until its stage ships.
 export const AMAI_PATHS = {
   orders: "/orders",
+  deliveriesToday: "/orders/today",
   newOrder: "/orders/new",
   receivables: "/receivables",
   summary: "/summary",

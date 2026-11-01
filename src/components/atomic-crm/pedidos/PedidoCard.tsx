@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 import { editOrderPath } from "../amai/paths";
 import type { EstadoPedido, PedidoLista } from "../types";
-import { formatoDinero } from "./formatoPedido";
+import { formatoDinero, mapsUrl } from "./formatoPedido";
 
 const AVISO_ESTADO: Record<EstadoPedido, string> = {
   entregado: "amai.orders.notice.delivered",
@@ -83,10 +83,18 @@ export const PedidoCard = ({ pedido }: { pedido: PedidoLista }) => {
         ))}
       </ul>
       {pedido.direccion ? (
-        <p className="flex items-start gap-1 text-sm break-words">
-          <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
+        <a
+          href={mapsUrl(pedido.direccion, pedido.zona)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={translate("amai.orders.open_maps", {
+            address: pedido.direccion,
+          })}
+          className="flex min-h-11 items-center gap-1 self-start text-sm font-semibold text-primary underline-offset-4 hover:underline break-all"
+        >
+          <MapPin className="size-4 shrink-0" aria-hidden />
           {pedido.direccion}
-        </p>
+        </a>
       ) : null}
       {pedido.notas ? (
         <p className="text-sm text-muted-foreground break-words">

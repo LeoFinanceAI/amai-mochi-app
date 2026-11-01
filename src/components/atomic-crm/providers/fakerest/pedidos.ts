@@ -185,7 +185,25 @@ const pedidoLista = async (
 const compare = (a: unknown, b: unknown) =>
   String(a ?? "").localeCompare(String(b ?? ""), undefined, { numeric: true });
 
-// Equality filters, one sort field and pagination: what the orders screen uses.
+// Filter keys as the supabase adapter leaves them: "estado", "fecha_entrega_lt"...
+const OPERATORS: Record<string, (order: number) => boolean> = {
+  neq: (order) => order !== 0,
+  lt: (order) => order < 0,
+  lte: (order) => order <= 0,
+  gt: (order) => order > 0,
+  gte: (order) => order >= 0,
+};
+
+const matches = (row: PedidoLista, key: string, value: unknown) => {
+  const operator = key.slice(key.lastIndexOf("_") + 1);
+  if (operator in OPERATORS) {
+    const field = key.slice(0, key.lastIndexOf("_")) as keyof PedidoLista;
+    return OPERATORS[operator](compare(row[field], value));
+  }
+  return row[key as keyof PedidoLista] === value;
+};
+
+// Comparison filters, one sort field and pagination: what the order screens use.
 export const getPedidoLista = async (
   dataProvider: DataProvider,
   params: GetListParams,
@@ -194,9 +212,7 @@ export const getPedidoLista = async (
   const { field, order } = params.sort ?? BY_ID;
   const direction = order === "DESC" ? -1 : 1;
   const rows = (await pedidoLista(dataProvider))
-    .filter((row) =>
-      filter.every(([key, value]) => row[key as keyof PedidoLista] === value),
-    )
+    .filter((row) => filter.every(([key, value]) => matches(row, key, value)))
     .sort(
       (a, b) =>
         direction *
