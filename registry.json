@@ -448,6 +448,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/pedidos/EntregasHoyPage.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/pedidos/EntregaSelector.tsx",
           "type": "registry:component"
         },
