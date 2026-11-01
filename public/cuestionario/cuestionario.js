@@ -49,7 +49,7 @@ const FLAVORS = [
     ]},
     { title: "Tu día a día", items: [
       { id: "dolor", q: "¿Qué es lo que más trabajo te da hoy?", type: "radio", opts: ["Anotar pedidos", "Acordarme de quién me debe", "Organizar las entregas", "Saber cuánto gané"], extra: "¿Algo más?" },
-      { id: "celular", q: "¿Qué celular usas?", type: "radio", opts: ["Android", "iPhone"] },
+      { id: "celular", q: "¿Qué celulares usan en el negocio?", hint: "Marca todos los que apliquen.", type: "check", opts: ["Android", "iPhone"] },
     ]},
     { title: "Más adelante", note: "Opcional. Son ideas para después; contesta solo las que quieras.", items: [
       { id: "inventario", q: "¿Llevas la cuenta de cuántos mochis tienes hechos por sabor?", type: "radio", opts: ["Sí", "A veces", "No"], optional: true },

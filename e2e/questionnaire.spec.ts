@@ -61,14 +61,14 @@ test.describe("questionnaire for Eduardo", () => {
   }) => {
     // Arrange
     await page.goto(QUESTIONNAIRE);
-    await page.getByRole("radio", { name: "Android" }).check();
+    await page.getByRole("checkbox", { name: "Android" }).check();
     await expect(page.getByText("1 de 30")).toBeVisible();
 
     // Act
     await page.reload();
 
     // Assert
-    await expect(page.getByRole("radio", { name: "Android" })).toBeChecked();
+    await expect(page.getByRole("checkbox", { name: "Android" })).toBeChecked();
     await expect(page.getByText("1 de 30")).toBeVisible();
   });
 });
