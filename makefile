@@ -47,8 +47,10 @@ start-app-e2e: ## start the app pointing to the e2e supabase instance
 stop-app-e2e:
 	kill $$(lsof -t -i:5175)
 
+# No -s (single-page fallback): the app routes by hash, and the fallback would also
+# answer standalone pages such as /cuestionario/ with the app, unlike Cloudflare Pages.
 start-app-e2e-ci: build-e2e ## start the app pointing to the e2e supabase instance in CI mode (no open, no watch)
-	npx serve -l 5175 -L -s dist &
+	npx serve -l 5175 -L dist &
 
 start: start-supabase start-app ## start the stack locally
 
