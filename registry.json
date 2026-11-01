@@ -416,6 +416,14 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/precios/preciosForm.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/precios/PreciosPage.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/pedidos/nuevoPedidoForm.ts",
           "type": "registry:component"
         },
