@@ -60,6 +60,11 @@ const getDataProviderWithCustomMethods = () => {
       if (resource === "contacts") {
         return baseDataProvider.getList("contacts_summary", params);
       }
+      if (resource === "pedido") {
+        // Orders are read with their client, pieces, total and flavors;
+        // updates (estado) still go to the pedido table.
+        return baseDataProvider.getList("v_pedido_lista", params);
+      }
       if (resource === "activity_log") {
         const { data, total } = await baseDataProvider.getList(
           "activity_log",
@@ -86,6 +91,9 @@ const getDataProviderWithCustomMethods = () => {
       }
       if (resource === "contacts") {
         return baseDataProvider.getOne("contacts_summary", params);
+      }
+      if (resource === "pedido") {
+        return baseDataProvider.getOne("v_pedido_lista", params);
       }
 
       return baseDataProvider.getOne(resource, params);
@@ -282,6 +290,29 @@ const getDataProviderWithCustomMethods = () => {
       if (error) {
         console.error("crear_pedido.error", error);
         throw new Error("Failed to save the order");
+      }
+      return { id: data as number };
+    },
+    // Edits a pending order and replaces its lines in one transaction.
+    async actualizarPedido(
+      id: number,
+      pedido: NuevoPedido,
+    ): Promise<{ id: number }> {
+      const { data, error } = await getSupabaseClient().rpc(
+        "actualizar_pedido",
+        {
+          p_pedido_id: id,
+          p_cliente_id: pedido.cliente_id,
+          p_fecha_entrega: pedido.fecha_entrega,
+          p_metodo_pago: pedido.metodo_pago,
+          p_direccion: pedido.direccion,
+          p_notas: pedido.notas,
+          p_lineas: pedido.lineas,
+        },
+      );
+      if (error) {
+        console.error("actualizar_pedido.error", error);
+        throw new Error("Failed to update the order");
       }
       return { id: data as number };
     },

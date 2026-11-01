@@ -272,15 +272,15 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/providers/fakerest/pedidos.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/providers/fakerest/index.ts",
           "type": "registry:component"
         },
         {
           "path": "src/components/atomic-crm/providers/fakerest/dataProvider.ts",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/atomic-crm/providers/fakerest/crearPedido.ts",
           "type": "registry:component"
         },
         {
@@ -420,6 +420,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/pedidos/formatoPedido.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/pedidos/fechaEntrega.ts",
           "type": "registry:component"
         },
@@ -428,11 +432,31 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/pedidos/PedidoListPage.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/PedidoForm.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/PedidoCard.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/pedidos/NuevoPedidoPage.tsx",
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/pedidos/EntregasHoyPage.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/pedidos/EntregaSelector.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/EditarPedidoPage.tsx",
           "type": "registry:component"
         },
         {

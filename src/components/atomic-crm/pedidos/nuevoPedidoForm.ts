@@ -1,5 +1,9 @@
-import type { NuevoPedido } from "../types";
-import { fechaEntrega, type OpcionEntrega } from "./fechaEntrega";
+import type { NuevoPedido, PedidoLista } from "../types";
+import {
+  fechaEntrega,
+  opcionDeFecha,
+  type OpcionEntrega,
+} from "./fechaEntrega";
 
 // Orders are 40 pieces or more (business rule); the screen warns, never blocks.
 export const MINIMO_PIEZAS = 40;
@@ -67,3 +71,19 @@ export const toNuevoPedido = (
     lineas,
   };
 };
+
+// The form filled with a saved order, for "Editar pedido".
+export const formDesdePedido = (
+  pedido: PedidoLista,
+  hoy: Date = new Date(),
+): NuevoPedidoForm => ({
+  clienteId: String(pedido.cliente_id),
+  ...opcionDeFecha(pedido.fecha_entrega, hoy),
+  cantidades: Object.fromEntries(
+    pedido.sabores.map((sabor) => [sabor.sabor_id, sabor.cantidad]),
+  ),
+  metodoPago:
+    pedido.metodo_pago === "transferencia" ? "transferencia" : "efectivo",
+  direccion: pedido.direccion ?? "",
+  notas: pedido.notas ?? "",
+});
