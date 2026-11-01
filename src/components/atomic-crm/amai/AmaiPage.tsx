@@ -3,9 +3,12 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 import MobileHeader from "../layout/MobileHeader";
 import { MobileContent } from "../layout/MobileContent";
+import { AmaiWordmark } from "./AmaiWordmark";
 
-// Frame shared by the Amai Mochi screens: the mobile header on phones, a narrow
-// centered column on desktop (the screens are short; a table would be empty space).
+// Frame shared by the Amai Mochi screens. On phones, as in the mockups: the
+// wordmark in the top bar and the screen title below it. On desktop the header
+// already shows the logo; the screen is a narrow centered column (the screens
+// are short; a table would be empty space).
 export const AmaiPage = ({
   title,
   children,
@@ -18,9 +21,14 @@ export const AmaiPage = ({
     return (
       <>
         <MobileHeader>
-          <h1 className="text-3xl text-primary">{title}</h1>
+          <AmaiWordmark />
         </MobileHeader>
-        <MobileContent>{children}</MobileContent>
+        <MobileContent>
+          <div className="flex flex-col gap-4">
+            <h1 className="text-4xl text-primary">{title}</h1>
+            {children}
+          </div>
+        </MobileContent>
       </>
     );
   }
