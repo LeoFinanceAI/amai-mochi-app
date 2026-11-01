@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
-import { CatalogPage } from "../amai/CatalogPage";
+import { AmaiPage } from "../amai/AmaiPage";
 import type { Cliente } from "../types";
 
 // ~5 distributors plus public and event buyers: one screen, no pagination.
@@ -19,9 +19,7 @@ export const ClienteList = () => {
       sort={{ field: "nombre", order: "ASC" }}
       perPage={ALL_CLIENTS}
     >
-      <CatalogPage
-        title={translate("resources.cliente.name", { smart_count: 2 })}
-      >
+      <AmaiPage title={translate("resources.cliente.name", { smart_count: 2 })}>
         <Link
           to="/cliente/create"
           className={cn(buttonVariants(), "min-h-11 self-start gap-2")}
@@ -30,7 +28,7 @@ export const ClienteList = () => {
           {translate("amai.clients.add")}
         </Link>
         <ClienteRows />
-      </CatalogPage>
+      </AmaiPage>
     </ListBase>
   );
 };

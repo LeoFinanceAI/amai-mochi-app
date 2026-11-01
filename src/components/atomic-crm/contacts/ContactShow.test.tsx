@@ -38,11 +38,12 @@ describe("ContactShow", () => {
       .toBe(false);
   });
 
-  it("offers search but no refresh in the header of a contact page", async () => {
+  // Amai Mochi removed the global search from the mobile header.
+  it("shows no refresh in the header of a contact page", async () => {
     const screen = await render(<MobileSuccess />);
 
     await expect
-      .element(screen.getByRole("button", { name: "Search", exact: true }))
+      .element(screen.getByRole("tab", { name: "0 tasks" }))
       .toBeVisible();
     await expect
       .element(screen.getByRole("button", { name: "Refresh" }))

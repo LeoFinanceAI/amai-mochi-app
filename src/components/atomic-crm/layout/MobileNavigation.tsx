@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { ChartColumn, CreditCard, Plus, Settings } from "lucide-react";
 import { useTranslate } from "ra-core";
 import { Link, matchPath, useLocation } from "react-router";
-import { AMAI_PATHS } from "../amai/ComingSoonPage";
+import { AMAI_PATHS } from "../amai/paths";
 
 // Bottom bar of the approved Amai Mochi mockups: Nuevo pedido / Por cobrar /
 // Resumen, plus Settings, which is where the admin creates the other users.

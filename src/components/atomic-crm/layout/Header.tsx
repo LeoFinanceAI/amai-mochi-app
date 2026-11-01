@@ -1,4 +1,4 @@
-import { FileText, Import, Settings, User, Users } from "lucide-react";
+import { FileText, Settings, User, Users } from "lucide-react";
 import { CanAccess, useTranslate, useUserMenu } from "ra-core";
 import { Link, matchPath, useLocation } from "react-router";
 import { RefreshButton } from "@/components/admin/refresh-button";
@@ -7,31 +7,31 @@ import { UserMenu } from "@/components/admin/user-menu";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 import { useConfigurationContext } from "../root/ConfigurationContext";
-import { ImportPage } from "../misc/ImportPage";
 import { ChangelogPage } from "../misc/ChangelogPage";
-import { GlobalSearchButton } from "../search/GlobalSearchButton";
+import { AMAI_PATHS } from "../amai/paths";
 
 const Header = () => {
   const { darkModeLogo, lightModeLogo, title } = useConfigurationContext();
   const location = useLocation();
   const translate = useTranslate();
 
-  let currentPath: string | boolean = "/";
-  if (matchPath("/", location.pathname)) {
-    currentPath = "/";
-  } else if (matchPath("/contacts/*", location.pathname)) {
-    currentPath = "/contacts";
-  } else if (matchPath("/companies/*", location.pathname)) {
-    currentPath = "/companies";
-  } else if (matchPath("/deals/*", location.pathname)) {
-    currentPath = "/deals";
-  } else if (matchPath("/sabor/*", location.pathname)) {
-    currentPath = "/sabor";
-  } else if (matchPath("/cliente/*", location.pathname)) {
-    currentPath = "/cliente";
-  } else {
-    currentPath = false;
-  }
+  // Same screens as the mobile bottom bar, plus the catalogs.
+  const tabs = [
+    { to: AMAI_PATHS.newOrder, label: translate("amai.navigation.new_order") },
+    {
+      to: AMAI_PATHS.receivables,
+      label: translate("amai.navigation.receivables"),
+    },
+    { to: AMAI_PATHS.summary, label: translate("amai.navigation.summary") },
+    {
+      to: "/sabor",
+      label: translate("resources.sabor.name", { smart_count: 2 }),
+    },
+    {
+      to: "/cliente",
+      label: translate("resources.cliente.name", { smart_count: 2 }),
+    },
+  ];
 
   return (
     <>
@@ -57,50 +57,17 @@ const Header = () => {
               </Link>
               <div>
                 <nav className="flex">
-                  <NavigationTab
-                    label={translate("ra.page.dashboard")}
-                    to="/"
-                    isActive={currentPath === "/"}
-                  />
-                  <NavigationTab
-                    label={translate("resources.contacts.name", {
-                      smart_count: 2,
-                    })}
-                    to="/contacts"
-                    isActive={currentPath === "/contacts"}
-                  />
-                  <NavigationTab
-                    label={translate("resources.companies.name", {
-                      smart_count: 2,
-                    })}
-                    to="/companies"
-                    isActive={currentPath === "/companies"}
-                  />
-                  <NavigationTab
-                    label={translate("resources.deals.name", {
-                      smart_count: 2,
-                    })}
-                    to="/deals"
-                    isActive={currentPath === "/deals"}
-                  />
-                  <NavigationTab
-                    label={translate("resources.sabor.name", {
-                      smart_count: 2,
-                    })}
-                    to="/sabor"
-                    isActive={currentPath === "/sabor"}
-                  />
-                  <NavigationTab
-                    label={translate("resources.cliente.name", {
-                      smart_count: 2,
-                    })}
-                    to="/cliente"
-                    isActive={currentPath === "/cliente"}
-                  />
+                  {tabs.map((tab) => (
+                    <NavigationTab
+                      key={tab.to}
+                      label={tab.label}
+                      to={tab.to}
+                      isActive={!!matchPath(`${tab.to}/*`, location.pathname)}
+                    />
+                  ))}
                 </nav>
               </div>
               <div className="flex items-center">
-                <GlobalSearchButton />
                 <ThemeModeToggle />
                 <RefreshButton />
                 <UserMenu>
@@ -111,7 +78,6 @@ const Header = () => {
                   <CanAccess resource="configuration" action="edit">
                     <SettingsMenu />
                   </CanAccess>
-                  <ImportFromJsonMenuItem />
                   <ChangelogMenuItem />
                 </UserMenu>
               </div>
@@ -191,23 +157,6 @@ const SettingsMenu = () => {
     >
       <Settings />
       {translate("crm.settings.title")}
-    </DropdownMenuItem>
-  );
-};
-
-const ImportFromJsonMenuItem = () => {
-  const translate = useTranslate();
-  const userMenuContext = useUserMenu();
-  if (!userMenuContext) {
-    throw new Error("<ImportFromJsonMenuItem> must be used inside <UserMenu>");
-  }
-  return (
-    <DropdownMenuItem
-      onClick={userMenuContext.onClose}
-      render={<Link to={ImportPage.path} className="flex items-center gap-2" />}
-    >
-      <Import />
-      {translate("crm.header.import_data")}
     </DropdownMenuItem>
   );
 };

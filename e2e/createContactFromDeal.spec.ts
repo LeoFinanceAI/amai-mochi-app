@@ -35,7 +35,9 @@ test.describe("user creating a contact from the deal form", () => {
     await page.getByRole("button", { name: "Sign in" }).click();
     await expect(page).toHaveTitle(/Amai Mochi/);
 
-    await page.getByRole("link", { name: "Deals" }).click();
+    // Deals have no link in the Amai Mochi navigation; reached by URL.
+    await expect(page.getByRole("link", { name: "New order" })).toBeVisible();
+    await page.goto("/#/deals");
     await page.waitForLoadState("networkidle");
 
     await page.getByRole("link", { name: "Create deal" }).click();

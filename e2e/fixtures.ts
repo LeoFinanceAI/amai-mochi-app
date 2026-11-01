@@ -206,41 +206,16 @@ async function createContact({
   return data;
 }
 
-// On desktop the header exposes the CRM pages as links. On mobile the bottom bar
-// only links the Amai Mochi screens, so the CRM pages are reached by URL, once the
-// bottom bar shows that sign-in has completed (the link click used to wait for it).
-const getMenuMethod = ({
-  page,
-  isMobile,
-}: {
-  page: Page;
-  isMobile: boolean;
-}) => {
-  const goToMobilePage = async (hash: string) => {
-    await expect(
-      page.getByRole("navigation", { name: "Amai Mochi navigation" }),
-    ).toBeVisible();
-    await page.goto(`/${hash}`);
-  };
-  return {
-    goToDashboard: async () => {
-      if (isMobile) {
-        await goToMobilePage("#/");
-      } else {
-        await page.getByRole("link", { name: "Dashboard" }).click();
-      }
-      await page.waitForLoadState("networkidle");
-    },
-    goToContacts: async () => {
-      if (isMobile) {
-        await goToMobilePage("#/contacts");
-      } else {
-        await page.getByRole("link", { name: "Contacts" }).click();
-      }
-      await page.waitForLoadState("networkidle");
-    },
-  };
-};
+// The CRM pages (contacts, deals) have no link in the Amai Mochi navigation on
+// any viewport, so they are reached by URL once sign-in has completed (the New
+// order link, in the header or the bottom bar, shows the app is ready).
+const getMenuMethod = ({ page }: { page: Page }) => ({
+  goToContacts: async () => {
+    await expect(page.getByRole("link", { name: "New order" })).toBeVisible();
+    await page.goto("/#/contacts");
+    await page.waitForLoadState("networkidle");
+  },
+});
 
 const dismissToast = async (page: Page, content: string) => {
   await expect(page.getByText(content)).toBeVisible();
@@ -289,8 +264,8 @@ export const test = base.extend<{
   createNotes: async ({}, cb) => {
     await cb(createNotes);
   },
-  menu: async ({ page, isMobile }, cb) => {
-    await cb(getMenuMethod({ page, isMobile }));
+  menu: async ({ page }, cb) => {
+    await cb(getMenuMethod({ page }));
   },
   dismissToast: async ({ page }, cb) => {
     await cb((content: string) => dismissToast(page, content));

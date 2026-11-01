@@ -1,7 +1,7 @@
 import { EditBase, Form, useTranslate } from "ra-core";
 import { Card, CardContent } from "@/components/ui/card";
 
-import { CatalogPage } from "../amai/CatalogPage";
+import { AmaiPage } from "../amai/AmaiPage";
 import { FormToolbar } from "../layout/FormToolbar";
 import { ClienteInputs } from "./ClienteInputs";
 
@@ -11,7 +11,7 @@ export const ClienteEdit = () => {
   const translate = useTranslate();
   return (
     <EditBase redirect="list" mutationMode="pessimistic">
-      <CatalogPage title={translate("amai.clients.edit_title")}>
+      <AmaiPage title={translate("amai.clients.edit_title")}>
         <Form>
           <Card>
             <CardContent>
@@ -20,7 +20,7 @@ export const ClienteEdit = () => {
             </CardContent>
           </Card>
         </Form>
-      </CatalogPage>
+      </AmaiPage>
     </EditBase>
   );
 };

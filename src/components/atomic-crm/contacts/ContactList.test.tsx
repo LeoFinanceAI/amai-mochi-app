@@ -241,13 +241,11 @@ describe("ContactList", () => {
       page.viewport(375, 667);
     });
 
-    it("leaves name search to the global search, keeping filters and refresh", async () => {
+    // Amai Mochi removed the global search from the mobile header.
+    it("keeps filters and refresh in the header, with no name search box", async () => {
       const screen = await render(<MobileSuccess />);
 
       await expect.element(screen.getByText("Ada Lovelace")).toBeVisible();
-      await expect
-        .element(screen.getByRole("button", { name: "Search", exact: true }))
-        .toBeVisible();
       await expect
         .element(screen.getByRole("button", { name: "Add filter" }))
         .toBeVisible();

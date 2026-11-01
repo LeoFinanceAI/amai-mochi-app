@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { FormToolbar } from "../layout/FormToolbar";
 import { SaborInputs } from "./SaborInputs";
-import { CatalogPage } from "../amai/CatalogPage";
+import { AmaiPage } from "../amai/AmaiPage";
 import { saborErrorMessage } from "./saborErrors";
 
 export const SaborCreate = () => {
@@ -16,7 +16,7 @@ export const SaborCreate = () => {
         onError: (error) => notify(saborErrorMessage(error), { type: "error" }),
       }}
     >
-      <CatalogPage title={translate("amai.flavors.create_title")}>
+      <AmaiPage title={translate("amai.flavors.create_title")}>
         <Form defaultValues={{ activo: true }}>
           <Card>
             <CardContent>
@@ -25,7 +25,7 @@ export const SaborCreate = () => {
             </CardContent>
           </Card>
         </Form>
-      </CatalogPage>
+      </AmaiPage>
     </CreateBase>
   );
 };
