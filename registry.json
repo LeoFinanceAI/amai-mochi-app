@@ -212,10 +212,6 @@
           "type": "registry:component"
         },
         {
-          "path": "src/components/atomic-crm/sabores/SaborPage.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "src/components/atomic-crm/sabores/SaborList.tsx",
           "type": "registry:component"
         },
@@ -361,6 +357,10 @@
         },
         {
           "path": "src/components/atomic-crm/providers/fakerest/dataGenerator/companies.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/providers/fakerest/dataGenerator/clientes.ts",
           "type": "registry:component"
         },
         {
@@ -928,11 +928,35 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/clientes/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/clientes/ClienteList.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/clientes/ClienteInputs.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/clientes/ClienteEdit.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/clientes/ClienteCreate.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/amai/ComingSoonPage.tsx",
           "type": "registry:component"
         },
         {
           "path": "src/components/atomic-crm/amai/CatalogSection.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/amai/CatalogPage.tsx",
           "type": "registry:component"
         },
         {

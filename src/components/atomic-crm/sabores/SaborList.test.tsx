@@ -1,15 +1,10 @@
-import { memoryStore } from "ra-core";
-import { MemoryRouter } from "react-router";
-import { beforeEach, describe, expect, it } from "vitest";
-import { page } from "vitest/browser";
-import { render } from "vitest-browser-react";
+import { describe, expect, it } from "vitest";
 
-import { createCrmDb, createTestAuthProvider } from "@/test/StoryWrapper";
+import {
+  renderMobileApp,
+  type DataProviderOverride,
+} from "@/test/renderMobileApp";
 
-import { i18nProvider } from "../providers/commons/i18nProvider";
-import { createDataProvider } from "../providers/fakerest";
-import type { Db } from "../providers/fakerest/dataGenerator/types";
-import { CRM } from "../root/CRM";
 import type { Sabor } from "../types";
 
 const flavors = (): Sabor[] => [
@@ -19,31 +14,14 @@ const flavors = (): Sabor[] => [
 ];
 
 // The mobile app on the flavors screen, as Eduardo would open it.
-const renderFlavors = (
-  dataProvider: ReturnType<typeof createDataProvider> = createDataProvider({
-    db: createCrmDb({ sabor: flavors() } as Partial<Db>),
-    silent: true,
-  }),
-) =>
-  render(
-    <MemoryRouter initialEntries={["/sabor"]}>
-      <CRM
-        authProvider={createTestAuthProvider()}
-        dataProvider={dataProvider}
-        i18nProvider={i18nProvider}
-        store={memoryStore()}
-        disableTelemetry
-      />
-    </MemoryRouter>,
-  );
-
-describe("flavors screen", () => {
-  beforeEach(async () => {
-    localStorage.clear();
-    await page.viewport(375, 667);
-    await i18nProvider.changeLocale("es");
+const renderFlavors = (dataProvider?: DataProviderOverride) =>
+  renderMobileApp({
+    path: "/sabor",
+    data: { sabor: flavors() },
+    dataProvider,
   });
 
+describe("flavors screen", () => {
   it("lists active flavors alphabetically and retired ones last", async () => {
     // Act
     const screen = await renderFlavors();
@@ -112,18 +90,14 @@ describe("flavors screen", () => {
 
   it("explains a duplicate name instead of showing the database error", async () => {
     // Arrange
-    const base = createDataProvider({
-      db: createCrmDb({ sabor: flavors() } as Partial<Db>),
-      silent: true,
-    });
-    const screen = await renderFlavors({
+    const screen = await renderFlavors((base) => ({
       ...base,
       create: async () => {
         throw Object.assign(new Error("duplicate key value"), {
           body: { code: "23505" },
         });
       },
-    });
+    }));
     await screen.getByRole("link", { name: "Nuevo sabor" }).click();
 
     // Act
