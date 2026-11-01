@@ -7,6 +7,11 @@ import { raSupabaseFrenchMessages } from "ra-supabase-language-french";
 import { englishAmaiMessages, spanishAmaiMessages } from "./amaiMessages";
 import { englishCrmMessages } from "./englishCrmMessages";
 import { frenchCrmMessages } from "./frenchCrmMessages";
+import { spanishCrmMessages } from "./spanishCrmMessages";
+import {
+  spanishRaMessages,
+  spanishRaSupabaseMessages,
+} from "./spanishRaMessages";
 
 const raSupabaseEnglishMessagesOverride = {
   "ra-supabase": {
@@ -59,8 +64,15 @@ const frenchCatalog = mergeTranslations(
   frenchCrmMessages,
 );
 
-// Only the Amai Mochi keys are in Spanish so far; everything else falls back to English.
-const spanishCatalog = mergeTranslations(englishCatalog, spanishAmaiMessages);
+// Spanish covers react-admin, sign-in and the CRM screens Amai Mochi uses;
+// unused CRM screens (contacts, deals...) fall back to English.
+const spanishCatalog = mergeTranslations(
+  englishCatalog,
+  spanishRaMessages,
+  spanishRaSupabaseMessages,
+  spanishCrmMessages,
+  spanishAmaiMessages,
+);
 
 export const getInitialLocale = (): "en" | "fr" | "es" => {
   if (typeof navigator === "undefined") {

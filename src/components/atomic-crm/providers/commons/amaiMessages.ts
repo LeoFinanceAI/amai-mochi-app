@@ -1,7 +1,7 @@
 // Messages for the Amai Mochi screens. Spanish (es-MX) is the business language;
 // English mirrors it so the keys never render raw in the en/fr catalogs.
-// The rest of the Atomic CRM UI is not translated to Spanish yet: the "es"
-// catalog falls back to English for every key not listed here.
+// Spanish for react-admin and the CRM screens lives in spanishRaMessages.ts and
+// spanishCrmMessages.ts.
 
 export const englishAmaiMessages = {
   amai: {
@@ -131,27 +131,6 @@ export const spanishAmaiMessages = {
         publico: "Público",
         evento: "Evento",
       },
-    },
-  },
-  // Only the react-admin strings the Amai screens show; the full Spanish
-  // translation of the CRM is a separate task.
-  ra: {
-    action: {
-      save: "Guardar",
-      cancel: "Cancelar",
-      back: "Regresar",
-    },
-    notification: {
-      created: "Guardado",
-      updated: "Guardado |||| %{smart_count} guardados",
-      http_error: "No se pudo conectar con el servidor",
-    },
-    message: {
-      invalid_form: "Revisa los campos marcados en rojo.",
-    },
-    validation: {
-      required: "Obligatorio",
-      maxLength: "Máximo %{max} caracteres",
     },
   },
 };
