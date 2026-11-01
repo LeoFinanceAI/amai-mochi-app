@@ -8,6 +8,7 @@ import {
 } from "ra-core";
 import type {
   ContactNote,
+  NuevoPedido,
   Deal,
   DealNote,
   RAFile,
@@ -266,6 +267,23 @@ const getDataProviderWithCustomMethods = () => {
       }
 
       return data;
+    },
+    // Saves the order and its pieces per flavor in one transaction
+    // (supabase/schemas/09_amai.sql). Prices are computed and frozen in SQL.
+    async crearPedido(pedido: NuevoPedido): Promise<{ id: number }> {
+      const { data, error } = await getSupabaseClient().rpc("crear_pedido", {
+        p_cliente_id: pedido.cliente_id,
+        p_fecha_entrega: pedido.fecha_entrega,
+        p_metodo_pago: pedido.metodo_pago,
+        p_direccion: pedido.direccion,
+        p_notas: pedido.notas,
+        p_lineas: pedido.lineas,
+      });
+      if (error) {
+        console.error("crear_pedido.error", error);
+        throw new Error("Failed to save the order");
+      }
+      return { id: data as number };
     },
     async getConfiguration(): Promise<ConfigurationContextValue> {
       const { data } = await baseDataProvider.getOne("configuration", {

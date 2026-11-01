@@ -224,6 +224,49 @@ const dismissToast = async (page: Page, content: string) => {
   await page.waitForLoadState("networkidle");
 };
 
+// Amai Mochi records, written with the service role (made-up data only).
+const amai = {
+  async createSabor(nombre: string, color = "#EE8FA8") {
+    const { data, error } = await adminSupabase
+      .from("sabor")
+      .insert({ nombre, color })
+      .select()
+      .single();
+    if (error) throw new Error(`Failed to create sabor: ${error.message}`);
+    return data as { id: number; nombre: string };
+  },
+  async createCliente(nombre: string, zona: string | null = null) {
+    const { data, error } = await adminSupabase
+      .from("cliente")
+      .insert({ nombre, zona })
+      .select()
+      .single();
+    if (error) throw new Error(`Failed to create cliente: ${error.message}`);
+    return data as { id: number; nombre: string };
+  },
+  // A wholesale tier for the flavor's per-piece product.
+  async createPrecio(saborId: number, cantidadMin: number, precio: number) {
+    const { data: producto } = await adminSupabase
+      .from("producto")
+      .select("id")
+      .eq("sabor_id", saborId)
+      .single();
+    const { error } = await adminSupabase.from("precio").insert({
+      producto_id: producto?.id,
+      cantidad_min: cantidadMin,
+      precio,
+    });
+    if (error) throw new Error(`Failed to create precio: ${error.message}`);
+  },
+  async listPedidoTotales() {
+    const { data, error } = await adminSupabase
+      .from("v_pedido_total")
+      .select("cliente_id, estado, piezas, total");
+    if (error) throw new Error(`Failed to read orders: ${error.message}`);
+    return data;
+  },
+};
+
 export const test = base.extend<{
   resetDb: void;
   createUser: typeof createUser;
@@ -232,6 +275,7 @@ export const test = base.extend<{
   createContact: typeof createContact;
   createNotes: typeof createNotes;
   menu: ReturnType<typeof getMenuMethod>;
+  amai: typeof amai;
   dismissToast: (content: string) => Promise<void>;
 }>({
   resetDb: [
@@ -263,6 +307,10 @@ export const test = base.extend<{
   // eslint-disable-next-line no-empty-pattern
   createNotes: async ({}, cb) => {
     await cb(createNotes);
+  },
+  // eslint-disable-next-line no-empty-pattern
+  amai: async ({}, cb) => {
+    await cb(amai);
   },
   menu: async ({ page }, cb) => {
     await cb(getMenuMethod({ page }));

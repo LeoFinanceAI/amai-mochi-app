@@ -165,6 +165,53 @@ export type Sabor = {
   creado_en?: string;
 };
 
+// Amai Mochi orders. Mirrors the enums and tables in supabase/schemas/09_amai.sql.
+export type MetodoPago = "efectivo" | "transferencia" | "tarjeta" | "otro";
+export type EstadoPedido = "pendiente" | "entregado" | "cancelado";
+
+// What is sold: one "pieza" product per flavor, created by a trigger on sabor.
+export type Producto = {
+  id: number;
+  sabor_id: number;
+  presentacion: string;
+  piezas_por_unidad: number;
+  precio_lista: number;
+  activo: boolean;
+};
+
+export type Pedido = {
+  id: number;
+  cliente_id: number;
+  fecha_pedido: string;
+  // Local calendar date, YYYY-MM-DD.
+  fecha_entrega: string;
+  estado: EstadoPedido;
+  metodo_pago: MetodoPago | null;
+  direccion: string | null;
+  ubicacion_url: string | null;
+  notas: string | null;
+  entregado_en: string | null;
+};
+
+export type PedidoDetalle = {
+  id: number;
+  pedido_id: number;
+  producto_id: number;
+  cantidad: number;
+  // Frozen when the order is saved.
+  precio_unitario: number;
+};
+
+// Input of crear_pedido(): the order and its pieces per flavor, saved together.
+export type NuevoPedido = {
+  cliente_id: number;
+  fecha_entrega: string;
+  metodo_pago: MetodoPago;
+  direccion: string;
+  notas: string;
+  lineas: Array<{ sabor_id: number; cantidad: number }>;
+};
+
 export type Tag = {
   id: number;
   name: string;
