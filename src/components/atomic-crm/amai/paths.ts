@@ -1,0 +1,7 @@
+// Paths of the Amai Mochi MVP screens, linked from the bottom bar on phones and
+// the header on desktop. Each one shows a placeholder until its stage ships.
+export const AMAI_PATHS = {
+  newOrder: "/orders/new",
+  receivables: "/receivables",
+  summary: "/summary",
+} as const;

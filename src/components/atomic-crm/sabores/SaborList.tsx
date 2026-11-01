@@ -13,7 +13,7 @@ import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 
 import type { Sabor } from "../types";
-import { CatalogPage } from "../amai/CatalogPage";
+import { AmaiPage } from "../amai/AmaiPage";
 
 // The whole catalog fits on one screen; no pagination.
 const ALL_FLAVORS = 100;
@@ -26,9 +26,7 @@ export const SaborList = () => {
       sort={{ field: "nombre", order: "ASC" }}
       perPage={ALL_FLAVORS}
     >
-      <CatalogPage
-        title={translate("resources.sabor.name", { smart_count: 2 })}
-      >
+      <AmaiPage title={translate("resources.sabor.name", { smart_count: 2 })}>
         <Link
           to="/sabor/create"
           className={cn(buttonVariants(), "min-h-11 self-start gap-2")}
@@ -37,7 +35,7 @@ export const SaborList = () => {
           {translate("amai.flavors.add")}
         </Link>
         <SaborRows />
-      </CatalogPage>
+      </AmaiPage>
     </ListBase>
   );
 };

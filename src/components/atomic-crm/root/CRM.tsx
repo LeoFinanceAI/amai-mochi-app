@@ -17,8 +17,6 @@ import { OAuthConsentPage } from "@/components/supabase/oauth-consent-page";
 
 import companies from "../companies";
 import contacts from "../contacts";
-import { Dashboard } from "../dashboard/Dashboard";
-import { MobileDashboard } from "../dashboard/MobileDashboard";
 import deals from "../deals";
 import { Layout } from "../layout/Layout";
 import { MobileLayout } from "../layout/MobileLayout";
@@ -61,7 +59,8 @@ import { ContactListMobile } from "../contacts/ContactList.tsx";
 import { ContactShow } from "../contacts/ContactShow.tsx";
 import { CompanyShow } from "../companies/CompanyShow.tsx";
 import { NoteShowPage } from "../notes/NoteShowPage.tsx";
-import { AMAI_PATHS, ComingSoonPage } from "../amai/ComingSoonPage.tsx";
+import { AmaiHome } from "../amai/AmaiHome.tsx";
+import { amaiRoutes } from "../amai/amaiRoutes.tsx";
 
 const defaultStore = localStorageStore(undefined, "CRM");
 
@@ -242,7 +241,7 @@ const DesktopAdmin = (
   return (
     <Admin
       layout={props.layout ?? Layout}
-      dashboard={props.dashboard ?? Dashboard}
+      dashboard={props.dashboard ?? AmaiHome}
       {...props}
     >
       <CustomRoutes noLayout>
@@ -264,6 +263,7 @@ const DesktopAdmin = (
         <Route path={SettingsPage.path} element={<SettingsPage />} />
         <Route path={ImportPage.path} element={<ImportPage />} />
         <Route path={ChangelogPage.path} element={<ChangelogPage />} />
+        {amaiRoutes}
       </CustomRoutes>
       <Resource name="deals" {...deals} />
       <Resource name="contacts" {...contacts} />
@@ -319,7 +319,7 @@ const MobileAdmin = (
       <Admin
         queryClient={queryClient}
         layout={props.layout ?? MobileLayout}
-        dashboard={props.dashboard ?? MobileDashboard}
+        dashboard={props.dashboard ?? AmaiHome}
         {...props}
       >
         <CustomRoutes noLayout>
@@ -341,27 +341,7 @@ const MobileAdmin = (
             element={<SettingsPageMobile />}
           />
           <Route path={ChangelogPage.path} element={<ChangelogPage />} />
-          <Route
-            path={AMAI_PATHS.newOrder}
-            element={
-              <ComingSoonPage titleKey="amai.navigation.new_order" stage={2} />
-            }
-          />
-          <Route
-            path={AMAI_PATHS.receivables}
-            element={
-              <ComingSoonPage
-                titleKey="amai.navigation.receivables"
-                stage={3}
-              />
-            }
-          />
-          <Route
-            path={AMAI_PATHS.summary}
-            element={
-              <ComingSoonPage titleKey="amai.navigation.summary" stage={4} />
-            }
-          />
+          {amaiRoutes}
         </CustomRoutes>
         <Resource
           name="contacts"

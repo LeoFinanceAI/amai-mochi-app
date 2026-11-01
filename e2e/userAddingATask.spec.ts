@@ -46,7 +46,7 @@ test.describe("user adding a task", () => {
     await page.getByRole("button", { name: "Sign in" }).click();
 
     await expect(page).toHaveTitle(/Amai Mochi/);
-    await expect(page.getByText("Latest Activity")).toBeVisible();
+    await expect(page.getByRole("link", { name: "New order" })).toBeVisible();
 
     await menu.goToContacts();
     await page.waitForLoadState("networkidle");
@@ -81,17 +81,11 @@ test.describe("user adding a task", () => {
       await expect(page.getByText("Tasks").locator("..")).toHaveText(
         /Follow up with Jane/,
       );
-      await menu.goToDashboard();
-
-      await expect(page.getByText("Upcoming Tasks")).toBeVisible();
-      await expect(
-        page.getByText("Upcoming Tasks").locator("../.."),
-      ).toHaveText(/Follow up with Jane/);
       await expect(
         page.getByText("Follow up with Jane").locator(".."),
-      ).toHaveText(
-        "Call Follow up with Janedue 4/11/2026, 9:00:00 PM (Re: Jane Smith)",
-      );
+        // A string, not a regex: Playwright normalizes the narrow no-break
+        // space Chrome puts before "PM" only when matching text.
+      ).toContainText("due 4/11/2026, 9:00:00 PM");
     }
   });
 });

@@ -37,7 +37,7 @@ test("user adds a tag to several contacts", async ({
   await page.getByRole("button", { name: "Sign in" }).click();
 
   await expect(page).toHaveTitle(/Amai Mochi/);
-  await expect(page.getByRole("link", { name: "Contacts" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "New order" })).toBeVisible();
 
   await menu.goToContacts();
   await expect(page.getByText("Ada Lovelace")).toBeVisible();

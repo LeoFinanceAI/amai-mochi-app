@@ -15,19 +15,27 @@ type DataProvider = ReturnType<typeof createDataProvider>;
 // Lets a test swap one data provider method, e.g. to simulate a server error.
 export type DataProviderOverride = (base: DataProvider) => DataProvider;
 
-// The whole mobile app in Spanish, as Eduardo sees it on his phone, backed by
-// an in-memory FakeRest database.
+const VIEWPORTS = {
+  phone: [375, 667],
+  desktop: [1280, 800],
+} as const;
+
+// The whole app in Spanish, as Eduardo sees it, backed by an in-memory
+// FakeRest database. Phone-sized by default (the app is mobile first).
 export const renderMobileApp = async ({
   path = "/",
   data = {},
   dataProvider,
+  device = "phone",
 }: {
   path?: string;
   data?: Partial<Db>;
   dataProvider?: DataProviderOverride;
+  device?: keyof typeof VIEWPORTS;
 } = {}) => {
   localStorage.clear();
-  await page.viewport(375, 667);
+  const [width, height] = VIEWPORTS[device];
+  await page.viewport(width, height);
   await i18nProvider.changeLocale("es");
   const base = createDataProvider({ db: createCrmDb(data), silent: true });
   return render(
