@@ -202,7 +202,23 @@ export type PedidoDetalle = {
   precio_unitario: number;
 };
 
-// Input of crear_pedido(): the order and its pieces per flavor, saved together.
+// A row of v_pedido_lista: the order with its client, pieces, total and flavors.
+export type PedidoLista = Pedido & {
+  cliente: string;
+  zona: string | null;
+  telefono: string | null;
+  piezas: number;
+  total: number;
+  sabores: Array<{
+    sabor_id: number;
+    nombre: string;
+    color: string;
+    cantidad: number;
+  }>;
+};
+
+// Input of crear_pedido() and actualizar_pedido(): the order and its pieces per
+// flavor, saved together.
 export type NuevoPedido = {
   cliente_id: number;
   fecha_entrega: string;

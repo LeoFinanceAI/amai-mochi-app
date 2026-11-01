@@ -1,12 +1,20 @@
 import { Route } from "react-router";
 
+import { EditarPedidoPage } from "../pedidos/EditarPedidoPage";
 import { NuevoPedidoPage } from "../pedidos/NuevoPedidoPage";
+import { PedidoListPage } from "../pedidos/PedidoListPage";
 import { ComingSoonPage } from "./ComingSoonPage";
 import { AMAI_PATHS } from "./paths";
 
 // Shared by the desktop and mobile route trees (an array, because CustomRoutes
 // reads its children as <Route> elements).
 export const amaiRoutes = [
+  <Route key="orders" path={AMAI_PATHS.orders} element={<PedidoListPage />} />,
+  <Route
+    key="edit-order"
+    path={`${AMAI_PATHS.orders}/:id/edit`}
+    element={<EditarPedidoPage />}
+  />,
   <Route
     key="new-order"
     path={AMAI_PATHS.newOrder}

@@ -16,8 +16,14 @@ const Header = () => {
   const translate = useTranslate();
 
   // Same screens as the mobile bottom bar, plus the catalogs.
-  const tabs = [
+  // activeOn: the paths that highlight the tab (default: the tab and below).
+  const tabs: Array<{ to: string; label: string; activeOn?: string[] }> = [
     { to: AMAI_PATHS.newOrder, label: translate("amai.navigation.new_order") },
+    {
+      to: AMAI_PATHS.orders,
+      label: translate("amai.navigation.orders"),
+      activeOn: [AMAI_PATHS.orders, `${AMAI_PATHS.orders}/:id/edit`],
+    },
     {
       to: AMAI_PATHS.receivables,
       label: translate("amai.navigation.receivables"),
@@ -62,7 +68,9 @@ const Header = () => {
                       key={tab.to}
                       label={tab.label}
                       to={tab.to}
-                      isActive={!!matchPath(`${tab.to}/*`, location.pathname)}
+                      isActive={(tab.activeOn ?? [`${tab.to}/*`]).some(
+                        (path) => !!matchPath(path, location.pathname),
+                      )}
                     />
                   ))}
                 </nav>

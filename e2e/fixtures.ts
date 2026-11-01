@@ -258,6 +258,40 @@ const amai = {
     });
     if (error) throw new Error(`Failed to create precio: ${error.message}`);
   },
+  // An order inserted directly; the SQL trigger prices its lines.
+  async createPedido(
+    clienteId: number,
+    fechaEntrega: string,
+    lineas: Array<{ saborId: number; cantidad: number }>,
+  ) {
+    const { data: pedido, error } = await adminSupabase
+      .from("pedido")
+      .insert({ cliente_id: clienteId, fecha_entrega: fechaEntrega })
+      .select()
+      .single();
+    if (error) throw new Error(`Failed to create pedido: ${error.message}`);
+    for (const { saborId, cantidad } of lineas) {
+      const { data: producto } = await adminSupabase
+        .from("producto")
+        .select("id")
+        .eq("sabor_id", saborId)
+        .single();
+      const { error: lineError } = await adminSupabase
+        .from("pedido_detalle")
+        .insert({ pedido_id: pedido.id, producto_id: producto?.id, cantidad });
+      if (lineError) {
+        throw new Error(`Failed to create line: ${lineError.message}`);
+      }
+    }
+    return pedido as { id: number };
+  },
+  async listPedidos() {
+    const { data, error } = await adminSupabase
+      .from("v_pedido_lista")
+      .select("id, estado, piezas, total, entregado_en");
+    if (error) throw new Error(`Failed to read orders: ${error.message}`);
+    return data;
+  },
   async listPedidoTotales() {
     const { data, error } = await adminSupabase
       .from("v_pedido_total")

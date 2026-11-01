@@ -29,7 +29,13 @@ import { getCompanyAvatar } from "../commons/getCompanyAvatar";
 import { getContactAvatar } from "../commons/getContactAvatar";
 import { mergeContacts } from "../commons/mergeContacts";
 import { getSearchResults } from "./search";
-import { crearPedido } from "./crearPedido";
+import {
+  actualizarPedido,
+  conHoraDeEntrega,
+  crearPedido,
+  getPedidoLista,
+  getPedidoListaOne,
+} from "./pedidos";
 import type { CrmDataProvider } from "../types";
 import {
   authProvider as defaultAuthProvider,
@@ -175,6 +181,20 @@ export const createDataProvider = ({
 
   const dataProviderWithCustomMethod: CrmDataProvider = {
     ...baseDataProvider,
+    // Orders are read like v_pedido_lista (see getList below); estado
+    // updates mimic its trigger.
+    async getOne(resource: string, params: any) {
+      if (resource === "pedido") {
+        return getPedidoListaOne(baseDataProvider, params.id) as any;
+      }
+      return baseDataProvider.getOne(resource, params);
+    },
+    async update(resource: string, params: any) {
+      if (resource === "pedido") {
+        return baseDataProvider.update(resource, conHoraDeEntrega(params));
+      }
+      return baseDataProvider.update(resource, params);
+    },
     async getMany(resource: string, params: any) {
       if (resource === "tags") {
         // like PostgREST, ignore unknown ids (a deleted tag may still be in cached contacts)
@@ -188,6 +208,9 @@ export const createDataProvider = ({
       return baseDataProvider.getMany(resource, params);
     },
     async getList(resource: string, params: any) {
+      if (resource === "pedido") {
+        return getPedidoLista(baseDataProvider, params) as any;
+      }
       if (resource === "activity_log") {
         const { filter = {}, pagination } = params;
         const all = await getActivityLog(
@@ -329,6 +352,9 @@ export const createDataProvider = ({
     },
     crearPedido: async (pedido: NuevoPedido) => {
       return crearPedido(baseDataProvider, pedido);
+    },
+    actualizarPedido: async (id: number, pedido: NuevoPedido) => {
+      return actualizarPedido(baseDataProvider, id, pedido);
     },
     getConfiguration: async (): Promise<ConfigurationContextValue> => {
       const { data } = await baseDataProvider.getOne("configuration", {
