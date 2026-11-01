@@ -280,6 +280,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/providers/fakerest/crearPedido.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/providers/fakerest/authProvider.ts",
           "type": "registry:component"
         },
@@ -409,6 +413,30 @@
         },
         {
           "path": "src/components/atomic-crm/providers/commons/activity.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/nuevoPedidoForm.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/fechaEntrega.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/SaborCantidades.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/NuevoPedidoPage.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/EntregaSelector.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/ClienteSelector.tsx",
           "type": "registry:component"
         },
         {
@@ -965,6 +993,10 @@
         },
         {
           "path": "src/components/atomic-crm/amai/ComingSoonPage.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/amai/ChipRadioGroup.tsx",
           "type": "registry:component"
         },
         {
