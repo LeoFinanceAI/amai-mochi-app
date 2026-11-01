@@ -31,6 +31,8 @@ export default defineConfig({
       registerType: "autoUpdate",
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
+        // The questionnaire is a standalone page: never answer it with the app shell.
+        navigateFallbackDenylist: [/\/cuestionario\//],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MiB
       },
       manifest: false, // Use existing manifest.json from public/
