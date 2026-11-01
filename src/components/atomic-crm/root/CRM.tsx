@@ -32,6 +32,7 @@ import {
 } from "../providers/supabase";
 import sales from "../sales";
 import sabores from "../sabores";
+import clientes from "../clientes";
 import { SettingsPageMobile } from "../settings/SettingsPageMobile";
 import { ProfilePage } from "../settings/ProfilePage";
 import { SettingsPage } from "../settings/SettingsPage";
@@ -272,6 +273,7 @@ const DesktopAdmin = (
       <Resource name="tasks" />
       <Resource name="sales" {...sales} />
       <Resource name="sabor" {...sabores} />
+      <Resource name="cliente" {...clientes} />
       <Resource name="tags" />
     </Admin>
   );
@@ -372,6 +374,7 @@ const MobileAdmin = (
         <Resource name="companies" show={CompanyShow} />
         <Resource name="tasks" list={MobileTasksList} />
         <Resource name="sabor" {...sabores} />
+        <Resource name="cliente" {...clientes} />
       </Admin>
     </PersistQueryClientProvider>
   );

@@ -4,9 +4,9 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import MobileHeader from "../layout/MobileHeader";
 import { MobileContent } from "../layout/MobileContent";
 
-// Frame shared by the flavor screens: the mobile header on phones, a narrow
-// centered column on desktop (the catalog is short, a table would be empty space).
-export const SaborPage = ({
+// Frame shared by the catalog screens: the mobile header on phones, a narrow
+// centered column on desktop (catalogs are short, a table would be empty space).
+export const CatalogPage = ({
   title,
   children,
 }: {

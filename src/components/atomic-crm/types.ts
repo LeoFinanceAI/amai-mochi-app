@@ -141,6 +141,21 @@ export type DealNote = {
   status?: undefined;
 } & Pick<RaRecord, "id">;
 
+// Amai Mochi customers (table `cliente`): distributors, public sales and events.
+export type TipoCliente = "distribuidor" | "publico" | "evento";
+
+export type Cliente = {
+  id: number;
+  nombre: string;
+  tipo: TipoCliente;
+  zona: string | null;
+  // Digits only (10 to 13), ready for wa.me links.
+  telefono: string | null;
+  notas: string | null;
+  activo: boolean;
+  creado_en?: string;
+};
+
 // Amai Mochi catalog: one row per flavor (table `sabor`).
 export type Sabor = {
   id: number;

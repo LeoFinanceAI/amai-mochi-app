@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { FormToolbar } from "../layout/FormToolbar";
 import { SaborInputs } from "./SaborInputs";
-import { SaborPage } from "./SaborPage";
+import { CatalogPage } from "../amai/CatalogPage";
 import { saborErrorMessage } from "./saborErrors";
 
 // No delete: products reference flavors (ON DELETE RESTRICT), so a flavor is
@@ -19,7 +19,7 @@ export const SaborEdit = () => {
         onError: (error) => notify(saborErrorMessage(error), { type: "error" }),
       }}
     >
-      <SaborPage title={translate("amai.flavors.edit_title")}>
+      <CatalogPage title={translate("amai.flavors.edit_title")}>
         <Form>
           <Card>
             <CardContent>
@@ -28,7 +28,7 @@ export const SaborEdit = () => {
             </CardContent>
           </Card>
         </Form>
-      </SaborPage>
+      </CatalogPage>
     </EditBase>
   );
 };

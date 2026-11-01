@@ -30,6 +30,16 @@ export const englishAmaiMessages = {
       color_hint: "Shown next to the flavor in orders and charts.",
       invalid_color: "Pick a color, like #EE8FA8.",
     },
+    clients: {
+      add: "New client",
+      create_title: "New client",
+      edit_title: "Edit client",
+      empty: "No clients yet. Add the first one.",
+      inactive: "Inactive",
+      phone_hint: "10 digits. Used to message them on WhatsApp.",
+      invalid_phone: "Write 10 digits, or 12 with 52 in front.",
+      zona_placeholder: "Guadalajara, Colima, Tepetitlán…",
+    },
   },
   resources: {
     sabor: {
@@ -38,6 +48,22 @@ export const englishAmaiMessages = {
         nombre: "Name",
         color: "Color",
         activo: "Active",
+      },
+    },
+    cliente: {
+      name: "Client |||| Clients",
+      fields: {
+        nombre: "Name",
+        tipo: "Type",
+        zona: "Area",
+        telefono: "Phone",
+        notas: "Notes",
+        activo: "Active",
+      },
+      tipos: {
+        distribuidor: "Distributor",
+        publico: "Public",
+        evento: "Event",
       },
     },
   },
@@ -70,6 +96,16 @@ export const spanishAmaiMessages = {
       color_hint: "Se muestra junto al sabor en pedidos y gráficas.",
       invalid_color: "Elige un color, por ejemplo #EE8FA8.",
     },
+    clients: {
+      add: "Nuevo cliente",
+      create_title: "Nuevo cliente",
+      edit_title: "Editar cliente",
+      empty: "Todavía no hay clientes. Agrega el primero.",
+      inactive: "Inactivo",
+      phone_hint: "10 dígitos. Sirve para escribirle por WhatsApp.",
+      invalid_phone: "Escribe 10 dígitos, o 12 con 52 al inicio.",
+      zona_placeholder: "Guadalajara, Colima, Tepetitlán…",
+    },
   },
   resources: {
     sabor: {
@@ -78,6 +114,22 @@ export const spanishAmaiMessages = {
         nombre: "Nombre",
         color: "Color",
         activo: "Activo",
+      },
+    },
+    cliente: {
+      name: "Cliente |||| Clientes",
+      fields: {
+        nombre: "Nombre",
+        tipo: "Tipo",
+        zona: "Zona",
+        telefono: "Teléfono",
+        notas: "Notas",
+        activo: "Activo",
+      },
+      tipos: {
+        distribuidor: "Distribuidor",
+        publico: "Público",
+        evento: "Evento",
       },
     },
   },
@@ -93,6 +145,9 @@ export const spanishAmaiMessages = {
       created: "Guardado",
       updated: "Guardado |||| %{smart_count} guardados",
       http_error: "No se pudo conectar con el servidor",
+    },
+    message: {
+      invalid_form: "Revisa los campos marcados en rojo.",
     },
     validation: {
       required: "Obligatorio",

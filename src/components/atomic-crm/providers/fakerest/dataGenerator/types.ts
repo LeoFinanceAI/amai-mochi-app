@@ -4,6 +4,7 @@ import type {
   ContactNote,
   Deal,
   DealNote,
+  Cliente,
   Sabor,
   Sale,
   Tag,
@@ -21,5 +22,6 @@ export interface Db {
   tags: Tag[];
   tasks: Task[];
   sabor: Sabor[];
+  cliente: Cliente[];
   configuration: Array<{ id: number; config: ConfigurationContextValue }>;
 }

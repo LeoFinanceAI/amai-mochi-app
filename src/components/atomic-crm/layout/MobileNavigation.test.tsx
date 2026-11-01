@@ -1,38 +1,11 @@
-import { memoryStore } from "ra-core";
-import { MemoryRouter } from "react-router";
-import { beforeEach, describe, expect, it } from "vitest";
-import { page } from "vitest/browser";
-import { render } from "vitest-browser-react";
+import { describe, expect, it } from "vitest";
 
-import { createCrmDb, createTestAuthProvider } from "@/test/StoryWrapper";
-
-import { i18nProvider } from "../providers/commons/i18nProvider";
-import { createDataProvider } from "../providers/fakerest";
-import { CRM } from "../root/CRM";
-
-// The whole mobile app, as Eduardo sees it on a phone with a Spanish browser.
-const MobileApp = () => (
-  <MemoryRouter initialEntries={["/"]}>
-    <CRM
-      authProvider={createTestAuthProvider()}
-      dataProvider={createDataProvider({ db: createCrmDb(), silent: true })}
-      i18nProvider={i18nProvider}
-      store={memoryStore()}
-      disableTelemetry
-    />
-  </MemoryRouter>
-);
+import { renderMobileApp } from "@/test/renderMobileApp";
 
 describe("MobileNavigation", () => {
-  beforeEach(async () => {
-    localStorage.clear();
-    await page.viewport(375, 667);
-    await i18nProvider.changeLocale("es");
-  });
-
   it("links the Amai Mochi screens and settings in Spanish", async () => {
     // Act
-    const screen = await render(<MobileApp />);
+    const screen = await renderMobileApp();
 
     // Assert
     const nav = screen.getByRole("navigation", {
@@ -48,7 +21,7 @@ describe("MobileNavigation", () => {
 
   it("opens the placeholder of a screen not built yet and marks it as current", async () => {
     // Arrange
-    const screen = await render(<MobileApp />);
+    const screen = await renderMobileApp();
     const receivables = screen.getByRole("link", { name: "Por cobrar" });
 
     // Act
