@@ -83,7 +83,9 @@ test.describe("user adding a task", () => {
       );
       await expect(
         page.getByText("Follow up with Jane").locator(".."),
-      ).toHaveText(/due 4\/11\/2026, 9:00:00 PM/);
+        // A string, not a regex: Playwright normalizes the narrow no-break
+        // space Chrome puts before "PM" only when matching text.
+      ).toContainText("due 4/11/2026, 9:00:00 PM");
     }
   });
 });
