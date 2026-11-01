@@ -15,7 +15,7 @@ React no es su stack diario: explica las decisiones de frontend y mantén el có
 - Sabores: fresa, mango, taro, chocolate, oreo, vainilla. Empaque con fecha de elaboración y caducidad.
 - Ya lleva su administración en una app, probablemente **Treinta** (ventas, gastos, deudas, clientes). Por confirmar:
   qué usa de ella, qué plan paga y si permite exportar sus datos. Hay que migrar lo que necesite.
-- **Aún no contesta el cuestionario** (formulario en https://claude.ai/artifact/FotEEPfTHugU2nSYusvmkr).
+- **Aún no contesta el cuestionario** (formulario en https://amai-mochi.pages.dev/cuestionario/).
   Todo lo anterior viene de su Instagram y de Leo; trátalo como hipótesis.
 
 ## Stack (decidido) y regla de costo
