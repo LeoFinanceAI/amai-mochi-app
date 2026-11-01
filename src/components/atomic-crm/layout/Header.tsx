@@ -37,6 +37,7 @@ const Header = () => {
       to: "/sabor",
       label: translate("resources.sabor.name", { smart_count: 2 }),
     },
+    { to: AMAI_PATHS.prices, label: translate("amai.prices.title") },
     {
       to: "/cliente",
       label: translate("resources.cliente.name", { smart_count: 2 }),
