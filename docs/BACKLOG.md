@@ -41,6 +41,10 @@ Terminada cuando los sabores, precios y clientes reales de Eduardo están en la 
 - [ ] Pantalla de clientes: tipo (distribuidor, público, evento), zona y teléfono (2 h)
 - [ ] Precios de mayoreo por escalón de piezas y precio especial por cliente (3 h)
 - [ ] Cargar los datos reales que mande Eduardo (1 h)
+- [ ] Migración desde Treinta (horas por estimar cuando sepamos cómo exporta): clientes, productos y precios y
+  deudas pendientes para operar desde el día uno; ventas y gastos pasados solo si Eduardo los quiere. Exportar
+  (Excel/CSV, soporte de Treinta o captura manual), cargar a tablas de staging en Supabase local, transformar con
+  SQL, validar totales contra Treinta y luego cargar a producción. Los archivos exportados nunca van al repo.
 
 ## Etapa 2 – Pedidos y entregas (22 h)
 
@@ -107,3 +111,5 @@ Estas respuestas pueden mover tareas o sumar horas antes de empezar la etapa 1.
 - [ ] ¿Factura a sus distribuidores? Si sí, la facturación (CFDI) es un módulo aparte con proveedor de timbrado (+15 h o más)
 - [ ] ¿Le serviría que los distribuidores pidan solos desde la app en lugar de por WhatsApp? (+20 h o más)
 - [ ] Acordar quién sostiene la app después del arranque: errores, cambios y hosting si crece
+- [ ] ¿Usa Treinta? ¿Qué plan paga y qué le falta? ¿Permite descargar sus datos? Define cómo migramos y la fecha de
+  corte: desde ese día todo se anota en la app nueva y Treinta queda solo para consulta
