@@ -204,6 +204,34 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/sabores/saborErrors.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/sabores/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/sabores/SaborPage.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/sabores/SaborList.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/sabores/SaborInputs.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/sabores/SaborEdit.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/sabores/SaborCreate.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/root/useConfigurationLoader.ts",
           "type": "registry:component"
         },
@@ -301,6 +329,10 @@
         },
         {
           "path": "src/components/atomic-crm/providers/fakerest/dataGenerator/sales.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/providers/fakerest/dataGenerator/sabores.ts",
           "type": "registry:component"
         },
         {
@@ -897,6 +929,10 @@
         },
         {
           "path": "src/components/atomic-crm/amai/ComingSoonPage.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/amai/CatalogSection.tsx",
           "type": "registry:component"
         },
         {
