@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { renderMobileApp } from "@/test/renderMobileApp";
 
 describe("Amai Mochi home and navigation", () => {
-  it("opens on Nuevo pedido on a phone, without the CRM dashboard", async () => {
+  it("opens on Nuevo pedido on a phone with the wordmark, without the CRM dashboard", async () => {
     // Act
     const screen = await renderMobileApp({ path: "/" });
 
@@ -14,6 +14,9 @@ describe("Amai Mochi home and navigation", () => {
     await expect
       .element(screen.getByRole("link", { name: "Nuevo pedido" }))
       .toHaveAttribute("aria-current", "page");
+    await expect
+      .element(screen.getByRole("link", { name: "Amai Mochi" }))
+      .toHaveAttribute("href", "/");
     await expect
       .element(screen.getByText("What's next?"))
       .not.toBeInTheDocument();
