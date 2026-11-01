@@ -5,7 +5,7 @@ import { generateDealNotes } from "./dealNotes";
 import { generateDeals } from "./deals";
 import { finalize } from "./finalize";
 import { generateClientes } from "./clientes";
-import { generateSabores } from "./sabores";
+import { generateProductos, generateSabores } from "./sabores";
 import { generateSales } from "./sales";
 import { generateTags } from "./tags";
 import { generateTasks } from "./tasks";
@@ -23,6 +23,9 @@ export default (): Db => {
   db.tasks = generateTasks(db);
   db.sabor = generateSabores();
   db.cliente = generateClientes();
+  db.producto = generateProductos(db.sabor);
+  db.pedido = [];
+  db.pedido_detalle = [];
   db.configuration = [
     {
       id: 1,

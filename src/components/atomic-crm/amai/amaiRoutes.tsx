@@ -1,5 +1,6 @@
 import { Route } from "react-router";
 
+import { NuevoPedidoPage } from "../pedidos/NuevoPedidoPage";
 import { ComingSoonPage } from "./ComingSoonPage";
 import { AMAI_PATHS } from "./paths";
 
@@ -9,7 +10,7 @@ export const amaiRoutes = [
   <Route
     key="new-order"
     path={AMAI_PATHS.newOrder}
-    element={<ComingSoonPage titleKey="amai.navigation.new_order" stage={2} />}
+    element={<NuevoPedidoPage />}
   />,
   <Route
     key="receivables"

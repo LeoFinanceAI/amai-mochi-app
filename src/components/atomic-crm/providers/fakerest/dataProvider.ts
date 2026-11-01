@@ -9,6 +9,7 @@ import {
 import fakeRestDataProvider from "ra-data-fakerest";
 
 import type {
+  NuevoPedido,
   Company,
   Contact,
   ContactNote,
@@ -28,6 +29,7 @@ import { getCompanyAvatar } from "../commons/getCompanyAvatar";
 import { getContactAvatar } from "../commons/getContactAvatar";
 import { mergeContacts } from "../commons/mergeContacts";
 import { getSearchResults } from "./search";
+import { crearPedido } from "./crearPedido";
 import type { CrmDataProvider } from "../types";
 import {
   authProvider as defaultAuthProvider,
@@ -324,6 +326,9 @@ export const createDataProvider = ({
     },
     mergeContacts: async (sourceId: Identifier, targetId: Identifier) => {
       return mergeContacts(sourceId, targetId, baseDataProvider);
+    },
+    crearPedido: async (pedido: NuevoPedido) => {
+      return crearPedido(baseDataProvider, pedido);
     },
     getConfiguration: async (): Promise<ConfigurationContextValue> => {
       const { data } = await baseDataProvider.getOne("configuration", {

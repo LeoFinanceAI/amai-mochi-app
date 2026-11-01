@@ -9,6 +9,11 @@
 @theme inline {
   --font-sans: "Quicksand Variable", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Bebas Neue", Impact, ui-sans-serif, sans-serif;
+  /* Amai Mochi brand olive and orange: bars, plus darker/lighter text shades */
+  --color-meta-ok: var(--meta-ok);
+  --color-meta-ok-text: var(--meta-ok-text);
+  --color-meta-pendiente: var(--meta-pendiente);
+  --color-meta-pendiente-text: var(--meta-pendiente-text);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -56,6 +61,10 @@
   --popover: #ffffff;
   --popover-foreground: #2a2320;
   --primary: #b23a62;
+  --meta-ok: #8a9a3e;
+  --meta-ok-text: #4f5a1b;
+  --meta-pendiente: #e58f35;
+  --meta-pendiente-text: #9a4f0e;
   --primary-foreground: #ffffff;
   --secondary: #f3eada;
   --secondary-foreground: #2a2320;
@@ -100,6 +109,10 @@
   --popover: #362d29;
   --popover-foreground: #fbf5e3;
   --primary: #f9d3dc;
+  --meta-ok: #8a9a3e;
+  --meta-ok-text: #c9d68a;
+  --meta-pendiente: #e58f35;
+  --meta-pendiente-text: #f3b27a;
   --primary-foreground: #2a2320;
   --secondary: #3d332e;
   --secondary-foreground: #fbf5e3;
