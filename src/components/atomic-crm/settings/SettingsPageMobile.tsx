@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "@/components/admin/use-theme";
 import { ChevronRight, KeyRound } from "lucide-react";
 import { Link } from "react-router";
+import { CatalogSection } from "../amai/CatalogSection";
 import { Button } from "@/components/ui/button";
 import {
   Item,
@@ -110,6 +111,7 @@ export const SettingsPageMobile = () => {
         <div className="flex flex-col min-h-[calc(100dvh-3.5rem-4.5rem)]">
           <div className="space-y-6">
             <ProfileSection />
+            <CatalogSection />
             <PreferencesSection />
             <InboundEmailSection />
             <McpServerSection />

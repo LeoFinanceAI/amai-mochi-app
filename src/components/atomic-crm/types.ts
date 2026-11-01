@@ -141,6 +141,15 @@ export type DealNote = {
   status?: undefined;
 } & Pick<RaRecord, "id">;
 
+// Amai Mochi catalog: one row per flavor (table `sabor`).
+export type Sabor = {
+  id: number;
+  nombre: string;
+  color: string;
+  activo: boolean;
+  creado_en?: string;
+};
+
 export type Tag = {
   id: number;
   name: string;

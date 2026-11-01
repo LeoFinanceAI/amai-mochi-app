@@ -9,6 +9,16 @@ const adminSupabase = createClient(
 
 // Tables in FK-safe deletion order (children before parents)
 const TABLES = [
+  // Amai Mochi
+  "pedido_detalle",
+  "pago",
+  "pedido",
+  "precio",
+  "producto",
+  "cliente",
+  "gasto",
+  "sabor",
+  // Atomic CRM
   "tasks",
   "contact_notes",
   "deal_notes",

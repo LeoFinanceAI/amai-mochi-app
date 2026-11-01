@@ -31,6 +31,7 @@ import {
   getDataProvider as defaultDataProviderBuilder,
 } from "../providers/supabase";
 import sales from "../sales";
+import sabores from "../sabores";
 import { SettingsPageMobile } from "../settings/SettingsPageMobile";
 import { ProfilePage } from "../settings/ProfilePage";
 import { SettingsPage } from "../settings/SettingsPage";
@@ -270,6 +271,7 @@ const DesktopAdmin = (
       <Resource name="deal_notes" />
       <Resource name="tasks" />
       <Resource name="sales" {...sales} />
+      <Resource name="sabor" {...sabores} />
       <Resource name="tags" />
     </Admin>
   );
@@ -369,6 +371,7 @@ const MobileAdmin = (
         </Resource>
         <Resource name="companies" show={CompanyShow} />
         <Resource name="tasks" list={MobileTasksList} />
+        <Resource name="sabor" {...sabores} />
       </Admin>
     </PersistQueryClientProvider>
   );
