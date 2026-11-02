@@ -19,7 +19,7 @@ describe("MobileNavigation", () => {
     }
   });
 
-  it("opens the placeholder of a screen not built yet and marks it as current", async () => {
+  it("opens the weekly summary and marks it as current", async () => {
     // Arrange
     const screen = await renderMobileApp();
     const summary = screen.getByRole("link", { name: "Resumen" });
@@ -29,10 +29,7 @@ describe("MobileNavigation", () => {
 
     // Assert
     await expect
-      .element(screen.getByRole("heading", { name: "Resumen" }))
-      .toBeVisible();
-    await expect
-      .element(screen.getByText("Esta pantalla llega en la etapa 4."))
+      .element(screen.getByRole("heading", { name: "Tu semana" }))
       .toBeVisible();
     await expect.element(summary).toHaveAttribute("aria-current", "page");
     await expect

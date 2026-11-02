@@ -7,7 +7,7 @@ import { PedidoListPage } from "../pedidos/PedidoListPage";
 import { PreciosPage } from "../precios/PreciosPage";
 import { GastosPage } from "../gastos/GastosPage";
 import { PorCobrarPage } from "../cobranza/PorCobrarPage";
-import { ComingSoonPage } from "./ComingSoonPage";
+import { ResumenPage } from "../resumen/ResumenPage";
 import { AMAI_PATHS } from "./paths";
 
 // Shared by the desktop and mobile route trees (an array, because CustomRoutes
@@ -36,9 +36,5 @@ export const amaiRoutes = [
     path={AMAI_PATHS.receivables}
     element={<PorCobrarPage />}
   />,
-  <Route
-    key="summary"
-    path={AMAI_PATHS.summary}
-    element={<ComingSoonPage titleKey="amai.navigation.summary" stage={4} />}
-  />,
+  <Route key="summary" path={AMAI_PATHS.summary} element={<ResumenPage />} />,
 ];

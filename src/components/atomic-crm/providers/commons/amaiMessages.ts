@@ -13,10 +13,6 @@ export const englishAmaiMessages = {
       summary: "Summary",
       settings: "Settings",
     },
-    coming_soon: {
-      title: "Coming soon",
-      body: "This screen arrives in stage %{stage}.",
-    },
     catalog: {
       title: "Catalog",
     },
@@ -107,6 +103,29 @@ export const englishAmaiMessages = {
       overdue: "Overdue",
       empty: "No deliveries for today.",
       all_orders: "See all orders",
+    },
+    summary: {
+      title: "Your week",
+      previous_week: "Previous week",
+      next_week: "Next week",
+      sold: "You sold",
+      vs_last_week: "%{change} vs. last week",
+      orders: "Orders",
+      average_pieces:
+        "%{smart_count} pc on average |||| %{smart_count} pcs on average",
+      collected: "Collected",
+      to_collect: "To collect",
+      expenses: "Expenses",
+      profit: "Profit",
+      profit_hint: "Sales minus expenses",
+      no_sales: "No deliveries this week.",
+      pieces_per_day: "Pieces per day",
+      day_pieces:
+        "%{day}: %{smart_count} piece |||| %{day}: %{smart_count} pieces",
+      top_flavors: "Best-selling flavors",
+      flavor_pieces:
+        "%{name}: %{smart_count} piece |||| %{name}: %{smart_count} pieces",
+      by_client: "By client",
     },
     receivables: {
       summary: "Summary of what is owed",
@@ -223,10 +242,6 @@ export const spanishAmaiMessages = {
       summary: "Resumen",
       settings: "Ajustes",
     },
-    coming_soon: {
-      title: "Muy pronto",
-      body: "Esta pantalla llega en la etapa %{stage}.",
-    },
     catalog: {
       title: "Catálogo",
     },
@@ -316,6 +331,29 @@ export const spanishAmaiMessages = {
       overdue: "Atrasados",
       empty: "No hay entregas para hoy.",
       all_orders: "Ver todos los pedidos",
+    },
+    summary: {
+      title: "Tu semana",
+      previous_week: "Semana anterior",
+      next_week: "Semana siguiente",
+      sold: "Vendiste",
+      vs_last_week: "%{change} vs. semana pasada",
+      orders: "Pedidos",
+      average_pieces:
+        "%{smart_count} pz en promedio |||| %{smart_count} pzs en promedio",
+      collected: "Cobrado",
+      to_collect: "Por cobrar",
+      expenses: "Gastos",
+      profit: "Ganancia",
+      profit_hint: "Ventas menos gastos",
+      no_sales: "No hubo entregas esta semana.",
+      pieces_per_day: "Piezas por día",
+      day_pieces:
+        "%{day}: %{smart_count} pieza |||| %{day}: %{smart_count} piezas",
+      top_flavors: "Sabores más vendidos",
+      flavor_pieces:
+        "%{name}: %{smart_count} pieza |||| %{name}: %{smart_count} piezas",
+      by_client: "Por cliente",
     },
     receivables: {
       summary: "Resumen de lo que te deben",
