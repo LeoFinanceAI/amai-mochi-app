@@ -27,6 +27,7 @@ export default (): Db => {
   db.pedido = [];
   db.pedido_detalle = [];
   db.gasto = [];
+  db.pago = [];
   db.configuration = [
     {
       id: 1,

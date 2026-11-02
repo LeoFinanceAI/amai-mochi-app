@@ -156,6 +156,34 @@ export type Cliente = {
   creado_en?: string;
 };
 
+// A payment (table `pago`). For an order, SQL fills cliente_id and monto.
+export type Pago = {
+  id: number;
+  cliente_id: number;
+  pedido_id: number | null;
+  fecha: string;
+  monto: number;
+  metodo: MetodoPago;
+  referencia: string | null;
+  notas: string | null;
+  creado_en?: string;
+};
+
+// A row of v_cobranza_pendiente: a delivered order with no payment yet.
+export type CobranzaPendiente = {
+  id: number;
+  pedido_id: number;
+  cliente_id: number;
+  nombre: string;
+  zona: string | null;
+  telefono: string | null;
+  fecha_entrega: string;
+  piezas: number;
+  total: number;
+  // Days since delivery, in Mexico's date.
+  dias: number;
+};
+
 // Amai Mochi expenses (table `gasto`).
 export type CategoriaGasto = "ingredientes" | "empaque" | "transporte" | "otro";
 

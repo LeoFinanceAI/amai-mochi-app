@@ -36,6 +36,7 @@ import {
   getPedidoLista,
   getPedidoListaOne,
 } from "./pedidos";
+import { conDatosDelPedido, getCobranzaPendiente } from "./cobranza";
 import type { CrmDataProvider } from "../types";
 import {
   authProvider as defaultAuthProvider,
@@ -189,6 +190,15 @@ export const createDataProvider = ({
       }
       return baseDataProvider.getOne(resource, params);
     },
+    async create(resource: string, params: any) {
+      if (resource === "pago") {
+        return baseDataProvider.create(
+          resource,
+          await conDatosDelPedido(baseDataProvider, params),
+        );
+      }
+      return baseDataProvider.create(resource, params);
+    },
     async update(resource: string, params: any) {
       if (resource === "pedido") {
         return baseDataProvider.update(resource, conHoraDeEntrega(params));
@@ -210,6 +220,9 @@ export const createDataProvider = ({
     async getList(resource: string, params: any) {
       if (resource === "pedido") {
         return getPedidoLista(baseDataProvider, params) as any;
+      }
+      if (resource === "v_cobranza_pendiente") {
+        return getCobranzaPendiente(baseDataProvider, params) as any;
       }
       if (resource === "activity_log") {
         const { filter = {}, pagination } = params;

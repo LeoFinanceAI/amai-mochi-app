@@ -6,6 +6,7 @@ import { NuevoPedidoPage } from "../pedidos/NuevoPedidoPage";
 import { PedidoListPage } from "../pedidos/PedidoListPage";
 import { PreciosPage } from "../precios/PreciosPage";
 import { GastosPage } from "../gastos/GastosPage";
+import { PorCobrarPage } from "../cobranza/PorCobrarPage";
 import { ComingSoonPage } from "./ComingSoonPage";
 import { AMAI_PATHS } from "./paths";
 
@@ -33,9 +34,7 @@ export const amaiRoutes = [
   <Route
     key="receivables"
     path={AMAI_PATHS.receivables}
-    element={
-      <ComingSoonPage titleKey="amai.navigation.receivables" stage={3} />
-    }
+    element={<PorCobrarPage />}
   />,
   <Route
     key="summary"
