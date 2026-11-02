@@ -196,11 +196,16 @@ describe("receivables screen", () => {
       { pedido_id: 2, cliente_id: 1, monto: 800, metodo: "transferencia" },
     ]);
 
-    // Act: undo
-    await screen
+    // Act: undo. "Cobrado hoy" sits at the bottom of a phone screen, where
+    // the payment notice and the fixed bottom bar cover it: close the notice
+    // and bring the button to the middle, as a person would scroll to it.
+    await screen.getByRole("button", { name: /close/i }).click();
+    const deshacer = screen
       .getByRole("region", { name: "Cobrado hoy" })
-      .getByRole("button", { name: "Deshacer" })
-      .click();
+      .getByRole("button", { name: "Deshacer" });
+    await expect.element(deshacer).toBeEnabled();
+    deshacer.element().scrollIntoView({ block: "center" });
+    await deshacer.click();
 
     // Assert
     await expect.element(screen.getByText("$2,400")).toBeVisible();
