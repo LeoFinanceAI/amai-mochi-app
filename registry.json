@@ -688,6 +688,14 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/gastos/gastoForm.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/gastos/GastosPage.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/filters/FilterCategory.tsx",
           "type": "registry:component"
         },
