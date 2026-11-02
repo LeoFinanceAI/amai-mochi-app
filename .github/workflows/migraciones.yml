@@ -1,0 +1,55 @@
+# Applies the pending SQL migrations (supabase/migrations/) to the production
+# database, by hand from the Actions tab, so it can be done from a phone:
+# Actions → "Apply migrations" → Run workflow.
+#
+# Run it with "check" first: it only lists the migrations that would be applied.
+# If the list is the expected one, run it again with "apply".
+#
+# Uses the same secret as the backup workflow (respaldo.yml):
+#   SUPABASE_DB_URL  Session pooler connection string (Project → Connect).
+#
+# Only runs from main, one run at a time. Seeds are never pushed.
+
+name: Apply migrations
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "check = only list pending migrations; apply = apply them to production"
+        type: choice
+        options:
+          - check
+          - apply
+        default: check
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apply-migrations
+  cancel-in-progress: false
+
+jobs:
+  migrations:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      # Pinned to the CLI version these migrations were tested with.
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.122.1
+
+      - name: List pending migrations
+        env:
+          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: supabase db push --db-url "$DB_URL" --dry-run
+
+      - name: Apply pending migrations
+        if: inputs.mode == 'apply'
+        env:
+          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: supabase db push --db-url "$DB_URL" --yes
