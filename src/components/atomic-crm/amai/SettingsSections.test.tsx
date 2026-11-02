@@ -5,7 +5,7 @@ import { renderMobileApp } from "@/test/renderMobileApp";
 import { NOVEDADES } from "./novedades";
 
 describe("Settings on a phone", () => {
-  it("links the catalog and the expenses", async () => {
+  it("links the catalog and the expenses, without Atomic's MCP server", async () => {
     // Act
     const screen = await renderMobileApp({ path: "/settings" });
 
@@ -21,6 +21,7 @@ describe("Settings on a phone", () => {
         .element(main.getByRole("link", { name: label }))
         .toHaveAttribute("href", href);
     }
+    await expect.element(main.getByText(/MCP/)).not.toBeInTheDocument();
   });
 
   it("says what the app is and links help, release notes and privacy", async () => {
