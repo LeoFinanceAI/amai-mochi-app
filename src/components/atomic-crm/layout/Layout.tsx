@@ -4,6 +4,7 @@ import { Notification } from "@/components/admin/notification";
 import { Error } from "@/components/admin/error";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { AvisoActualizacion } from "../amai/AvisoActualizacion";
 import { DataImportProvider } from "../dataImport/DataImportProvider";
 import { useConfigurationLoader } from "../root/useConfigurationLoader";
 import Header from "./Header";
@@ -20,6 +21,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
           </Suspense>
         </ErrorBoundary>
       </main>
+      <AvisoActualizacion />
       <Notification />
     </DataImportProvider>
   );

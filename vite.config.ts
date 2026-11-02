@@ -28,7 +28,9 @@ export default defineConfig({
       },
     }),
     VitePWA({
-      registerType: "autoUpdate",
+      // A new version waits until the user taps "Update" (AvisoActualizacion),
+      // instead of silently replacing the running one on the next launch.
+      registerType: "prompt",
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
         // The questionnaire and the privacy notice are standalone pages: never
