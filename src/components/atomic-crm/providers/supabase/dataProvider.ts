@@ -9,6 +9,7 @@ import {
 import type {
   ContactNote,
   NuevoPedido,
+  ResumenSemana,
   Deal,
   DealNote,
   RAFile,
@@ -315,6 +316,17 @@ const getDataProviderWithCustomMethods = () => {
         throw new Error("Failed to update the order");
       }
       return { id: data as number };
+    },
+    // The weekly summary of the week that contains `fecha` (YYYY-MM-DD).
+    async resumenSemana(fecha: string): Promise<ResumenSemana> {
+      const { data, error } = await getSupabaseClient().rpc("resumen_semana", {
+        p_lunes: fecha,
+      });
+      if (error) {
+        console.error("resumen_semana.error", error);
+        throw new Error("Failed to load the weekly summary");
+      }
+      return data as ResumenSemana;
     },
     async getConfiguration(): Promise<ConfigurationContextValue> {
       const { data } = await baseDataProvider.getOne("configuration", {

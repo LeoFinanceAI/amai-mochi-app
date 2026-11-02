@@ -286,6 +286,12 @@ const amai = {
     }
     return pedido as { id: number };
   },
+  async createGasto(fecha: string, monto: number) {
+    const { error } = await adminSupabase
+      .from("gasto")
+      .insert({ fecha, monto, categoria: "ingredientes" });
+    if (error) throw new Error(`Failed to create expense: ${error.message}`);
+  },
   async listGastos() {
     const { data, error } = await adminSupabase
       .from("gasto")

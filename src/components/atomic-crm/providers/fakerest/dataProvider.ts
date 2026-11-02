@@ -37,6 +37,7 @@ import {
   getPedidoListaOne,
 } from "./pedidos";
 import { conDatosDelPedido, getCobranzaPendiente } from "./cobranza";
+import { resumenSemana } from "./resumen";
 import type { CrmDataProvider } from "../types";
 import {
   authProvider as defaultAuthProvider,
@@ -368,6 +369,9 @@ export const createDataProvider = ({
     },
     actualizarPedido: async (id: number, pedido: NuevoPedido) => {
       return actualizarPedido(baseDataProvider, id, pedido);
+    },
+    resumenSemana: async (fecha: string) => {
+      return resumenSemana(baseDataProvider, fecha);
     },
     getConfiguration: async (): Promise<ConfigurationContextValue> => {
       const { data } = await baseDataProvider.getOne("configuration", {

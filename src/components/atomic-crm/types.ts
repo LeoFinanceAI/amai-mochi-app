@@ -184,6 +184,28 @@ export type CobranzaPendiente = {
   dias: number;
 };
 
+// What resumen_semana() returns: one week (Monday to Sunday) of the business.
+export type ResumenSemana = {
+  lunes: string;
+  vendido: number;
+  pedidos: number;
+  piezas: number;
+  cobrado: number;
+  gastado: number;
+  ganancia: number;
+  vendido_semana_anterior: number;
+  por_cobrar: number;
+  por_dia: Array<{ fecha: string; piezas: number }>;
+  por_sabor: Array<{ sabor: string; color: string; piezas: number }>;
+  por_cliente: Array<{
+    cliente_id: number;
+    nombre: string;
+    zona: string | null;
+    piezas: number;
+    total: number;
+  }>;
+};
+
 // Amai Mochi expenses (table `gasto`).
 export type CategoriaGasto = "ingredientes" | "empaque" | "transporte" | "otro";
 
