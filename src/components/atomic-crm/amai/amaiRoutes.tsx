@@ -5,6 +5,7 @@ import { EntregasHoyPage } from "../pedidos/EntregasHoyPage";
 import { NuevoPedidoPage } from "../pedidos/NuevoPedidoPage";
 import { PedidoListPage } from "../pedidos/PedidoListPage";
 import { PreciosPage } from "../precios/PreciosPage";
+import { GastosPage } from "../gastos/GastosPage";
 import { ComingSoonPage } from "./ComingSoonPage";
 import { AMAI_PATHS } from "./paths";
 
@@ -12,6 +13,7 @@ import { AMAI_PATHS } from "./paths";
 // reads its children as <Route> elements).
 export const amaiRoutes = [
   <Route key="prices" path={AMAI_PATHS.prices} element={<PreciosPage />} />,
+  <Route key="expenses" path={AMAI_PATHS.expenses} element={<GastosPage />} />,
   <Route key="orders" path={AMAI_PATHS.orders} element={<PedidoListPage />} />,
   <Route
     key="deliveries-today"

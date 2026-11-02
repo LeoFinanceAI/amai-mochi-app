@@ -33,6 +33,7 @@ const Header = () => {
       label: translate("amai.navigation.receivables"),
     },
     { to: AMAI_PATHS.summary, label: translate("amai.navigation.summary") },
+    { to: AMAI_PATHS.expenses, label: translate("amai.expenses.title") },
     {
       to: "/sabor",
       label: translate("resources.sabor.name", { smart_count: 2 }),

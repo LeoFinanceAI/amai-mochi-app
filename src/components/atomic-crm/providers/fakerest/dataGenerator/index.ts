@@ -26,6 +26,7 @@ export default (): Db => {
   db.producto = generateProductos(db.sabor);
   db.pedido = [];
   db.pedido_detalle = [];
+  db.gasto = [];
   db.configuration = [
     {
       id: 1,

@@ -108,6 +108,32 @@ export const englishAmaiMessages = {
       empty: "No deliveries for today.",
       all_orders: "See all orders",
     },
+    money: {
+      title: "Money",
+    },
+    expenses: {
+      title: "Expenses",
+      amount: "Amount",
+      category: "Category",
+      categories: {
+        ingredientes: "Ingredients",
+        empaque: "Packaging",
+        transporte: "Fuel and transport",
+        otro: "Other",
+      },
+      date: "Date",
+      description: "Note (optional)",
+      description_placeholder: "What was it?",
+      save: "Save expense",
+      saved: "Expense saved",
+      save_error:
+        "The expense could not be saved. Check your connection and try again.",
+      recent: "Recent expenses",
+      this_week: "This week: %{total}",
+      empty: "No expenses in the last weeks.",
+      delete: "Delete %{name}",
+      deleted: "Expense deleted",
+    },
     prices: {
       title: "Prices",
       intro:
@@ -262,6 +288,32 @@ export const spanishAmaiMessages = {
       overdue: "Atrasados",
       empty: "No hay entregas para hoy.",
       all_orders: "Ver todos los pedidos",
+    },
+    money: {
+      title: "Dinero",
+    },
+    expenses: {
+      title: "Gastos",
+      amount: "Monto",
+      category: "Categoría",
+      categories: {
+        ingredientes: "Ingredientes",
+        empaque: "Empaque",
+        transporte: "Gasolina y transporte",
+        otro: "Otro",
+      },
+      date: "Fecha",
+      description: "Nota (opcional)",
+      description_placeholder: "¿En qué se gastó?",
+      save: "Guardar gasto",
+      saved: "Gasto guardado",
+      save_error:
+        "No se pudo guardar el gasto. Revisa tu conexión e inténtalo otra vez.",
+      recent: "Gastos recientes",
+      this_week: "Esta semana: %{total}",
+      empty: "No hay gastos en las últimas semanas.",
+      delete: "Borrar %{name}",
+      deleted: "Gasto borrado",
     },
     prices: {
       title: "Precios",

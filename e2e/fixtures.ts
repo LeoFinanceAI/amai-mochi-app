@@ -286,6 +286,13 @@ const amai = {
     }
     return pedido as { id: number };
   },
+  async listGastos() {
+    const { data, error } = await adminSupabase
+      .from("gasto")
+      .select("categoria, monto, descripcion");
+    if (error) throw new Error(`Failed to read expenses: ${error.message}`);
+    return data;
+  },
   async listPedidos() {
     const { data, error } = await adminSupabase
       .from("v_pedido_lista")

@@ -156,6 +156,19 @@ export type Cliente = {
   creado_en?: string;
 };
 
+// Amai Mochi expenses (table `gasto`).
+export type CategoriaGasto = "ingredientes" | "empaque" | "transporte" | "otro";
+
+export type Gasto = {
+  id: number;
+  // Local calendar date, YYYY-MM-DD.
+  fecha: string;
+  categoria: CategoriaGasto;
+  monto: number;
+  descripcion: string | null;
+  creado_en?: string;
+};
+
 // Amai Mochi catalog: one row per flavor (table `sabor`).
 export type Sabor = {
   id: number;
