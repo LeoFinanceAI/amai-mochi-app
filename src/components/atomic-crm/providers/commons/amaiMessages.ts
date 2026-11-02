@@ -158,6 +158,10 @@ export const englishAmaiMessages = {
     money: {
       title: "Money",
     },
+    legal: {
+      title: "Legal",
+      privacy_notice: "Privacy notice",
+    },
     expenses: {
       title: "Expenses",
       amount: "Amount",
@@ -386,6 +390,10 @@ export const spanishAmaiMessages = {
     },
     money: {
       title: "Dinero",
+    },
+    legal: {
+      title: "Legal",
+      privacy_notice: "Aviso de privacidad",
     },
     expenses: {
       title: "Gastos",

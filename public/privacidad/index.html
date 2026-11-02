@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!-- Draft: keep it out of search engines until Eduardo confirms the data in <mark>. -->
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#B23A62" />
+    <title>Aviso de privacidad · Amai Mochi</title>
+    <link rel="icon" href="/favicon.ico" />
+    <style>
+      /* Same look as /cuestionario/: self-hosted fonts (the CSP only allows this origin). */
+      @font-face {
+        font-family: "Quicksand";
+        src: url("/cuestionario/quicksand.woff2") format("woff2");
+        font-weight: 300 700;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Bebas Neue";
+        src: url("/cuestionario/bebas-neue.woff2") format("woff2");
+        font-weight: 400;
+        font-display: swap;
+      }
+      :root {
+        --bg: #fbf5e3;
+        --card: #ffffff;
+        --fg: #2a2320;
+        --muted: #5e5249;
+        --line: #eadfcb;
+        --accent: #b23a62;
+        --warn-bg: #fdecd4;
+        --warn-fg: #6b3a08;
+        --display: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+        --body: "Quicksand", ui-rounded, system-ui, sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #2a2320;
+          --card: #362d29;
+          --fg: #fbf5e3;
+          --muted: #cfc3b3;
+          --line: #4a3f39;
+          --accent: #f9d3dc;
+          --warn-bg: #4a3420;
+          --warn-fg: #f8d9b0;
+          color-scheme: dark;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: var(--body);
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .wrap {
+        max-width: 640px;
+        margin: 0 auto;
+        padding-block: 24px 48px;
+        padding-left: max(16px, env(safe-area-inset-left, 0px));
+        padding-right: max(16px, env(safe-area-inset-right, 0px));
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .logo {
+        width: 150px;
+        height: 70px;
+        background: var(--fg);
+        -webkit-mask: url("/cuestionario/logo.png") left center / contain no-repeat;
+        mask: url("/cuestionario/logo.png") left center / contain no-repeat;
+      }
+      h1,
+      h2 {
+        font-family: var(--display);
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        margin: 0;
+      }
+      h1 {
+        font-size: 44px;
+        line-height: 1;
+        color: var(--accent);
+      }
+      h2 {
+        font-size: 24px;
+        line-height: 1.1;
+      }
+      section {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      section > :first-child {
+        margin-top: 0;
+      }
+      p,
+      ul {
+        margin: 8px 0 0;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .borrador {
+        background: var(--warn-bg);
+        color: var(--warn-fg);
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-weight: 600;
+      }
+      mark {
+        background: var(--warn-bg);
+        color: var(--warn-fg);
+        border-radius: 4px;
+        padding: 0 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="logo" role="img" aria-label="amai mochi"></div>
+      <h1>Aviso de privacidad</h1>
+      <p class="borrador" role="note">
+        Borrador: los datos marcados así <mark>[como este]</mark> faltan por
+        confirmar con Eduardo antes de compartir este aviso.
+      </p>
+      <p class="muted">
+        Amai Mochi te explica qué datos personales guarda cuando le haces un
+        pedido, para qué los usa y cómo puedes pedir que los corrija o los
+        borre, conforme a la Ley Federal de Protección de Datos Personales en
+        Posesión de los Particulares.
+      </p>
+
+      <section aria-labelledby="responsable">
+        <h2 id="responsable">Quién es responsable de tus datos</h2>
+        <p>
+          <mark>[Nombre completo de Eduardo]</mark>, con el nombre comercial
+          Amai Mochi, con domicilio en <mark>[ciudad y estado]</mark>.
+        </p>
+        <p>
+          Contacto para temas de privacidad: WhatsApp
+          <mark>[número]</mark> o correo <mark>[correo]</mark>.
+        </p>
+      </section>
+
+      <section aria-labelledby="datos">
+        <h2 id="datos">Qué datos guardamos</h2>
+        <ul>
+          <li>Tu nombre o el de tu negocio.</li>
+          <li>Tu teléfono o WhatsApp.</li>
+          <li>La dirección o ubicación de entrega y las notas del pedido.</li>
+          <li>
+            Tus pedidos (sabores, piezas, fechas y precios) y tus pagos
+            (monto, fecha y si fue en efectivo o transferencia).
+          </li>
+        </ul>
+        <p>
+          No pedimos datos sensibles ni datos bancarios: de una transferencia
+          solo anotamos que se recibió.
+        </p>
+      </section>
+
+      <section aria-labelledby="para-que">
+        <h2 id="para-que">Para qué los usamos</h2>
+        <ul>
+          <li>Registrar y preparar tus pedidos.</li>
+          <li>Entregarlos en el lugar y la fecha acordados.</li>
+          <li>Llevar la cuenta de lo que se ha pagado y lo que está pendiente.</li>
+          <li>Escribirte sobre tus pedidos y pagos, por ejemplo para recordarte un saldo.</li>
+        </ul>
+        <p>
+          No usamos tus datos para publicidad ni los vendemos.
+          <mark>[Confirmar con Eduardo si quiere avisar de sabores nuevos o promociones; si sí, se agrega aquí como uso opcional que puedes rechazar.]</mark>
+        </p>
+      </section>
+
+      <section aria-labelledby="quien-mas">
+        <h2 id="quien-mas">Con quién se comparten</h2>
+        <p>
+          No compartimos tus datos con otras empresas. Se guardan en servicios
+          de tecnología que usamos para operar la app de pedidos (Supabase,
+          para la base de datos, y Cloudflare, para publicar la app), que los
+          resguardan por nuestra cuenta y no pueden usarlos para otra cosa.
+          Esos servicios pueden tener sus servidores fuera de México.
+        </p>
+      </section>
+
+      <section aria-labelledby="derechos">
+        <h2 id="derechos">Tus derechos</h2>
+        <p>
+          Puedes pedir en cualquier momento <strong>ver</strong> los datos que
+          tenemos de ti, <strong>corregirlos</strong>, que los
+          <strong>borremos</strong> o <strong>oponerte</strong> a algún uso
+          (derechos ARCO), y también retirar tu consentimiento.
+        </p>
+        <p>
+          Escríbenos al contacto de arriba con tu nombre y lo que necesitas. Te
+          respondemos en un máximo de 20 días hábiles. Algunos datos de pedidos
+          y pagos podríamos tener que conservarlos el tiempo que marquen las
+          leyes fiscales.
+        </p>
+      </section>
+
+      <section aria-labelledby="cambios">
+        <h2 id="cambios">Cambios a este aviso</h2>
+        <p>
+          Si cambia, publicaremos la versión nueva en esta misma página.
+        </p>
+        <p class="muted">Última actualización: <mark>[fecha de publicación]</mark>.</p>
+      </section>
+    </main>
+  </body>
+</html>

@@ -11,7 +11,11 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 
-// Entry to the Amai Mochi catalog and expenses from the mobile Settings page.
+// The public privacy notice for Eduardo's clients (LFPDPPP).
+const PRIVACY_NOTICE_URL = "/privacidad/";
+
+// Entry to the Amai Mochi catalog, expenses and privacy notice from the mobile
+// Settings page.
 export const CatalogSection = () => {
   const translate = useTranslate();
   return (
@@ -40,6 +44,26 @@ export const CatalogSection = () => {
             to={AMAI_PATHS.expenses}
             label={translate("amai.expenses.title")}
           />
+        </ItemGroup>
+      </div>
+      <div>
+        <SectionTitle>{translate("amai.legal.title")}</SectionTitle>
+        <ItemGroup className="rounded-lg border overflow-hidden">
+          {/* A static page outside the app (public/privacidad), so a plain link. */}
+          <Item
+            size="sm"
+            className="cursor-pointer min-h-11"
+            render={<a href={PRIVACY_NOTICE_URL} />}
+          >
+            <ItemContent>
+              <ItemTitle className="font-normal">
+                {translate("amai.legal.privacy_notice")}
+              </ItemTitle>
+            </ItemContent>
+            <ItemActions>
+              <ChevronRight className="size-4 text-muted-foreground" />
+            </ItemActions>
+          </Item>
         </ItemGroup>
       </div>
     </div>
