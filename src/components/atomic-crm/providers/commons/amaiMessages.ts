@@ -108,6 +108,18 @@ export const englishAmaiMessages = {
       empty: "No deliveries for today.",
       all_orders: "See all orders",
     },
+    prices: {
+      title: "Prices",
+      intro:
+        "Price per piece of each flavor. New orders use it; saved orders keep the price they had.",
+      same_for_all: "Same price for all",
+      apply_to_all: "Apply to all",
+      save: "Save prices",
+      saved: "Prices saved",
+      save_error:
+        "Some prices could not be saved. Check your connection and try again.",
+      invalid: "Write each price as a number, like 25 or 25.50.",
+    },
     clients: {
       add: "New client",
       create_title: "New client",
@@ -250,6 +262,18 @@ export const spanishAmaiMessages = {
       overdue: "Atrasados",
       empty: "No hay entregas para hoy.",
       all_orders: "Ver todos los pedidos",
+    },
+    prices: {
+      title: "Precios",
+      intro:
+        "Precio por pieza de cada sabor. Lo usan los pedidos nuevos; los pedidos ya guardados conservan su precio.",
+      same_for_all: "Mismo precio para todos",
+      apply_to_all: "Aplicar a todos",
+      save: "Guardar precios",
+      saved: "Precios guardados",
+      save_error:
+        "Algunos precios no se guardaron. Revisa tu conexión e inténtalo otra vez.",
+      invalid: "Escribe cada precio como número, por ejemplo 25 o 25.50.",
     },
     clients: {
       add: "Nuevo cliente",
