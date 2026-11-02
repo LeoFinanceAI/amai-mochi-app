@@ -244,6 +244,18 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/resumen/semana.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/resumen/ResumenPage.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/resumen/GraficasResumen.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/providers/types.ts",
           "type": "registry:component"
         },
@@ -269,6 +281,10 @@
         },
         {
           "path": "src/components/atomic-crm/providers/fakerest/search.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/providers/fakerest/resumen.ts",
           "type": "registry:component"
         },
         {
@@ -1045,10 +1061,6 @@
         },
         {
           "path": "src/components/atomic-crm/amai/amaiRoutes.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/atomic-crm/amai/ComingSoonPage.tsx",
           "type": "registry:component"
         },
         {
