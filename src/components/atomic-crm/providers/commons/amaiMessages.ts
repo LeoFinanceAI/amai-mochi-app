@@ -161,6 +161,11 @@ export const englishAmaiMessages = {
     legal: {
       privacy_notice: "Privacy notice",
     },
+    update: {
+      available: "There is a new version of the app",
+      later: "Later",
+      now: "Update",
+    },
     about: {
       app: "Amai Mochi",
       updated: "Updated on %{date}",
@@ -399,6 +404,11 @@ export const spanishAmaiMessages = {
     },
     legal: {
       privacy_notice: "Aviso de privacidad",
+    },
+    update: {
+      available: "Hay una versión nueva de la app",
+      later: "Después",
+      now: "Actualizar",
     },
     about: {
       app: "Amai Mochi",

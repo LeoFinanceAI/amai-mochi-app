@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense, type ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
+import { AvisoActualizacion } from "../amai/AvisoActualizacion";
 import { DataImportProvider } from "../dataImport/DataImportProvider";
 import { useConfigurationLoader } from "../root/useConfigurationLoader";
 import { MobileNavigation } from "./MobileNavigation";
@@ -20,6 +21,7 @@ export const MobileLayout = ({ children }: { children: ReactNode }) => {
         </Suspense>
       </ErrorBoundary>
       <MobileNavigation />
+      <AvisoActualizacion isMobile />
       <Notification mobileOffset={{ bottom: "72px" }} />
     </DataImportProvider>
   );

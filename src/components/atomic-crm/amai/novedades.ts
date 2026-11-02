@@ -10,6 +10,8 @@ export const NOVEDADES: ReadonlyArray<Novedad> = [
   {
     fecha: "2026-11-02",
     cambios: [
+      "Cuando haya una versión nueva de la app, verás un aviso con el botón Actualizar.",
+      "Ajustes → Acerca de: botón de Ayuda para escribirle a Leo por WhatsApp.",
       "Tu semana: cuánto vendiste, cobraste, gastaste y ganaste, con las piezas por día y los sabores más vendidos.",
       "Por cobrar: quién te debe y cuánto, recordatorio por WhatsApp y registro de pagos.",
       "Gastos: anota lo que gastas en ingredientes, empaque, gasolina y otros.",
