@@ -31,8 +31,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
-        // The questionnaire is a standalone page: never answer it with the app shell.
-        navigateFallbackDenylist: [/\/cuestionario\//],
+        // The questionnaire and the privacy notice are standalone pages: never
+        // answer them with the app shell.
+        navigateFallbackDenylist: [/\/cuestionario\//, /\/privacidad\//],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MiB
       },
       manifest: false, // Use existing manifest.json from public/
