@@ -3,6 +3,12 @@ import { useTheme } from "@/components/admin/use-theme";
 import { ChevronRight, KeyRound } from "lucide-react";
 import { Link } from "react-router";
 import { CatalogSection } from "../amai/CatalogSection";
+import {
+  PRIVACY_NOTICE_URL,
+  ayudaUrl,
+  ultimaActualizacion,
+} from "../amai/acercaDe";
+import { fromIsoDate } from "../pedidos/fechaEntrega";
 import { Button } from "@/components/ui/button";
 import {
   Item,
@@ -114,7 +120,6 @@ export const SettingsPageMobile = () => {
             <CatalogSection />
             <PreferencesSection />
             <InboundEmailSection />
-            <McpServerSection />
             <AboutSection />
           </div>
 
@@ -559,43 +564,77 @@ const InboundEmailSection = () => {
   );
 };
 
-const McpServerSection = () => {
-  const translate = useTranslate();
-
-  return (
-    <div>
-      <SectionLabel>
-        {translate("crm.profile.mcp.title", { _: "MCP Server" })}
-      </SectionLabel>
-      <p className="text-sm text-muted-foreground mb-2 px-1">
-        {translate("crm.profile.mcp.description", {
-          _: "Use this URL to connect your AI assistant to your CRM data via the Model Context Protocol (MCP).",
-        })}
-      </p>
-      <ItemGroup className="rounded-lg border overflow-hidden">
-        <CopyPasteRow
-          value={`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mcp`}
-        />
-      </ItemGroup>
-    </div>
-  );
-};
-
+// "Acerca de" for Amai Mochi: what the app is, when it last changed, help
+// from Leo by WhatsApp, the release notes and the public privacy notice.
 const AboutSection = () => {
   const translate = useTranslate();
+  const [locale] = useLocaleState();
+  const actualizada = new Intl.DateTimeFormat(
+    locale === "es" ? "es-MX" : locale,
+    { day: "numeric", month: "long", year: "numeric" },
+  ).format(fromIsoDate(ultimaActualizacion()));
 
   return (
     <div>
       <SectionLabel>{translate("crm.settings.about")}</SectionLabel>
       <ItemGroup className="rounded-lg border overflow-hidden">
+        <Item size="sm">
+          <ItemContent>
+            <ItemTitle>{translate("amai.about.app")}</ItemTitle>
+            <p className="text-xs text-muted-foreground">
+              {translate("amai.about.updated", { date: actualizada })}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              {translate("amai.about.made_by")}
+            </p>
+          </ItemContent>
+        </Item>
+        <ItemSeparator />
         <Item
           size="sm"
-          className="cursor-pointer"
+          className="cursor-pointer min-h-11"
+          render={
+            <a
+              href={ayudaUrl(translate("amai.about.help_message"))}
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+          }
+        >
+          <ItemContent>
+            <ItemTitle className="font-normal">
+              {translate("amai.about.help")}
+            </ItemTitle>
+          </ItemContent>
+          <ItemActions>
+            <ChevronRight className="size-4 text-muted-foreground" />
+          </ItemActions>
+        </Item>
+        <ItemSeparator />
+        <Item
+          size="sm"
+          className="cursor-pointer min-h-11"
           render={<Link to={ChangelogPage.path} />}
         >
           <ItemContent>
             <ItemTitle className="font-normal">
               {translate("crm.changelog.title")}
+            </ItemTitle>
+          </ItemContent>
+          <ItemActions>
+            <ChevronRight className="size-4 text-muted-foreground" />
+          </ItemActions>
+        </Item>
+        <ItemSeparator />
+        {/* A static page outside the app (public/privacidad), so a plain link. */}
+        <Item
+          size="sm"
+          className="cursor-pointer min-h-11"
+          render={<a href={PRIVACY_NOTICE_URL} />}
+        >
+          <ItemContent>
+            <ItemTitle className="font-normal">
+              {translate("amai.legal.privacy_notice")}
             </ItemTitle>
           </ItemContent>
           <ItemActions>

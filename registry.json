@@ -1060,7 +1060,15 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/amai/novedades.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/amai/amaiRoutes.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/amai/acercaDe.ts",
           "type": "registry:component"
         },
         {
