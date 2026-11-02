@@ -159,8 +159,14 @@ export const englishAmaiMessages = {
       title: "Money",
     },
     legal: {
-      title: "Legal",
       privacy_notice: "Privacy notice",
+    },
+    about: {
+      app: "Amai Mochi",
+      updated: "Updated on %{date}",
+      made_by: "Made by Leo Fuentes for Amai Mochi",
+      help: "Help (WhatsApp with Leo)",
+      help_message: "Hi Leo, I have a question about the Amai Mochi app: ",
     },
     expenses: {
       title: "Expenses",
@@ -392,8 +398,14 @@ export const spanishAmaiMessages = {
       title: "Dinero",
     },
     legal: {
-      title: "Legal",
       privacy_notice: "Aviso de privacidad",
+    },
+    about: {
+      app: "Amai Mochi",
+      updated: "Actualizada el %{date}",
+      made_by: "Hecha por Leo Fuentes para Amai Mochi",
+      help: "Ayuda (WhatsApp con Leo)",
+      help_message: "Hola Leo, tengo una duda con la app de Amai Mochi: ",
     },
     expenses: {
       title: "Gastos",
