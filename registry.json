@@ -284,6 +284,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/providers/fakerest/cobranza.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/providers/fakerest/authProvider.ts",
           "type": "registry:component"
         },
@@ -688,6 +692,14 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/gastos/gastoForm.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/gastos/GastosPage.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/filters/FilterCategory.tsx",
           "type": "registry:component"
         },
@@ -993,6 +1005,18 @@
         },
         {
           "path": "src/components/atomic-crm/companies/AutocompleteCompanyInput.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/cobranza/cobranza.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/cobranza/PorCobrarPage.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/cobranza/DeudaClienteCard.tsx",
           "type": "registry:component"
         },
         {

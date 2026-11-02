@@ -1,5 +1,6 @@
 import { memoryStore } from "ra-core";
 import { MemoryRouter } from "react-router";
+import { toast } from "sonner";
 import { page } from "vitest/browser";
 import { render } from "vitest-browser-react";
 
@@ -34,6 +35,8 @@ export const renderMobileApp = async ({
   device?: keyof typeof VIEWPORTS;
 } = {}) => {
   localStorage.clear();
+  // Toasts live in a global store: drop the ones a previous test left open.
+  toast.dismiss();
   const [width, height] = VIEWPORTS[device];
   await page.viewport(width, height);
   await i18nProvider.changeLocale("es");

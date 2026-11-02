@@ -5,6 +5,8 @@ import type {
   Deal,
   DealNote,
   Cliente,
+  Gasto,
+  Pago,
   Pedido,
   PedidoDetalle,
   Producto,
@@ -29,5 +31,7 @@ export interface Db {
   producto: Producto[];
   pedido: Pedido[];
   pedido_detalle: PedidoDetalle[];
+  gasto: Gasto[];
+  pago: Pago[];
   configuration: Array<{ id: number; config: ConfigurationContextValue }>;
 }

@@ -286,6 +286,34 @@ const amai = {
     }
     return pedido as { id: number };
   },
+  async listGastos() {
+    const { data, error } = await adminSupabase
+      .from("gasto")
+      .select("categoria, monto, descripcion");
+    if (error) throw new Error(`Failed to read expenses: ${error.message}`);
+    return data;
+  },
+  async setPrecioLista(saborId: number, precio: number) {
+    const { error } = await adminSupabase
+      .from("producto")
+      .update({ precio_lista: precio })
+      .eq("sabor_id", saborId);
+    if (error) throw new Error(`Failed to set price: ${error.message}`);
+  },
+  async marcarEntregado(pedidoId: number) {
+    const { error } = await adminSupabase
+      .from("pedido")
+      .update({ estado: "entregado" })
+      .eq("id", pedidoId);
+    if (error) throw new Error(`Failed to deliver: ${error.message}`);
+  },
+  async listPagos() {
+    const { data, error } = await adminSupabase
+      .from("pago")
+      .select("pedido_id, cliente_id, monto, metodo");
+    if (error) throw new Error(`Failed to read payments: ${error.message}`);
+    return data;
+  },
   async listPedidos() {
     const { data, error } = await adminSupabase
       .from("v_pedido_lista")

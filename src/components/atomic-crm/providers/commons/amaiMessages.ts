@@ -108,6 +108,60 @@ export const englishAmaiMessages = {
       empty: "No deliveries for today.",
       all_orders: "See all orders",
     },
+    receivables: {
+      summary: "Summary of what is owed",
+      owed_total: "Owed to you in total",
+      all_paid: "All collected",
+      counts:
+        "%{smart_count} order · %{overdue} older than %{days} days |||| %{smart_count} orders · %{overdue} older than %{days} days",
+      filters: {
+        todos: "All",
+        vencidos: "Older than %{days} days",
+      },
+      none_overdue: "No client has orders older than %{days} days.",
+      order_line: "%{date} · %{pieces} pcs",
+      delivered_today: "today",
+      days_ago: "%{smart_count} day ago |||| %{smart_count} days ago",
+      remind: "Remind",
+      reminded: "Reminded",
+      no_phone: "No phone to remind",
+      register_payment: "Register payment",
+      how_paid: "How did they pay?",
+      paid: "Payment from %{name} registered",
+      pay_error:
+        "The payment could not be registered. Check your connection and try again.",
+      undone: "Payment undone",
+      collected_today: "Collected today",
+      no_price_hint: "An order has no price yet: set prices to collect it.",
+      reminder:
+        "Hi %{name}, this is Amai Mochi. A friendly reminder of the pending payment of %{total} for %{smart_count} order. Thank you! |||| Hi %{name}, this is Amai Mochi. A friendly reminder of the pending payment of %{total} for %{smart_count} orders. Thank you!",
+    },
+    money: {
+      title: "Money",
+    },
+    expenses: {
+      title: "Expenses",
+      amount: "Amount",
+      category: "Category",
+      categories: {
+        ingredientes: "Ingredients",
+        empaque: "Packaging",
+        transporte: "Fuel and transport",
+        otro: "Other",
+      },
+      date: "Date",
+      description: "Note (optional)",
+      description_placeholder: "What was it?",
+      save: "Save expense",
+      saved: "Expense saved",
+      save_error:
+        "The expense could not be saved. Check your connection and try again.",
+      recent: "Recent expenses",
+      this_week: "This week: %{total}",
+      empty: "No expenses in the last weeks.",
+      delete: "Delete %{name}",
+      deleted: "Expense deleted",
+    },
     prices: {
       title: "Prices",
       intro:
@@ -262,6 +316,61 @@ export const spanishAmaiMessages = {
       overdue: "Atrasados",
       empty: "No hay entregas para hoy.",
       all_orders: "Ver todos los pedidos",
+    },
+    receivables: {
+      summary: "Resumen de lo que te deben",
+      owed_total: "Te deben en total",
+      all_paid: "Todo cobrado",
+      counts:
+        "%{smart_count} pedido · %{overdue} con más de %{days} días |||| %{smart_count} pedidos · %{overdue} con más de %{days} días",
+      filters: {
+        todos: "Todos",
+        vencidos: "Más de %{days} días",
+      },
+      none_overdue: "Ningún cliente tiene pedidos con más de %{days} días.",
+      order_line: "%{date} · %{pieces} pzs",
+      delivered_today: "hoy",
+      days_ago: "hace %{smart_count} día |||| hace %{smart_count} días",
+      remind: "Recordar",
+      reminded: "Recordado",
+      no_phone: "Sin teléfono para recordar",
+      register_payment: "Registrar pago",
+      how_paid: "¿Cómo pagó?",
+      paid: "Pago de %{name} registrado",
+      pay_error:
+        "No se pudo registrar el pago. Revisa tu conexión e inténtalo otra vez.",
+      undone: "Pago deshecho",
+      collected_today: "Cobrado hoy",
+      no_price_hint:
+        "Hay un pedido sin precio: captura los precios para poder cobrarlo.",
+      reminder:
+        "Hola %{name}, te escribo de Amai Mochi. Te recuerdo el pago pendiente de %{total} por %{smart_count} pedido. ¡Muchas gracias! |||| Hola %{name}, te escribo de Amai Mochi. Te recuerdo el pago pendiente de %{total} por %{smart_count} pedidos. ¡Muchas gracias!",
+    },
+    money: {
+      title: "Dinero",
+    },
+    expenses: {
+      title: "Gastos",
+      amount: "Monto",
+      category: "Categoría",
+      categories: {
+        ingredientes: "Ingredientes",
+        empaque: "Empaque",
+        transporte: "Gasolina y transporte",
+        otro: "Otro",
+      },
+      date: "Fecha",
+      description: "Nota (opcional)",
+      description_placeholder: "¿En qué se gastó?",
+      save: "Guardar gasto",
+      saved: "Gasto guardado",
+      save_error:
+        "No se pudo guardar el gasto. Revisa tu conexión e inténtalo otra vez.",
+      recent: "Gastos recientes",
+      this_week: "Esta semana: %{total}",
+      empty: "No hay gastos en las últimas semanas.",
+      delete: "Borrar %{name}",
+      deleted: "Gasto borrado",
     },
     prices: {
       title: "Precios",

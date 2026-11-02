@@ -22,19 +22,19 @@ describe("MobileNavigation", () => {
   it("opens the placeholder of a screen not built yet and marks it as current", async () => {
     // Arrange
     const screen = await renderMobileApp();
-    const receivables = screen.getByRole("link", { name: "Por cobrar" });
+    const summary = screen.getByRole("link", { name: "Resumen" });
 
     // Act
-    await receivables.click();
+    await summary.click();
 
     // Assert
     await expect
-      .element(screen.getByRole("heading", { name: "Por cobrar" }))
+      .element(screen.getByRole("heading", { name: "Resumen" }))
       .toBeVisible();
     await expect
-      .element(screen.getByText("Esta pantalla llega en la etapa 3."))
+      .element(screen.getByText("Esta pantalla llega en la etapa 4."))
       .toBeVisible();
-    await expect.element(receivables).toHaveAttribute("aria-current", "page");
+    await expect.element(summary).toHaveAttribute("aria-current", "page");
     await expect
       .element(screen.getByRole("link", { name: "Nuevo pedido" }))
       .not.toHaveAttribute("aria-current");

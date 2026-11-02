@@ -52,6 +52,8 @@ export const createCrmDb = (overrides: Partial<Db> = {}): Db =>
     producto: generateProductos(overrides.sabor ?? []),
     pedido: [],
     pedido_detalle: [],
+    gasto: [],
+    pago: [],
     companies: [],
     configuration: [{ config: {}, id: 1 }],
     contact_notes: [],
