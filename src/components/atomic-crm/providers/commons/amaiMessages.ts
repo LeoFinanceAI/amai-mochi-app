@@ -61,6 +61,10 @@ export const englishAmaiMessages = {
       missing_pieces: "Add at least one flavor",
       missing_date: "Pick the delivery date",
       view_orders: "View orders",
+      repeat: {
+        last: "Last order (%{date}):",
+        button: "Repeat last order",
+      },
       filter: "Show",
       filters: {
         pendiente: "Pending",
@@ -317,6 +321,10 @@ export const spanishAmaiMessages = {
       missing_pieces: "Agrega al menos un sabor",
       missing_date: "Elige la fecha de entrega",
       view_orders: "Ver pedidos",
+      repeat: {
+        last: "Último pedido (%{date}):",
+        button: "Repetir el último pedido",
+      },
       filter: "Mostrar",
       filters: {
         pendiente: "Pendientes",

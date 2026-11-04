@@ -47,6 +47,7 @@ export const NuevoPedidoPage = () => {
         onSave={(pedido) => mutate(pedido)}
         isSaving={isPending}
         submitLabel="amai.orders.save"
+        permitirRepetir
       />
     </AmaiPage>
   );

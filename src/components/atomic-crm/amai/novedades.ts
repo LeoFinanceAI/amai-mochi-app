@@ -11,6 +11,7 @@ export const NOVEDADES: ReadonlyArray<Novedad> = [
     fecha: "2026-11-04",
     cambios: [
       "Producción: cuántas piezas de cada sabor preparar para los pedidos de mañana (o de hoy, o de pasado mañana). Está en Pedidos.",
+      "Nuevo pedido: al elegir un cliente, el botón Repetir el último pedido llena los sabores, la forma de pago y la ubicación; solo ajustas lo que cambie.",
     ],
   },
   {

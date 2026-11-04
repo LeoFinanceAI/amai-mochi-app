@@ -16,6 +16,7 @@ import {
   totalPiezas,
   type NuevoPedidoForm,
 } from "./nuevoPedidoForm";
+import { RepetirUltimoPedido } from "./RepetirUltimoPedido";
 import { SaborCantidades } from "./SaborCantidades";
 
 const MAX_TEXT = 500;
@@ -26,6 +27,8 @@ interface PedidoFormProps {
   isSaving: boolean;
   // Translation key of the save button.
   submitLabel: string;
+  // New orders only: offer to repeat the client's last order.
+  permitirRepetir?: boolean;
 }
 
 // The order form from the approved mockup, shared by "Nuevo pedido" and
@@ -36,6 +39,7 @@ export const PedidoForm = ({
   onSave,
   isSaving,
   submitLabel,
+  permitirRepetir = false,
 }: PedidoFormProps) => {
   const translate = useTranslate();
   const [form, setForm] = useState<NuevoPedidoForm>(initial);
@@ -62,6 +66,11 @@ export const PedidoForm = ({
         value={form.clienteId}
         onChange={(clienteId) => update({ clienteId })}
       />
+      {permitirRepetir &&
+      form.clienteId != null &&
+      totalPiezas(form.cantidades) === 0 ? (
+        <RepetirUltimoPedido clienteId={form.clienteId} onRepetir={update} />
+      ) : null}
       <EntregaSelector
         opcion={form.entrega}
         otraFecha={form.otraFecha}
