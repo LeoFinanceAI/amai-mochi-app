@@ -460,6 +460,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/pedidos/confirmacion.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/pedidos/SaborCantidades.tsx",
           "type": "registry:component"
         },
@@ -1065,6 +1069,10 @@
         },
         {
           "path": "src/components/atomic-crm/clientes/ClienteCreate.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/amai/whatsapp.ts",
           "type": "registry:component"
         },
         {
