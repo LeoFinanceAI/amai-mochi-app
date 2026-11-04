@@ -10,6 +10,7 @@ export const NOVEDADES: ReadonlyArray<Novedad> = [
   {
     fecha: "2026-11-05",
     cambios: [
+      "Tu mes: en Resumen, el botón Mes muestra lo vendido, cobrado, gastado y ganado del mes, comparado con el mes pasado.",
       "Pedidos: busca por nombre del cliente o por día de entrega.",
       "Pedidos: un pedido entregado se puede cancelar o regresar a pendiente; si ya estaba cobrado, te avisa y borra ese pago.",
     ],

@@ -239,6 +239,17 @@ export type ResumenSemana = {
   }>;
 };
 
+// What resumen_mes() returns: one calendar month, with the same rules as the
+// week (no pieces per day).
+export type ResumenMes = Omit<
+  ResumenSemana,
+  "lunes" | "vendido_semana_anterior" | "por_dia"
+> & {
+  // First day of the month, YYYY-MM-DD.
+  inicio: string;
+  vendido_mes_anterior: number;
+};
+
 // Amai Mochi expenses (table `gasto`).
 export type CategoriaGasto = "ingredientes" | "empaque" | "transporte" | "otro";
 
