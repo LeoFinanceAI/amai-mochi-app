@@ -25,6 +25,7 @@ const Header = () => {
       activeOn: [
         AMAI_PATHS.orders,
         AMAI_PATHS.deliveriesToday,
+        AMAI_PATHS.production,
         `${AMAI_PATHS.orders}/:id/edit`,
       ],
     },

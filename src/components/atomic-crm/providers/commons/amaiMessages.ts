@@ -97,6 +97,19 @@ export const englishAmaiMessages = {
       only_pending: "Only pending orders can be edited.",
       open_maps: "Open %{address} in Maps",
     },
+    production: {
+      title: "Production",
+      for: "Prepare for",
+      days: {
+        hoy: "Today",
+        manana: "Tomorrow",
+        pasado: "Day after tomorrow",
+      },
+      total: "%{smart_count} piece |||| %{smart_count} pieces",
+      orders: "for %{smart_count} order |||| for %{smart_count} orders",
+      per_flavor: "Pieces per flavor",
+      empty: "No pending orders for that day.",
+    },
     deliveries: {
       title: "Today's deliveries",
       progress: "%{done} of %{total} delivered · %{pieces} pieces to go",
@@ -339,6 +352,19 @@ export const spanishAmaiMessages = {
       updated: "Pedido actualizado",
       only_pending: "Solo se pueden editar pedidos pendientes.",
       open_maps: "Abrir %{address} en Maps",
+    },
+    production: {
+      title: "Producción",
+      for: "Preparar para",
+      days: {
+        hoy: "Hoy",
+        manana: "Mañana",
+        pasado: "Pasado mañana",
+      },
+      total: "%{smart_count} pieza |||| %{smart_count} piezas",
+      orders: "para %{smart_count} pedido |||| para %{smart_count} pedidos",
+      per_flavor: "Piezas por sabor",
+      empty: "No hay pedidos pendientes para ese día.",
     },
     deliveries: {
       title: "Entregas de hoy",

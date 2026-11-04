@@ -1,6 +1,6 @@
 import { useGetList, useLocaleState, useTranslate } from "ra-core";
 import { Link, useSearchParams } from "react-router";
-import { Plus, Truck } from "lucide-react";
+import { ChefHat, Plus, Truck } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
@@ -65,6 +65,16 @@ export const PedidoListPage = () => {
         >
           <Truck className="size-5" />
           {translate("amai.deliveries.title")}
+        </Link>
+        <Link
+          to={AMAI_PATHS.production}
+          className={cn(
+            buttonVariants({ variant: "outline" }),
+            "min-h-11 gap-2",
+          )}
+        >
+          <ChefHat className="size-5" />
+          {translate("amai.production.title")}
         </Link>
       </div>
       <ChipRadioGroup

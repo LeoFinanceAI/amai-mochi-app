@@ -8,6 +8,12 @@ export interface Novedad {
 
 export const NOVEDADES: ReadonlyArray<Novedad> = [
   {
+    fecha: "2026-11-04",
+    cambios: [
+      "Producción: cuántas piezas de cada sabor preparar para los pedidos de mañana (o de hoy, o de pasado mañana). Está en Pedidos.",
+    ],
+  },
+  {
     fecha: "2026-11-02",
     cambios: [
       "Cuando haya una versión nueva de la app, verás un aviso con el botón Actualizar.",
