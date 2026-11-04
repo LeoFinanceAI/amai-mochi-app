@@ -11,6 +11,7 @@ import type {
   NuevoPedido,
   ResumenSemana,
   SaldoCliente,
+  VentaRapida,
   Deal,
   DealNote,
   RAFile,
@@ -315,6 +316,20 @@ const getDataProviderWithCustomMethods = () => {
       if (error) {
         console.error("actualizar_pedido.error", error);
         throw new Error("Failed to update the order");
+      }
+      return { id: data as number };
+    },
+    // A sale delivered and paid on the spot, saved by venta_rapida().
+    async ventaRapida(venta: VentaRapida): Promise<{ id: number }> {
+      const { data, error } = await getSupabaseClient().rpc("venta_rapida", {
+        p_cliente_id: venta.cliente_id,
+        p_metodo_pago: venta.metodo_pago,
+        p_notas: venta.notas,
+        p_lineas: venta.lineas,
+      });
+      if (error) {
+        console.error("venta_rapida.error", error);
+        throw new Error("Failed to save the sale");
       }
       return { id: data as number };
     },

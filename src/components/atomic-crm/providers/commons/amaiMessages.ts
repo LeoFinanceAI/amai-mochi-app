@@ -38,7 +38,8 @@ export const englishAmaiMessages = {
       pieces: "%{smart_count} piece |||| %{smart_count} pieces",
       pieces_of: "Pieces of %{name}",
       remove_one: "Remove one piece of %{name}",
-      add_five: "Add 5 pieces of %{name}",
+      add_pieces:
+        "Add %{smart_count} piece of %{name} |||| Add %{smart_count} pieces of %{name}",
       no_flavors: "No active flavors. Add them in Settings → Flavors.",
       minimum_ok: "Meets the %{minimum}-piece minimum",
       minimum_missing:
@@ -192,6 +193,35 @@ export const englishAmaiMessages = {
       },
       reminder:
         "Hi %{name}, this is Amai Mochi. A friendly reminder of the pending payment of %{total} for %{smart_count} order. Thank you! |||| Hi %{name}, this is Amai Mochi. A friendly reminder of the pending payment of %{total} for %{smart_count} orders. Thank you!",
+    },
+    quick_sale: {
+      title: "Quick sale",
+      intro:
+        "A sale to the public or at an event: delivered and paid right now, with no minimum.",
+      client: "Who buys",
+      public: "General public",
+      payment: "Paid with",
+      notes_placeholder: "E.g. Sunday market",
+      save: "Charge and save",
+      saved:
+        "Sale of %{smart_count} piece saved |||| Sale of %{smart_count} pieces saved",
+      save_error:
+        "The sale could not be saved. Check your connection and try again.",
+    },
+    customers: {
+      title: "Your clients",
+      link: "See your clients",
+      top: "Who buys the most (90 days)",
+      top_empty: "No sales in the last 90 days.",
+      quiet: "No order in more than %{days} days",
+      quiet_empty: "Every distributor has ordered in the last %{days} days.",
+      ordered_today: "ordered today",
+      last_order:
+        "last order %{smart_count} day ago |||| last order %{smart_count} days ago",
+      write: "Write",
+      no_phone: "No phone",
+      message:
+        "Hi %{name}, this is Amai Mochi. How are you? Shall I prepare some mochis for you this week?",
     },
     export: {
       title: "Export to Excel",
@@ -354,7 +384,8 @@ export const spanishAmaiMessages = {
       pieces: "%{smart_count} pieza |||| %{smart_count} piezas",
       pieces_of: "Piezas de %{name}",
       remove_one: "Quitar una pieza de %{name}",
-      add_five: "Agregar 5 piezas de %{name}",
+      add_pieces:
+        "Agregar %{smart_count} pieza de %{name} |||| Agregar %{smart_count} piezas de %{name}",
       no_flavors: "No hay sabores activos. Agrégalos en Ajustes → Sabores.",
       minimum_ok: "Cumple el mínimo de %{minimum} piezas",
       minimum_missing: "Faltan %{missing} piezas para el mínimo de %{minimum}",
@@ -508,6 +539,36 @@ export const spanishAmaiMessages = {
       },
       reminder:
         "Hola %{name}, te escribo de Amai Mochi. Te recuerdo el pago pendiente de %{total} por %{smart_count} pedido. ¡Muchas gracias! |||| Hola %{name}, te escribo de Amai Mochi. Te recuerdo el pago pendiente de %{total} por %{smart_count} pedidos. ¡Muchas gracias!",
+    },
+    quick_sale: {
+      title: "Venta rápida",
+      intro:
+        "Una venta al público o en un evento: se entrega y se cobra al momento, sin mínimo de piezas.",
+      client: "¿Quién compra?",
+      public: "Público en general",
+      payment: "Pagó con",
+      notes_placeholder: "Ej. Tianguis del domingo",
+      save: "Cobrar y guardar",
+      saved:
+        "Venta de %{smart_count} pieza guardada |||| Venta de %{smart_count} piezas guardada",
+      save_error:
+        "No se pudo guardar la venta. Revisa tu conexión e inténtalo otra vez.",
+    },
+    customers: {
+      title: "Tus clientes",
+      link: "Ver tus clientes",
+      top: "Los que más compran (90 días)",
+      top_empty: "No hubo ventas en los últimos 90 días.",
+      quiet: "Sin pedir hace más de %{days} días",
+      quiet_empty:
+        "Todos los distribuidores han pedido en los últimos %{days} días.",
+      ordered_today: "pidió hoy",
+      last_order:
+        "último pedido hace %{smart_count} día |||| último pedido hace %{smart_count} días",
+      write: "Escribir",
+      no_phone: "Sin teléfono",
+      message:
+        "Hola %{name}, te escribo de Amai Mochi. ¿Cómo estás? ¿Te preparo mochis para esta semana?",
     },
     export: {
       title: "Exportar a Excel",

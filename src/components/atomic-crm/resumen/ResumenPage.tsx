@@ -64,6 +64,12 @@ export const ResumenPage = () => {
         </p>
       ) : null}
       {data ? <Resumen resumen={data} /> : null}
+      <Link
+        to={AMAI_PATHS.customers}
+        className="inline-flex min-h-11 items-center self-start font-semibold text-primary"
+      >
+        {translate("amai.customers.link")} ›
+      </Link>
     </AmaiPage>
   );
 };
