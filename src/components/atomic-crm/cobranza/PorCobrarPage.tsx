@@ -17,6 +17,7 @@ import {
   type DeudaCliente,
 } from "./cobranza";
 import { DeudaClienteCard } from "./DeudaClienteCard";
+import { RecordarATodos } from "./RecordarATodos";
 
 const FILTROS = ["todos", "vencidos"] as const;
 type Filtro = (typeof FILTROS)[number];
@@ -147,6 +148,7 @@ export const PorCobrarPage = () => {
               </p>
             ) : null}
           </section>
+          <RecordarATodos deudas={deudas} />
           <ChipRadioGroup
             legend={translate("amai.orders.filter")}
             name="filtro"

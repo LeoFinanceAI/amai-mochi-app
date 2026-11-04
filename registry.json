@@ -280,6 +280,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/providers/fakerest/ventas.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/providers/fakerest/search.ts",
           "type": "registry:component"
         },
@@ -289,6 +293,10 @@
         },
         {
           "path": "src/components/atomic-crm/providers/fakerest/pedidos.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/providers/fakerest/listar.ts",
           "type": "registry:component"
         },
         {
@@ -461,6 +469,10 @@
         },
         {
           "path": "src/components/atomic-crm/pedidos/confirmacion.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/VentaRapidaPage.tsx",
           "type": "registry:component"
         },
         {
@@ -1052,7 +1064,15 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/cobranza/recordatorio.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/cobranza/cobranza.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/cobranza/RecordarATodos.tsx",
           "type": "registry:component"
         },
         {
@@ -1065,6 +1085,10 @@
         },
         {
           "path": "src/components/atomic-crm/clientes/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/clientes/TusClientesPage.tsx",
           "type": "registry:component"
         },
         {

@@ -14,6 +14,7 @@ import type {
   Producto,
   Sabor,
 } from "../../types";
+import { listar } from "./listar";
 
 // In-memory versions of the order SQL (supabase/schemas/09_amai.sql) for the
 // demo and tests. Simplification: lines are priced at the list price (no
@@ -182,50 +183,12 @@ const pedidoLista = async (
   });
 };
 
-const compare = (a: unknown, b: unknown) =>
-  String(a ?? "").localeCompare(String(b ?? ""), undefined, { numeric: true });
-
-// Filter keys as the supabase adapter leaves them: "estado", "fecha_entrega_lt"...
-const OPERATORS: Record<string, (order: number) => boolean> = {
-  neq: (order) => order !== 0,
-  lt: (order) => order < 0,
-  lte: (order) => order <= 0,
-  gt: (order) => order > 0,
-  gte: (order) => order >= 0,
-};
-
-const matches = (row: PedidoLista, key: string, value: unknown) => {
-  const operator = key.slice(key.lastIndexOf("_") + 1);
-  if (operator in OPERATORS) {
-    const field = key.slice(0, key.lastIndexOf("_")) as keyof PedidoLista;
-    return OPERATORS[operator](compare(row[field], value));
-  }
-  return row[key as keyof PedidoLista] === value;
-};
-
 // Comparison filters, one sort field and pagination: what the order screens use.
 export const getPedidoLista = async (
   dataProvider: DataProvider,
   params: GetListParams,
 ) => {
-  const filter = Object.entries(params.filter ?? {});
-  const { field, order } = params.sort ?? BY_ID;
-  const direction = order === "DESC" ? -1 : 1;
-  const rows = (await pedidoLista(dataProvider))
-    .filter((row) => filter.every(([key, value]) => matches(row, key, value)))
-    .sort(
-      (a, b) =>
-        direction *
-          compare(
-            a[field as keyof PedidoLista],
-            b[field as keyof PedidoLista],
-          ) || Number(a.id) - Number(b.id),
-    );
-  const { page, perPage } = params.pagination ?? { page: 1, perPage: 25 };
-  return {
-    data: rows.slice((page - 1) * perPage, page * perPage),
-    total: rows.length,
-  };
+  return listar(await pedidoLista(dataProvider), params);
 };
 
 export const getPedidoListaOne = async (

@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useDataProvider, useNotify, useTranslate } from "ra-core";
 import { useState } from "react";
 import { Link } from "react-router";
-import { List } from "lucide-react";
+import { List, Zap } from "lucide-react";
 
 import { AmaiPage } from "../amai/AmaiPage";
 import { AMAI_PATHS } from "../amai/paths";
@@ -34,13 +34,22 @@ export const NuevoPedidoPage = () => {
 
   return (
     <AmaiPage title={translate("amai.navigation.new_order")}>
-      <Link
-        to={AMAI_PATHS.orders}
-        className="inline-flex min-h-11 items-center gap-2 self-start font-semibold text-primary"
-      >
-        <List className="size-5" />
-        {translate("amai.orders.view_orders")}
-      </Link>
+      <div className="flex flex-wrap gap-x-6">
+        <Link
+          to={AMAI_PATHS.orders}
+          className="inline-flex min-h-11 items-center gap-2 font-semibold text-primary"
+        >
+          <List className="size-5" />
+          {translate("amai.orders.view_orders")}
+        </Link>
+        <Link
+          to={AMAI_PATHS.quickSale}
+          className="inline-flex min-h-11 items-center gap-2 font-semibold text-primary"
+        >
+          <Zap className="size-5" />
+          {translate("amai.quick_sale.title")}
+        </Link>
+      </div>
       <PedidoForm
         key={formKey}
         initial={FORM_VACIO}

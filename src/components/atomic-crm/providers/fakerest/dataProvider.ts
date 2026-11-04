@@ -10,6 +10,7 @@ import fakeRestDataProvider from "ra-data-fakerest";
 
 import type {
   NuevoPedido,
+  VentaRapida,
   Company,
   Contact,
   ContactNote,
@@ -42,6 +43,7 @@ import {
   saldoCliente,
 } from "./cobranza";
 import { resumenSemana } from "./resumen";
+import { getClienteActividad, ventaRapida } from "./ventas";
 import type { CrmDataProvider } from "../types";
 import {
   authProvider as defaultAuthProvider,
@@ -226,6 +228,9 @@ export const createDataProvider = ({
       if (resource === "pedido") {
         return getPedidoLista(baseDataProvider, params) as any;
       }
+      if (resource === "v_cliente_actividad") {
+        return getClienteActividad(baseDataProvider, params) as any;
+      }
       if (resource === "v_cobranza_pendiente") {
         return getCobranzaPendiente(baseDataProvider, params) as any;
       }
@@ -376,6 +381,9 @@ export const createDataProvider = ({
     },
     resumenSemana: async (fecha: string) => {
       return resumenSemana(baseDataProvider, fecha);
+    },
+    ventaRapida: async (venta: VentaRapida) => {
+      return ventaRapida(baseDataProvider, venta);
     },
     saldoCliente: async (clienteId: number) => {
       return saldoCliente(baseDataProvider, clienteId);

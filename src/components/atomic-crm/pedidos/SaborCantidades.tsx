@@ -12,12 +12,18 @@ const ALL_FLAVORS = 100;
 interface SaborCantidadesProps {
   cantidades: Readonly<Record<number, number>>;
   onChange: (saborId: number, delta: number) => void;
+  // Pieces added by the + button: 5 for orders, 1 for a quick sale.
+  paso?: number;
+  // Orders warn below the 40-piece minimum; a quick sale has no minimum.
+  conMinimo?: boolean;
 }
 
 // Pieces per active flavor, with − (one piece) and +5 buttons as in the mockup.
 export const SaborCantidades = ({
   cantidades,
   onChange,
+  paso = PASO_PIEZAS,
+  conMinimo = true,
 }: SaborCantidadesProps) => {
   const translate = useTranslate();
   const { data, isPending, error } = useGetList<Sabor>("sabor", {
@@ -55,12 +61,13 @@ export const SaborCantidades = ({
               key={sabor.id}
               sabor={sabor}
               cantidad={cantidades[sabor.id] ?? 0}
+              paso={paso}
               onChange={(delta) => onChange(sabor.id, delta)}
             />
           ))}
         </ul>
       ) : null}
-      <MinimoAviso total={total} />
+      {conMinimo ? <MinimoAviso total={total} /> : null}
     </section>
   );
 };
@@ -68,10 +75,11 @@ export const SaborCantidades = ({
 interface SaborFilaProps {
   sabor: Sabor;
   cantidad: number;
+  paso: number;
   onChange: (delta: number) => void;
 }
 
-const SaborFila = ({ sabor, cantidad, onChange }: SaborFilaProps) => {
+const SaborFila = ({ sabor, cantidad, paso, onChange }: SaborFilaProps) => {
   const translate = useTranslate();
   return (
     <li className="flex items-center gap-3 rounded-xl border bg-card pl-4 pr-2 min-h-14">
@@ -100,10 +108,14 @@ const SaborFila = ({ sabor, cantidad, onChange }: SaborFilaProps) => {
       <Button
         type="button"
         className="h-11 px-3 gap-1"
-        onClick={() => onChange(PASO_PIEZAS)}
-        aria-label={translate("amai.orders.add_five", { name: sabor.nombre })}
+        onClick={() => onChange(paso)}
+        aria-label={translate("amai.orders.add_pieces", {
+          name: sabor.nombre,
+          smart_count: paso,
+        })}
       >
-        <Plus className="size-4" />5
+        <Plus className="size-4" />
+        {paso}
       </Button>
     </li>
   );

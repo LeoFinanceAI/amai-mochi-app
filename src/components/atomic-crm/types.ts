@@ -176,6 +176,32 @@ export type SaldoCliente = {
   saldo: number;
 };
 
+// Input of venta_rapida(): a sale delivered and paid on the spot. No client
+// means "Público en general".
+export type VentaRapida = {
+  cliente_id: number | null;
+  metodo_pago: MetodoPago;
+  notas: string;
+  lineas: Array<{ sabor_id: number; cantidad: number }>;
+};
+
+// A row of v_cliente_actividad: what a client buys and when they last ordered.
+export type ClienteActividad = {
+  id: number;
+  nombre: string;
+  tipo: TipoCliente;
+  zona: string | null;
+  telefono: string | null;
+  activo: boolean;
+  pedidos: number;
+  piezas: number;
+  total: number;
+  total_90_dias: number;
+  ultimo_pedido: string | null;
+  // Days since the last order that was not cancelled, in Mexico's date.
+  dias_sin_pedir: number | null;
+};
+
 // A row of v_cobranza_pendiente: a delivered order with no payment yet.
 export type CobranzaPendiente = {
   id: number;

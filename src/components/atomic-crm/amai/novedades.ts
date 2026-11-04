@@ -10,6 +10,9 @@ export const NOVEDADES: ReadonlyArray<Novedad> = [
   {
     fecha: "2026-11-04",
     cambios: [
+      "Venta rápida: para ventas al público o en eventos, se cobra al momento y sin mínimo de piezas. Está arriba en Nuevo pedido.",
+      "Tus clientes: quién te compra más y qué distribuidores llevan más de 30 días sin pedir, con un botón para escribirles. Está al final de Tu semana.",
+      "Por cobrar: el botón Recordar a los clientes con pedidos de más de 7 días te lleva uno por uno a su WhatsApp con el mensaje de cobro ya escrito.",
       "Exportar a Excel: baja las ventas, los cobros o los gastos de un mes para mandárselos a tu contador. Está en Ajustes → Dinero.",
       "Clientes: al abrir un cliente ves cuánto te ha comprado, cuántos pedidos lleva, cuánto te debe y sus últimos pedidos.",
       "Producción: cuántas piezas de cada sabor preparar para los pedidos de mañana (o de hoy, o de pasado mañana). Está en Pedidos.",
