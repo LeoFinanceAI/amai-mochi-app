@@ -1052,7 +1052,15 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/cobranza/recordatorio.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/cobranza/cobranza.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/cobranza/RecordarATodos.tsx",
           "type": "registry:component"
         },
         {
