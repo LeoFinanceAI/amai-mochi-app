@@ -77,6 +77,7 @@ test.describe("client history and export", () => {
 
   test("downloads a month's payments with the client's name", async ({
     page,
+    isMobile,
   }) => {
     // Arrange
     await open(page, isMobile, "Export to Excel");
