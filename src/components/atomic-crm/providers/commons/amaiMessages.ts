@@ -207,6 +207,8 @@ export const englishAmaiMessages = {
         "Sale of %{smart_count} piece saved |||| Sale of %{smart_count} pieces saved",
       save_error:
         "The sale could not be saved. Check your connection and try again.",
+      recent: "Sold just now",
+      undone: "Sale undone",
     },
     customers: {
       title: "Your clients",
@@ -553,6 +555,8 @@ export const spanishAmaiMessages = {
         "Venta de %{smart_count} pieza guardada |||| Venta de %{smart_count} piezas guardada",
       save_error:
         "No se pudo guardar la venta. Revisa tu conexión e inténtalo otra vez.",
+      recent: "Vendido hace un momento",
+      undone: "Venta deshecha",
     },
     customers: {
       title: "Tus clientes",
