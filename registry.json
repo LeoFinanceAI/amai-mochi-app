@@ -248,11 +248,19 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/resumen/mes.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/resumen/ResumenPage.tsx",
           "type": "registry:component"
         },
         {
           "path": "src/components/atomic-crm/resumen/GraficasResumen.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/resumen/CuerpoResumen.tsx",
           "type": "registry:component"
         },
         {

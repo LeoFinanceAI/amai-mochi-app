@@ -42,7 +42,7 @@ import {
   getCobranzaPendiente,
   saldoCliente,
 } from "./cobranza";
-import { resumenSemana } from "./resumen";
+import { resumenMes, resumenSemana } from "./resumen";
 import { getClienteActividad, ventaRapida } from "./ventas";
 import type { CrmDataProvider } from "../types";
 import {
@@ -381,6 +381,9 @@ export const createDataProvider = ({
     },
     resumenSemana: async (fecha: string) => {
       return resumenSemana(baseDataProvider, fecha);
+    },
+    resumenMes: async (fecha: string) => {
+      return resumenMes(baseDataProvider, fecha);
     },
     ventaRapida: async (venta: VentaRapida) => {
       return ventaRapida(baseDataProvider, venta);

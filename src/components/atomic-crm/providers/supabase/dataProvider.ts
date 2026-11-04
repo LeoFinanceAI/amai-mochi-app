@@ -9,6 +9,7 @@ import {
 import type {
   ContactNote,
   NuevoPedido,
+  ResumenMes,
   ResumenSemana,
   SaldoCliente,
   VentaRapida,
@@ -360,6 +361,16 @@ const getDataProviderWithCustomMethods = () => {
         throw new Error("Failed to load the weekly summary");
       }
       return data as ResumenSemana;
+    },
+    async resumenMes(fecha: string): Promise<ResumenMes> {
+      const { data, error } = await getSupabaseClient().rpc("resumen_mes", {
+        p_dia: fecha,
+      });
+      if (error) {
+        console.error("resumen_mes.error", error);
+        throw new Error("Failed to load the monthly summary");
+      }
+      return data as ResumenMes;
     },
     async getConfiguration(): Promise<ConfigurationContextValue> {
       const { data } = await baseDataProvider.getOne("configuration", {

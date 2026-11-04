@@ -6,64 +6,51 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { AmaiPage } from "../amai/AmaiPage";
+import { ChipRadioGroup } from "../amai/ChipRadioGroup";
 import { AMAI_PATHS } from "../amai/paths";
+import { mesActual } from "../exportar/csv";
 import { lunesDeLaSemana } from "../gastos/gastoForm";
 import { fromIsoDate } from "../pedidos/fechaEntrega";
-import { formatoDinero } from "../pedidos/formatoPedido";
 import type { CrmDataProvider } from "../providers/types";
-import type { ResumenSemana } from "../types";
-import { PiezasPorDia, SaboresMasVendidos } from "./GraficasResumen";
-import { cambioPorcentual, lunesElegido, moverSemanas } from "./semana";
+import { CuerpoResumen } from "./CuerpoResumen";
+import { mesElegido, moverMeses } from "./mes";
+import { lunesElegido, moverSemanas } from "./semana";
 
-// "Tu semana" from the approved mockup: sales, orders, collected vs. to
-// collect, expenses and profit, pieces per day, top flavors and sales per
-// client. All numbers come from resumen_semana() in SQL. The week shown lives
-// in the address (?semana=YYYY-MM-DD), so Monday's look at last week is a tap.
+const VISTAS = ["semana", "mes"] as const;
+type Vista = (typeof VISTAS)[number];
+
+// "Tu semana" from the approved mockup, plus the same figures for a month:
+// sales, orders, collected vs. to collect, expenses and profit, top flavors
+// and sales per client (and pieces per day for the week). All numbers come
+// from resumen_semana() / resumen_mes() in SQL. What is shown lives in the
+// address (?vista=mes&mes=YYYY-MM or ?semana=YYYY-MM-DD), so last week or
+// last month is a tap away.
 export const ResumenPage = () => {
   const translate = useTranslate();
-  const dataProvider = useDataProvider<CrmDataProvider>();
   const [searchParams, setSearchParams] = useSearchParams();
-  const lunes = lunesElegido(searchParams.get("semana"));
-  const esActual = lunes === lunesDeLaSemana();
-  const { data, isPending, error } = useQuery({
-    queryKey: ["resumen_semana", lunes],
-    queryFn: () => dataProvider.resumenSemana(lunes),
-  });
-  const irA = (semanas: number) =>
-    setSearchParams(
-      { semana: moverSemanas(lunes, semanas) },
-      { replace: true },
-    );
+  const vista: Vista = searchParams.get("vista") === "mes" ? "mes" : "semana";
 
   return (
-    <AmaiPage title={translate("amai.summary.title")}>
-      <div className="flex items-center gap-2">
-        <Button
-          variant="outline"
-          className="size-11"
-          onClick={() => irA(-1)}
-          aria-label={translate("amai.summary.previous_week")}
-        >
-          <ChevronLeft className="size-5" />
-        </Button>
-        <RangoSemana lunes={lunes} />
-        <Button
-          variant="outline"
-          className="size-11"
-          disabled={esActual}
-          onClick={() => irA(1)}
-          aria-label={translate("amai.summary.next_week")}
-        >
-          <ChevronRight className="size-5" />
-        </Button>
-      </div>
-      {isPending ? <Skeleton className="h-80 w-full" /> : null}
-      {error ? (
-        <p className="text-destructive" role="alert">
-          {translate("ra.notification.http_error")}
-        </p>
-      ) : null}
-      {data ? <Resumen resumen={data} /> : null}
+    <AmaiPage
+      title={translate(
+        vista === "mes" ? "amai.summary.month_title" : "amai.summary.title",
+      )}
+    >
+      <ChipRadioGroup
+        legend={translate("amai.summary.period")}
+        name="vista"
+        options={VISTAS.map((value) => ({
+          value,
+          label: translate(`amai.summary.views.${value}`),
+        }))}
+        value={vista}
+        onChange={(nueva) =>
+          setSearchParams(nueva === "mes" ? { vista: "mes" } : {}, {
+            replace: true,
+          })
+        }
+      />
+      {vista === "mes" ? <ResumenDelMes /> : <ResumenDeLaSemana />}
       <Link
         to={AMAI_PATHS.customers}
         className="inline-flex min-h-11 items-center self-start font-semibold text-primary"
@@ -72,6 +59,141 @@ export const ResumenPage = () => {
       </Link>
     </AmaiPage>
   );
+};
+
+const ResumenDeLaSemana = () => {
+  const dataProvider = useDataProvider<CrmDataProvider>();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const lunes = lunesElegido(searchParams.get("semana"));
+  const consulta = useQuery({
+    queryKey: ["resumen_semana", lunes],
+    queryFn: () => dataProvider.resumenSemana(lunes),
+  });
+  return (
+    <>
+      <Navegacion
+        anterior="amai.summary.previous_week"
+        siguiente="amai.summary.next_week"
+        esActual={lunes === lunesDeLaSemana()}
+        onMover={(n) =>
+          setSearchParams({ semana: moverSemanas(lunes, n) }, { replace: true })
+        }
+      >
+        <RangoSemana lunes={lunes} />
+      </Navegacion>
+      <Estado consulta={consulta} />
+      {consulta.data ? (
+        <CuerpoResumen
+          resumen={consulta.data}
+          anterior={consulta.data.vendido_semana_anterior}
+          comparacion="amai.summary.vs_last_week"
+          sinVentas="amai.summary.no_sales"
+          porDia={consulta.data.por_dia}
+        />
+      ) : null}
+    </>
+  );
+};
+
+const ResumenDelMes = () => {
+  const dataProvider = useDataProvider<CrmDataProvider>();
+  const [locale] = useLocaleState();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const mes = mesElegido(searchParams.get("mes"));
+  const consulta = useQuery({
+    queryKey: ["resumen_mes", mes],
+    queryFn: () => dataProvider.resumenMes(`${mes}-01`),
+  });
+  const nombre = new Intl.DateTimeFormat(locale === "es" ? "es-MX" : locale, {
+    month: "long",
+    year: "numeric",
+  }).format(fromIsoDate(`${mes}-01`));
+  return (
+    <>
+      <Navegacion
+        anterior="amai.summary.previous_month"
+        siguiente="amai.summary.next_month"
+        esActual={mes === mesActual()}
+        onMover={(n) =>
+          setSearchParams(
+            { vista: "mes", mes: moverMeses(mes, n) },
+            { replace: true },
+          )
+        }
+      >
+        <p className="flex-1 text-center text-sm font-semibold first-letter:uppercase">
+          {nombre}
+        </p>
+      </Navegacion>
+      <Estado consulta={consulta} />
+      {consulta.data ? (
+        <CuerpoResumen
+          resumen={consulta.data}
+          anterior={consulta.data.vendido_mes_anterior}
+          comparacion="amai.summary.vs_last_month"
+          sinVentas="amai.summary.no_sales_month"
+        />
+      ) : null}
+    </>
+  );
+};
+
+interface NavegacionProps {
+  anterior: string;
+  siguiente: string;
+  esActual: boolean;
+  onMover: (n: number) => void;
+  children: React.ReactNode;
+}
+
+// Previous / next period around its name; no going past the current one.
+const Navegacion = ({
+  anterior,
+  siguiente,
+  esActual,
+  onMover,
+  children,
+}: NavegacionProps) => {
+  const translate = useTranslate();
+  return (
+    <div className="flex items-center gap-2">
+      <Button
+        variant="outline"
+        className="size-11"
+        onClick={() => onMover(-1)}
+        aria-label={translate(anterior)}
+      >
+        <ChevronLeft className="size-5" />
+      </Button>
+      {children}
+      <Button
+        variant="outline"
+        className="size-11"
+        disabled={esActual}
+        onClick={() => onMover(1)}
+        aria-label={translate(siguiente)}
+      >
+        <ChevronRight className="size-5" />
+      </Button>
+    </div>
+  );
+};
+
+const Estado = ({
+  consulta,
+}: {
+  consulta: { isPending: boolean; error: unknown };
+}) => {
+  const translate = useTranslate();
+  if (consulta.isPending) return <Skeleton className="h-80 w-full" />;
+  if (consulta.error) {
+    return (
+      <p className="text-destructive" role="alert">
+        {translate("ra.notification.http_error")}
+      </p>
+    );
+  }
+  return null;
 };
 
 const RangoSemana = ({ lunes }: { lunes: string }) => {
@@ -88,136 +210,5 @@ const RangoSemana = ({ lunes }: { lunes: string }) => {
     <p className="flex-1 text-center text-sm font-semibold first-letter:uppercase">
       {formato.format(inicio)} – {formato.format(fin)}
     </p>
-  );
-};
-
-const Resumen = ({ resumen }: { resumen: ResumenSemana }) => {
-  const translate = useTranslate();
-  const cambio = cambioPorcentual(
-    resumen.vendido,
-    resumen.vendido_semana_anterior,
-  );
-  const promedio = resumen.pedidos
-    ? Math.round(resumen.piezas / resumen.pedidos)
-    : 0;
-
-  return (
-    <div className="flex flex-col gap-6">
-      <div className="grid grid-cols-2 gap-3">
-        <Tarjeta
-          titulo={translate("amai.summary.sold")}
-          valor={formatoDinero(resumen.vendido)}
-          detalle={
-            cambio == null
-              ? null
-              : translate("amai.summary.vs_last_week", {
-                  change: `${cambio > 0 ? "+" : ""}${cambio}%`,
-                })
-          }
-        />
-        <Tarjeta
-          titulo={translate("amai.summary.orders")}
-          valor={String(resumen.pedidos)}
-          detalle={
-            resumen.pedidos
-              ? translate("amai.summary.average_pieces", {
-                  smart_count: promedio,
-                })
-              : null
-          }
-        />
-        <Tarjeta
-          titulo={translate("amai.summary.collected")}
-          valor={formatoDinero(resumen.cobrado)}
-        />
-        <Link
-          to={AMAI_PATHS.receivables}
-          className="rounded-xl border bg-card p-4 hover:bg-accent"
-        >
-          <p className="text-sm text-muted-foreground">
-            {translate("amai.summary.to_collect")}
-          </p>
-          <p className="text-2xl font-bold tabular-nums">
-            {formatoDinero(resumen.por_cobrar)} ›
-          </p>
-        </Link>
-        <Tarjeta
-          titulo={translate("amai.summary.expenses")}
-          valor={formatoDinero(resumen.gastado)}
-        />
-        <Tarjeta
-          titulo={translate("amai.summary.profit")}
-          valor={formatoDinero(resumen.ganancia)}
-          detalle={translate("amai.summary.profit_hint")}
-        />
-      </div>
-      {resumen.piezas > 0 ? (
-        <>
-          <PiezasPorDia dias={resumen.por_dia} />
-          <SaboresMasVendidos sabores={resumen.por_sabor} />
-          <PorCliente clientes={resumen.por_cliente} />
-        </>
-      ) : (
-        <p className="text-muted-foreground">
-          {translate("amai.summary.no_sales")}
-        </p>
-      )}
-    </div>
-  );
-};
-
-interface TarjetaProps {
-  titulo: string;
-  valor: string;
-  detalle?: string | null;
-}
-
-const Tarjeta = ({ titulo, valor, detalle }: TarjetaProps) => (
-  <div className="rounded-xl border bg-card p-4">
-    <p className="text-sm text-muted-foreground">{titulo}</p>
-    <p className="text-2xl font-bold tabular-nums">{valor}</p>
-    {detalle ? (
-      <p className="text-xs text-muted-foreground">{detalle}</p>
-    ) : null}
-  </div>
-);
-
-const PorCliente = ({
-  clientes,
-}: {
-  clientes: ResumenSemana["por_cliente"];
-}) => {
-  const translate = useTranslate();
-  return (
-    <section aria-labelledby="por-cliente" className="flex flex-col gap-3">
-      <h2 id="por-cliente" className="text-2xl">
-        {translate("amai.summary.by_client")}
-      </h2>
-      <ul className="flex flex-col gap-2">
-        {clientes.map((cliente) => (
-          <li
-            key={cliente.cliente_id}
-            className="flex items-center justify-between gap-2 rounded-xl border bg-card px-4 min-h-14"
-          >
-            <div className="flex min-w-0 flex-col py-2">
-              <span className="truncate font-semibold">{cliente.nombre}</span>
-              <span className="text-sm text-muted-foreground">
-                {[
-                  cliente.zona,
-                  translate("amai.orders.pieces", {
-                    smart_count: cliente.piezas,
-                  }),
-                ]
-                  .filter(Boolean)
-                  .join(" · ")}
-              </span>
-            </div>
-            <span className="font-bold tabular-nums">
-              {formatoDinero(cliente.total)}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </section>
   );
 };

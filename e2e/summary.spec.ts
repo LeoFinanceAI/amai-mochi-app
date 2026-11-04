@@ -4,7 +4,7 @@ import { expect, test } from "./fixtures";
 
 const today = () => new Date().toLocaleDateString("en-CA");
 
-test.describe("weekly summary", () => {
+test.describe("weekly and monthly summary", () => {
   test.beforeEach(async ({ createSales }) => {
     await createSales({
       first_name: "John",
@@ -43,6 +43,40 @@ test.describe("weekly summary", () => {
     await expect(
       page.getByRole("region", { name: "Best-selling flavors" }),
     ).toContainText("Fresa");
+    await expect(page.getByRole("region", { name: "By client" })).toContainText(
+      "Tienda Centro",
+    );
+  });
+
+  test("shows this month's sales and profit computed in SQL", async ({
+    page,
+    amai,
+  }) => {
+    // Arrange: 40 Fresa at $25 delivered today, and $300 of expenses.
+    const fresa = await amai.createSabor("Fresa");
+    await amai.setPrecioLista(fresa.id, 25);
+    const cliente = await amai.createCliente("Tienda Centro", "Guadalajara");
+    const pedido = await amai.createPedido(cliente.id, today(), [
+      { saborId: fresa.id, cantidad: 40 },
+    ]);
+    await amai.marcarEntregado(pedido.id);
+    await amai.createGasto(today(), 300);
+    await page.goto("/");
+    await page.getByLabel("Email").fill("john@doe.com");
+    await page.getByLabel("Password").fill("password");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.getByRole("link", { name: "Summary" }).click();
+
+    // Act
+    await page.getByText("Month", { exact: true }).click();
+
+    // Assert
+    const main = page.getByRole("main");
+    await expect(
+      page.getByRole("heading", { name: "Your month" }),
+    ).toBeVisible();
+    await expect(main.getByText("$1,000").first()).toBeVisible();
+    await expect(main.getByText("$700")).toBeVisible();
     await expect(page.getByRole("region", { name: "By client" })).toContainText(
       "Tienda Centro",
     );
