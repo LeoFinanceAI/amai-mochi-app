@@ -27,22 +27,24 @@ test.describe("client history and export", () => {
     await amai.createGasto("2026-11-02", 99);
   });
 
-  const signIn = async (page: Page) => {
+  // Signs in and opens a screen from Settings (phone) or the header (desktop):
+  // the e2e server has no SPA fallback, so deep links do not load.
+  const open = async (page: Page, isMobile: boolean, link: string) => {
     await page.goto("/");
     await page.getByLabel("Email").fill("john@doe.com");
     await page.getByLabel("Password").fill("password");
     await page.getByRole("button", { name: "Sign in" }).click();
-    await expect(
-      page.getByRole("link", { name: "New order" }).first(),
-    ).toBeVisible();
+    if (isMobile) {
+      await page.getByRole("link", { name: "Settings" }).click();
+    }
+    await page.getByRole("link", { name: link }).click();
   };
 
-  test("shows what a client bought and owes", async ({ page }) => {
+  test("shows what a client bought and owes", async ({ page, isMobile }) => {
     // Arrange
-    await signIn(page);
+    await open(page, isMobile, "Clients");
 
     // Act
-    await page.goto("/cliente");
     await page.getByRole("link", { name: /Tienda Centro/ }).click();
 
     // Assert
@@ -52,10 +54,12 @@ test.describe("client history and export", () => {
     await expect(historial.getByText("Fresa 40")).toBeVisible();
   });
 
-  test("downloads a month's expenses as a CSV file", async ({ page }) => {
+  test("downloads a month's expenses as a CSV file", async ({
+    page,
+    isMobile,
+  }) => {
     // Arrange
-    await signIn(page);
-    await page.goto("/export");
+    await open(page, isMobile, "Export to Excel");
     await page.getByLabel("Month").fill("2026-10");
 
     // Act
@@ -75,8 +79,7 @@ test.describe("client history and export", () => {
     page,
   }) => {
     // Arrange
-    await signIn(page);
-    await page.goto("/export");
+    await open(page, isMobile, "Export to Excel");
     await page.getByLabel("Month").fill("2026-10");
 
     // Act
