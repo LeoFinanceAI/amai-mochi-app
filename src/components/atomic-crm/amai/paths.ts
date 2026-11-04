@@ -9,6 +9,7 @@ export const AMAI_PATHS = {
   summary: "/summary",
   prices: "/prices",
   expenses: "/expenses",
+  export: "/export",
 } as const;
 
 export const editOrderPath = (id: number | string) => `/orders/${id}/edit`;

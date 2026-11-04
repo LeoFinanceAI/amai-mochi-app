@@ -183,6 +183,31 @@ export const englishAmaiMessages = {
       reminder:
         "Hi %{name}, this is Amai Mochi. A friendly reminder of the pending payment of %{total} for %{smart_count} order. Thank you! |||| Hi %{name}, this is Amai Mochi. A friendly reminder of the pending payment of %{total} for %{smart_count} orders. Thank you!",
     },
+    export: {
+      title: "Export to Excel",
+      intro:
+        "Download a month's sales, payments or expenses in a file that opens in Excel, to send to your accountant.",
+      month: "Month",
+      reports: {
+        ventas: "Sales (delivered orders)",
+        cobros: "Payments received",
+        gastos: "Expenses",
+      },
+      empty: "Nothing to export in that month.",
+      columns: {
+        date: "Date",
+        order: "Order",
+        client: "Client",
+        flavors: "Flavors",
+        pieces: "Pieces",
+        payment: "Payment method",
+        total: "Total",
+        reference: "Reference",
+        amount: "Amount",
+        category: "Category",
+        note: "Note",
+      },
+    },
     money: {
       title: "Money",
     },
@@ -463,6 +488,31 @@ export const spanishAmaiMessages = {
         "Hay un pedido sin precio: captura los precios para poder cobrarlo.",
       reminder:
         "Hola %{name}, te escribo de Amai Mochi. Te recuerdo el pago pendiente de %{total} por %{smart_count} pedido. ¡Muchas gracias! |||| Hola %{name}, te escribo de Amai Mochi. Te recuerdo el pago pendiente de %{total} por %{smart_count} pedidos. ¡Muchas gracias!",
+    },
+    export: {
+      title: "Exportar a Excel",
+      intro:
+        "Baja las ventas, los cobros o los gastos de un mes en un archivo que se abre en Excel, para mandárselo a tu contador.",
+      month: "Mes",
+      reports: {
+        ventas: "Ventas (pedidos entregados)",
+        cobros: "Cobros",
+        gastos: "Gastos",
+      },
+      empty: "No hay nada que exportar en ese mes.",
+      columns: {
+        date: "Fecha",
+        order: "Pedido",
+        client: "Cliente",
+        flavors: "Sabores",
+        pieces: "Piezas",
+        payment: "Forma de pago",
+        total: "Total",
+        reference: "Referencia",
+        amount: "Monto",
+        category: "Categoría",
+        note: "Nota",
+      },
     },
     money: {
       title: "Dinero",

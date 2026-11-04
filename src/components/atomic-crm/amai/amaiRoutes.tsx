@@ -7,6 +7,7 @@ import { PedidoListPage } from "../pedidos/PedidoListPage";
 import { ProduccionPage } from "../pedidos/ProduccionPage";
 import { PreciosPage } from "../precios/PreciosPage";
 import { GastosPage } from "../gastos/GastosPage";
+import { ExportarPage } from "../exportar/ExportarPage";
 import { PorCobrarPage } from "../cobranza/PorCobrarPage";
 import { ResumenPage } from "../resumen/ResumenPage";
 import { AMAI_PATHS } from "./paths";
@@ -16,6 +17,7 @@ import { AMAI_PATHS } from "./paths";
 export const amaiRoutes = [
   <Route key="prices" path={AMAI_PATHS.prices} element={<PreciosPage />} />,
   <Route key="expenses" path={AMAI_PATHS.expenses} element={<GastosPage />} />,
+  <Route key="export" path={AMAI_PATHS.export} element={<ExportarPage />} />,
   <Route key="orders" path={AMAI_PATHS.orders} element={<PedidoListPage />} />,
   <Route
     key="production"
