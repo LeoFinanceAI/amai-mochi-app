@@ -464,6 +464,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/pedidos/RepetirUltimoPedido.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/pedidos/ProduccionPage.tsx",
           "type": "registry:component"
         },
