@@ -3,6 +3,7 @@
 export const AMAI_PATHS = {
   orders: "/orders",
   deliveriesToday: "/orders/today",
+  production: "/orders/production",
   newOrder: "/orders/new",
   receivables: "/receivables",
   summary: "/summary",

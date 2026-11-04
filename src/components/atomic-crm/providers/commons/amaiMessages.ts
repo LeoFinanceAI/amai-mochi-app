@@ -61,6 +61,21 @@ export const englishAmaiMessages = {
       missing_pieces: "Add at least one flavor",
       missing_date: "Pick the delivery date",
       view_orders: "View orders",
+      repeat: {
+        last: "Last order (%{date}):",
+        button: "Repeat last order",
+      },
+      confirm: {
+        button: "Confirm on WhatsApp",
+        greeting: "Hi %{name}, this is Amai Mochi confirming your order:",
+        total:
+          "Total: %{smart_count} piece · %{total} |||| Total: %{smart_count} pieces · %{total}",
+        total_no_price:
+          "Total: %{smart_count} piece |||| Total: %{smart_count} pieces",
+        delivery: "Delivery: %{date}",
+        payment: "Payment on delivery: %{method}",
+        thanks: "Thank you!",
+      },
       filter: "Show",
       filters: {
         pendiente: "Pending",
@@ -96,6 +111,19 @@ export const englishAmaiMessages = {
       updated: "Order updated",
       only_pending: "Only pending orders can be edited.",
       open_maps: "Open %{address} in Maps",
+    },
+    production: {
+      title: "Production",
+      for: "Prepare for",
+      days: {
+        hoy: "Today",
+        manana: "Tomorrow",
+        pasado: "Day after tomorrow",
+      },
+      total: "%{smart_count} piece |||| %{smart_count} pieces",
+      orders: "for %{smart_count} order |||| for %{smart_count} orders",
+      per_flavor: "Pieces per flavor",
+      empty: "No pending orders for that day.",
     },
     deliveries: {
       title: "Today's deliveries",
@@ -304,6 +332,21 @@ export const spanishAmaiMessages = {
       missing_pieces: "Agrega al menos un sabor",
       missing_date: "Elige la fecha de entrega",
       view_orders: "Ver pedidos",
+      repeat: {
+        last: "Último pedido (%{date}):",
+        button: "Repetir el último pedido",
+      },
+      confirm: {
+        button: "Confirmar por WhatsApp",
+        greeting: "Hola %{name}, te confirmo tu pedido de Amai Mochi:",
+        total:
+          "Total: %{smart_count} pieza · %{total} |||| Total: %{smart_count} piezas · %{total}",
+        total_no_price:
+          "Total: %{smart_count} pieza |||| Total: %{smart_count} piezas",
+        delivery: "Entrega: %{date}",
+        payment: "Pago al recibir: %{method}",
+        thanks: "¡Gracias!",
+      },
       filter: "Mostrar",
       filters: {
         pendiente: "Pendientes",
@@ -339,6 +382,19 @@ export const spanishAmaiMessages = {
       updated: "Pedido actualizado",
       only_pending: "Solo se pueden editar pedidos pendientes.",
       open_maps: "Abrir %{address} en Maps",
+    },
+    production: {
+      title: "Producción",
+      for: "Preparar para",
+      days: {
+        hoy: "Hoy",
+        manana: "Mañana",
+        pasado: "Pasado mañana",
+      },
+      total: "%{smart_count} pieza |||| %{smart_count} piezas",
+      orders: "para %{smart_count} pedido |||| para %{smart_count} pedidos",
+      per_flavor: "Piezas por sabor",
+      empty: "No hay pedidos pendientes para ese día.",
     },
     deliveries: {
       title: "Entregas de hoy",

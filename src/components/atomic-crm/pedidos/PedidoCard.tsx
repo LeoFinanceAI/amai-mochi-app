@@ -1,12 +1,21 @@
-import { useNotify, useTranslate, useUpdate } from "ra-core";
+import { useLocaleState, useNotify, useTranslate, useUpdate } from "ra-core";
 import { Link } from "react-router";
-import { Check, MapPin, Pencil, RotateCcw, X } from "lucide-react";
+import {
+  Check,
+  MapPin,
+  MessageCircle,
+  Pencil,
+  RotateCcw,
+  X,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import { editOrderPath } from "../amai/paths";
 import type { EstadoPedido, PedidoLista } from "../types";
+import { whatsappUrl } from "../amai/whatsapp";
+import { mensajeConfirmacion } from "./confirmacion";
 import { formatoDinero, mapsUrl } from "./formatoPedido";
 
 const AVISO_ESTADO: Record<EstadoPedido, string> = {
@@ -21,6 +30,15 @@ export const PedidoCard = ({ pedido }: { pedido: PedidoLista }) => {
   const translate = useTranslate();
   const notify = useNotify();
   const [update, { isPending }] = useUpdate<PedidoLista>();
+  const [locale] = useLocaleState();
+  // Pending orders only: confirm what was agreed before delivering.
+  const confirmar =
+    pedido.estado === "pendiente"
+      ? whatsappUrl(
+          pedido.telefono,
+          mensajeConfirmacion(pedido, translate, locale),
+        )
+      : null;
 
   const cambiarEstado = (estado: EstadoPedido) =>
     update(
@@ -112,6 +130,20 @@ export const PedidoCard = ({ pedido }: { pedido: PedidoLista }) => {
               <Check className="size-4" />
               {translate("amai.orders.actions.deliver")}
             </Button>
+            {confirmar ? (
+              <a
+                href={confirmar}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "min-h-11 gap-1",
+                )}
+              >
+                <MessageCircle className="size-4" />
+                {translate("amai.orders.confirm.button")}
+              </a>
+            ) : null}
             <Link
               to={editOrderPath(pedido.id)}
               className={cn(
