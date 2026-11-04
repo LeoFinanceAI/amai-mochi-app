@@ -61,6 +61,19 @@ export const englishAmaiMessages = {
       missing_client: "Pick a client",
       missing_pieces: "Add at least one flavor",
       missing_date: "Pick the delivery date",
+      paid_warning: {
+        pending:
+          "This order was already paid (%{amount}). Moving it back to pending removes that payment.",
+        cancel:
+          "This order was already paid (%{amount}). Cancelling it removes that payment.",
+        confirm: "Yes, remove the payment",
+      },
+      search: {
+        client: "Search by client",
+        day: "Delivery day",
+        clear: "Clear",
+        none: "No orders match the search.",
+      },
       view_orders: "View orders",
       repeat: {
         last: "Last order (%{date}):",
@@ -408,6 +421,19 @@ export const spanishAmaiMessages = {
       missing_client: "Elige un cliente",
       missing_pieces: "Agrega al menos un sabor",
       missing_date: "Elige la fecha de entrega",
+      paid_warning: {
+        pending:
+          "Este pedido ya está cobrado (%{amount}). Si lo regresas a pendiente, se borra ese pago.",
+        cancel:
+          "Este pedido ya está cobrado (%{amount}). Si lo cancelas, se borra ese pago.",
+        confirm: "Sí, borrar el pago",
+      },
+      search: {
+        client: "Buscar por cliente",
+        day: "Día de entrega",
+        clear: "Limpiar",
+        none: "Ningún pedido coincide con la búsqueda.",
+      },
       view_orders: "Ver pedidos",
       repeat: {
         last: "Último pedido (%{date}):",

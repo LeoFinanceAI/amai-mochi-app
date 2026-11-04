@@ -452,6 +452,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/pedidos/useCambiarEstado.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/pedidos/produccion.ts",
           "type": "registry:component"
         },
@@ -521,6 +525,10 @@
         },
         {
           "path": "src/components/atomic-crm/pedidos/ClienteSelector.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/BuscarPedidos.tsx",
           "type": "registry:component"
         },
         {

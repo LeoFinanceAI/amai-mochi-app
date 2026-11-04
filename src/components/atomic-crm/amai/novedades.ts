@@ -8,6 +8,13 @@ export interface Novedad {
 
 export const NOVEDADES: ReadonlyArray<Novedad> = [
   {
+    fecha: "2026-11-05",
+    cambios: [
+      "Pedidos: busca por nombre del cliente o por día de entrega.",
+      "Pedidos: un pedido entregado se puede cancelar o regresar a pendiente; si ya estaba cobrado, te avisa y borra ese pago.",
+    ],
+  },
+  {
     fecha: "2026-11-04",
     cambios: [
       "Venta rápida: para ventas al público o en eventos, se cobra al momento y sin mínimo de piezas. Está arriba en Nuevo pedido. Si te equivocas, la puedes deshacer ahí mismo.",
