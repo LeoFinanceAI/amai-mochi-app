@@ -1,4 +1,5 @@
 import { useGetList, useLocaleState, useTranslate } from "ra-core";
+import { useCallback } from "react";
 import { Link, useSearchParams } from "react-router";
 import { ChefHat, Plus, Truck } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
@@ -11,6 +12,7 @@ import { AMAI_PATHS } from "../amai/paths";
 import type { PedidoLista } from "../types";
 import { diasDesdeHoy, fromIsoDate } from "./fechaEntrega";
 import { formatoFecha } from "./formatoPedido";
+import { BuscarPedidos } from "./BuscarPedidos";
 import { PedidoCard } from "./PedidoCard";
 
 const FILTROS = ["pendiente", "entregado", "cancelado", "todos"] as const;
@@ -30,15 +32,47 @@ const DAY_LABELS: Record<number, string> = {
 
 // Orders grouped by delivery date. Pending ones (the default) go from the
 // most overdue to the latest; the others, newest first. The chosen filter
-// lives in the URL (?estado=...), so back and refresh keep it.
+// and the search live in the URL (?estado=...&q=...&fecha=...), so back and
+// refresh keep them.
 export const PedidoListPage = () => {
   const translate = useTranslate();
   const [searchParams, setSearchParams] = useSearchParams();
   const param = searchParams.get("estado");
   const filtro: Filtro = isFiltro(param) ? param : "pendiente";
+  const texto = searchParams.get("q") ?? "";
+  const fecha = searchParams.get("fecha") ?? "";
+
+  // Replaces some URL params, dropping the empty ones.
+  const cambiarParams = useCallback(
+    (cambios: Record<string, string>) =>
+      setSearchParams(
+        (actuales) => {
+          const nuevos = new URLSearchParams(actuales);
+          for (const [clave, valor] of Object.entries(cambios)) {
+            if (valor) nuevos.set(clave, valor);
+            else nuevos.delete(clave);
+          }
+          return nuevos;
+        },
+        { replace: true },
+      ),
+    [setSearchParams],
+  );
+  const buscar = useCallback(
+    (cambio: { texto?: string; fecha?: string }) =>
+      cambiarParams({
+        ...(cambio.texto !== undefined ? { q: cambio.texto.trim() } : {}),
+        ...(cambio.fecha !== undefined ? { fecha: cambio.fecha } : {}),
+      }),
+    [cambiarParams],
+  );
 
   const { data, isPending, error } = useGetList<PedidoLista>("pedido", {
-    filter: filtro === "todos" ? {} : { estado: filtro },
+    filter: {
+      ...(filtro === "todos" ? {} : { estado: filtro }),
+      ...(texto ? { "cliente@ilike": texto } : {}),
+      ...(fecha ? { fecha_entrega: fecha } : {}),
+    },
     sort: {
       field: "fecha_entrega",
       order: filtro === "pendiente" ? "ASC" : "DESC",
@@ -85,8 +119,9 @@ export const PedidoListPage = () => {
           label: translate(`amai.orders.filters.${value}`),
         }))}
         value={filtro}
-        onChange={(estado) => setSearchParams({ estado }, { replace: true })}
+        onChange={(estado) => cambiarParams({ estado })}
       />
+      <BuscarPedidos texto={texto} fecha={fecha} onChange={buscar} />
       {isPending ? <Skeleton className="h-40 w-full" /> : null}
       {error ? (
         <p className="text-destructive" role="alert">
@@ -95,7 +130,9 @@ export const PedidoListPage = () => {
       ) : null}
       {data?.length === 0 ? (
         <p className="text-muted-foreground">
-          {translate("amai.orders.empty")}
+          {translate(
+            texto || fecha ? "amai.orders.search.none" : "amai.orders.empty",
+          )}
         </p>
       ) : null}
       {data?.length ? <GruposPorFecha pedidos={data} /> : null}

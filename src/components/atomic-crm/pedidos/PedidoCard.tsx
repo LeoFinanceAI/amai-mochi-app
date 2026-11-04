@@ -1,4 +1,4 @@
-import { useLocaleState, useNotify, useTranslate, useUpdate } from "ra-core";
+import { useLocaleState, useTranslate } from "ra-core";
 import { Link } from "react-router";
 import {
   Check,
@@ -13,23 +13,19 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import { editOrderPath } from "../amai/paths";
-import type { EstadoPedido, PedidoLista } from "../types";
+import type { PedidoLista } from "../types";
 import { whatsappUrl } from "../amai/whatsapp";
 import { mensajeConfirmacion } from "./confirmacion";
 import { formatoDinero, mapsUrl } from "./formatoPedido";
-
-const AVISO_ESTADO: Record<EstadoPedido, string> = {
-  entregado: "amai.orders.notice.delivered",
-  cancelado: "amai.orders.notice.cancelled",
-  pendiente: "amai.orders.notice.pending",
-};
+import { useCambiarEstado } from "./useCambiarEstado";
 
 // One order in the list: who, how many of each flavor, how much, and the
-// actions for its state. State changes can be undone for a few seconds.
+// actions for its state. A delivered order can go back to pending or be
+// cancelled; if it was paid, it asks first and removes the payment.
 export const PedidoCard = ({ pedido }: { pedido: PedidoLista }) => {
   const translate = useTranslate();
-  const notify = useNotify();
-  const [update, { isPending }] = useUpdate<PedidoLista>();
+  const { cambiar, porConfirmar, confirmarCambio, descartar, isPending } =
+    useCambiarEstado(pedido);
   const [locale] = useLocaleState();
   // Pending orders only: confirm what was agreed before delivering.
   const confirmar =
@@ -39,18 +35,6 @@ export const PedidoCard = ({ pedido }: { pedido: PedidoLista }) => {
           mensajeConfirmacion(pedido, translate, locale),
         )
       : null;
-
-  const cambiarEstado = (estado: EstadoPedido) =>
-    update(
-      "pedido",
-      { id: pedido.id, data: { estado }, previousData: pedido },
-      {
-        mutationMode: "undoable",
-        onSuccess: () =>
-          notify(AVISO_ESTADO[estado], { type: "info", undoable: true }),
-        onError: () => notify("ra.notification.http_error", { type: "error" }),
-      },
-    );
 
   const detalle = [
     translate("amai.orders.pieces", { smart_count: pedido.piezas }),
@@ -125,7 +109,7 @@ export const PedidoCard = ({ pedido }: { pedido: PedidoLista }) => {
             <Button
               className="min-h-11 grow gap-1"
               disabled={isPending}
-              onClick={() => cambiarEstado("entregado")}
+              onClick={() => cambiar("entregado")}
             >
               <Check className="size-4" />
               {translate("amai.orders.actions.deliver")}
@@ -158,24 +142,69 @@ export const PedidoCard = ({ pedido }: { pedido: PedidoLista }) => {
               variant="ghost"
               className="min-h-11 gap-1"
               disabled={isPending}
-              onClick={() => cambiarEstado("cancelado")}
+              onClick={() => cambiar("cancelado")}
             >
               <X className="size-4" />
               {translate("amai.orders.actions.cancel")}
             </Button>
           </>
-        ) : (
-          <Button
-            variant="outline"
-            className="min-h-11 gap-1"
-            disabled={isPending}
-            onClick={() => cambiarEstado("pendiente")}
-          >
-            <RotateCcw className="size-4" />
-            {translate("amai.orders.actions.back_to_pending")}
-          </Button>
+        ) : porConfirmar ? null : (
+          <>
+            <Button
+              variant="outline"
+              className="min-h-11 gap-1"
+              disabled={isPending}
+              onClick={() => cambiar("pendiente")}
+            >
+              <RotateCcw className="size-4" />
+              {translate("amai.orders.actions.back_to_pending")}
+            </Button>
+            {pedido.estado === "entregado" ? (
+              <Button
+                variant="ghost"
+                className="min-h-11 gap-1"
+                disabled={isPending}
+                onClick={() => cambiar("cancelado")}
+              >
+                <X className="size-4" />
+                {translate("amai.orders.actions.cancel")}
+              </Button>
+            ) : null}
+          </>
         )}
       </div>
+      {porConfirmar ? (
+        <div
+          role="alert"
+          className="flex flex-col gap-2 rounded-lg bg-secondary p-3"
+        >
+          <p className="text-sm font-semibold">
+            {translate(
+              porConfirmar.estado === "cancelado"
+                ? "amai.orders.paid_warning.cancel"
+                : "amai.orders.paid_warning.pending",
+              { amount: formatoDinero(porConfirmar.monto) },
+            )}
+          </p>
+          <div className="flex gap-2">
+            <Button
+              className="min-h-11 grow"
+              disabled={isPending}
+              onClick={confirmarCambio}
+            >
+              {translate("amai.orders.paid_warning.confirm")}
+            </Button>
+            <Button
+              variant="ghost"
+              className="min-h-11"
+              disabled={isPending}
+              onClick={descartar}
+            >
+              {translate("ra.action.cancel")}
+            </Button>
+          </div>
+        </div>
+      ) : null}
     </li>
   );
 };

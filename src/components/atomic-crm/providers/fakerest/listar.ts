@@ -17,7 +17,21 @@ const OPERATORS: Record<string, (order: number) => boolean> = {
   gte: (order) => order >= 0,
 };
 
+// "field@ilike": like ra-data-postgrest, every word of the search must appear
+// in the field, ignoring case (ILIKE *word*).
+const contieneTodas = (cell: unknown, value: unknown) => {
+  if (cell == null) return false;
+  const texto = String(cell).toLocaleLowerCase();
+  return String(value)
+    .trim()
+    .split(/\s+/)
+    .every((palabra) => texto.includes(palabra.toLocaleLowerCase()));
+};
+
 const matches = <T extends object>(row: T, key: string, value: unknown) => {
+  if (key.endsWith("@ilike")) {
+    return contieneTodas(row[key.slice(0, -"@ilike".length) as keyof T], value);
+  }
   const operator = key.slice(key.lastIndexOf("_") + 1);
   if (operator in OPERATORS) {
     const field = key.slice(0, key.lastIndexOf("_")) as keyof T;
