@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { AmaiPage } from "../amai/AmaiPage";
 import { ChipRadioGroup } from "../amai/ChipRadioGroup";
 import type { CrmDataProvider } from "../providers/types";
-import type { Cliente, VentaRapida } from "../types";
+import type { Cliente, PedidoLista, VentaRapida } from "../types";
 import {
   METODOS_PAGO,
   cambiarCantidad,
@@ -16,6 +16,7 @@ import {
   type NuevoPedidoForm,
 } from "./nuevoPedidoForm";
 import { SaborCantidades } from "./SaborCantidades";
+import { VentasRecientes, type VentaHecha } from "./VentasRecientes";
 
 // The chip for "Público en general"; venta_rapida() picks that client in SQL.
 const PUBLICO = "publico";
@@ -58,14 +59,30 @@ export const VentaRapidaPage = () => {
   const dataProvider = useDataProvider<CrmDataProvider>();
   const queryClient = useQueryClient();
   const [form, setForm] = useState<VentaForm>(VENTA_VACIA);
+  const [ventas, setVentas] = useState<VentaHecha[]>([]);
   const update = (cambio: Partial<VentaForm>) =>
     setForm((actual) => ({ ...actual, ...cambio }));
   const venta = toVentaRapida(form);
   const piezas = totalPiezas(form.cantidades);
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (nueva: VentaRapida) => dataProvider.ventaRapida(nueva),
-    onSuccess: () => {
+    // Read back the saved order for its total, priced in SQL.
+    mutationFn: async (nueva: VentaRapida) => {
+      const { id } = await dataProvider.ventaRapida(nueva);
+      const { data } = await dataProvider.getOne<PedidoLista>("pedido", {
+        id,
+      });
+      return data;
+    },
+    onSuccess: (pedido) => {
+      setVentas((actuales) => [
+        {
+          pedidoId: pedido.id,
+          piezas: Number(pedido.piezas),
+          total: Number(pedido.total),
+        },
+        ...actuales,
+      ]);
       notify("amai.quick_sale.saved", {
         type: "success",
         messageArgs: { smart_count: piezas },
@@ -89,6 +106,14 @@ export const VentaRapidaPage = () => {
       <p className="text-muted-foreground">
         {translate("amai.quick_sale.intro")}
       </p>
+      <VentasRecientes
+        ventas={ventas}
+        onDeshecha={(pedidoId) =>
+          setVentas((actuales) =>
+            actuales.filter((venta) => venta.pedidoId !== pedidoId),
+          )
+        }
+      />
       <form
         noValidate
         onSubmit={guardar}

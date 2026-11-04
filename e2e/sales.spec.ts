@@ -53,6 +53,28 @@ test.describe("quick sale and your clients", () => {
     ]);
   });
 
+  test("a quick sale can be undone", async ({ page, amai }) => {
+    // Arrange
+    const fresa = await amai.createSabor("Fresa");
+    await amai.setPrecioLista(fresa.id, 30);
+    await signIn(page);
+    await page.getByRole("link", { name: "Quick sale" }).click();
+    await page.getByRole("button", { name: "Add 1 piece of Fresa" }).click();
+    await page.getByRole("button", { name: "Charge and save" }).click();
+    const recent = page.getByRole("region", { name: "Sold just now" });
+    await expect(recent.getByText("1 piece · $30")).toBeVisible();
+
+    // Act
+    await recent.getByRole("button", { name: "Undo" }).click();
+
+    // Assert
+    await expect(page.getByText("Sale undone")).toBeVisible();
+    expect(await amai.listPagos()).toEqual([]);
+    expect(await amai.listPedidos()).toEqual([
+      expect.objectContaining({ estado: "cancelado", total: 30 }),
+    ]);
+  });
+
   test("your clients shows who buys and who stopped ordering", async ({
     page,
     amai,

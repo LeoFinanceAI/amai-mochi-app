@@ -159,4 +159,27 @@ describe("quick sale", () => {
     expect(pedidos.map((p) => p.estado)).toEqual(["entregado"]);
     expect(pagos).toEqual([]);
   });
+
+  it("undoes a sale made by mistake", async () => {
+    // Arrange
+    const { screen, leer } = await openQuickSale();
+    await screen
+      .getByRole("button", { name: "Agregar 1 pieza de Fresa" })
+      .click();
+    await screen.getByRole("button", { name: "Cobrar y guardar" }).click();
+    const recientes = screen.getByRole("region", {
+      name: "Vendido hace un momento",
+    });
+    await expect.element(recientes.getByText("1 pieza · $30")).toBeVisible();
+
+    // Act
+    await recientes.getByRole("button", { name: "Deshacer" }).click();
+
+    // Assert
+    await expect.element(screen.getByText("Venta deshecha")).toBeVisible();
+    await expect.element(recientes).not.toBeInTheDocument();
+    const { pedidos, pagos } = await leer();
+    expect(pedidos.map((p) => p.estado)).toEqual(["cancelado"]);
+    expect(pagos).toEqual([]);
+  });
 });
