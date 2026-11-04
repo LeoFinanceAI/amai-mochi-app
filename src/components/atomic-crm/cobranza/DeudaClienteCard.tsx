@@ -7,7 +7,8 @@ import { cn } from "@/lib/utils";
 import { fromIsoDate } from "../pedidos/fechaEntrega";
 import { formatoDinero } from "../pedidos/formatoPedido";
 import type { MetodoPago } from "../types";
-import { DIAS_ALERTA, whatsappUrl, type DeudaCliente } from "./cobranza";
+import { whatsappUrl } from "../amai/whatsapp";
+import { DIAS_ALERTA, type DeudaCliente } from "./cobranza";
 
 const METODOS: ReadonlyArray<MetodoPago> = ["efectivo", "transferencia"];
 

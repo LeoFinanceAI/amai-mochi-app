@@ -65,6 +65,17 @@ export const englishAmaiMessages = {
         last: "Last order (%{date}):",
         button: "Repeat last order",
       },
+      confirm: {
+        button: "Confirm on WhatsApp",
+        greeting: "Hi %{name}, this is Amai Mochi confirming your order:",
+        total:
+          "Total: %{smart_count} piece · %{total} |||| Total: %{smart_count} pieces · %{total}",
+        total_no_price:
+          "Total: %{smart_count} piece |||| Total: %{smart_count} pieces",
+        delivery: "Delivery: %{date}",
+        payment: "Payment on delivery: %{method}",
+        thanks: "Thank you!",
+      },
       filter: "Show",
       filters: {
         pendiente: "Pending",
@@ -324,6 +335,17 @@ export const spanishAmaiMessages = {
       repeat: {
         last: "Último pedido (%{date}):",
         button: "Repetir el último pedido",
+      },
+      confirm: {
+        button: "Confirmar por WhatsApp",
+        greeting: "Hola %{name}, te confirmo tu pedido de Amai Mochi:",
+        total:
+          "Total: %{smart_count} pieza · %{total} |||| Total: %{smart_count} piezas · %{total}",
+        total_no_price:
+          "Total: %{smart_count} pieza |||| Total: %{smart_count} piezas",
+        delivery: "Entrega: %{date}",
+        payment: "Pago al recibir: %{method}",
+        thanks: "¡Gracias!",
       },
       filter: "Mostrar",
       filters: {
