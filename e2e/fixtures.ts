@@ -313,6 +313,21 @@ const amai = {
       .eq("id", pedidoId);
     if (error) throw new Error(`Failed to deliver: ${error.message}`);
   },
+  async createPago(
+    clienteId: number,
+    pedidoId: number,
+    fecha: string,
+    monto: number,
+  ) {
+    const { error } = await adminSupabase.from("pago").insert({
+      cliente_id: clienteId,
+      pedido_id: pedidoId,
+      fecha,
+      monto,
+      metodo: "efectivo",
+    });
+    if (error) throw new Error(`Failed to create payment: ${error.message}`);
+  },
   async listPagos() {
     const { data, error } = await adminSupabase
       .from("pago")

@@ -736,6 +736,18 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/exportar/reportes.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/exportar/csv.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/exportar/ExportarPage.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/deals/stages.ts",
           "type": "registry:component"
         },
@@ -1061,6 +1073,10 @@
         },
         {
           "path": "src/components/atomic-crm/clientes/ClienteInputs.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/clientes/ClienteHistorial.tsx",
           "type": "registry:component"
         },
         {

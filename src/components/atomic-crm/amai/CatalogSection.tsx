@@ -40,6 +40,10 @@ export const CatalogSection = () => {
             to={AMAI_PATHS.expenses}
             label={translate("amai.expenses.title")}
           />
+          <CatalogItem
+            to={AMAI_PATHS.export}
+            label={translate("amai.export.title")}
+          />
         </ItemGroup>
       </div>
     </div>

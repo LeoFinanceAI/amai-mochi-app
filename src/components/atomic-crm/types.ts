@@ -169,6 +169,13 @@ export type Pago = {
   creado_en?: string;
 };
 
+// A client's balance from v_saldo_cliente: delivered orders minus payments.
+export type SaldoCliente = {
+  cargos: number;
+  abonos: number;
+  saldo: number;
+};
+
 // A row of v_cobranza_pendiente: a delivered order with no payment yet.
 export type CobranzaPendiente = {
   id: number;

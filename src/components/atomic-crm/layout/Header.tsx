@@ -35,6 +35,7 @@ const Header = () => {
     },
     { to: AMAI_PATHS.summary, label: translate("amai.navigation.summary") },
     { to: AMAI_PATHS.expenses, label: translate("amai.expenses.title") },
+    { to: AMAI_PATHS.export, label: translate("amai.export.title") },
     {
       to: "/sabor",
       label: translate("resources.sabor.name", { smart_count: 2 }),

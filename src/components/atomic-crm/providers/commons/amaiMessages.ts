@@ -183,6 +183,31 @@ export const englishAmaiMessages = {
       reminder:
         "Hi %{name}, this is Amai Mochi. A friendly reminder of the pending payment of %{total} for %{smart_count} order. Thank you! |||| Hi %{name}, this is Amai Mochi. A friendly reminder of the pending payment of %{total} for %{smart_count} orders. Thank you!",
     },
+    export: {
+      title: "Export to Excel",
+      intro:
+        "Download a month's sales, payments or expenses in a file that opens in Excel, to send to your accountant.",
+      month: "Month",
+      reports: {
+        ventas: "Sales (delivered orders)",
+        cobros: "Payments received",
+        gastos: "Expenses",
+      },
+      empty: "Nothing to export in that month.",
+      columns: {
+        date: "Date",
+        order: "Order",
+        client: "Client",
+        flavors: "Flavors",
+        pieces: "Pieces",
+        payment: "Payment method",
+        total: "Total",
+        reference: "Reference",
+        amount: "Amount",
+        category: "Category",
+        note: "Note",
+      },
+    },
     money: {
       title: "Money",
     },
@@ -245,6 +270,15 @@ export const englishAmaiMessages = {
       phone_hint: "10 digits. Used to message them on WhatsApp.",
       invalid_phone: "Write 10 digits, or 12 with 52 in front.",
       zona_placeholder: "Guadalajara, Colima, Tepetitlán…",
+      history: {
+        title: "Client history",
+        bought: "Bought",
+        orders: "Orders",
+        owes: "Owes",
+        latest: "Latest orders",
+        none: "No orders yet.",
+        data: "Details",
+      },
     },
   },
   resources: {
@@ -455,6 +489,31 @@ export const spanishAmaiMessages = {
       reminder:
         "Hola %{name}, te escribo de Amai Mochi. Te recuerdo el pago pendiente de %{total} por %{smart_count} pedido. ¡Muchas gracias! |||| Hola %{name}, te escribo de Amai Mochi. Te recuerdo el pago pendiente de %{total} por %{smart_count} pedidos. ¡Muchas gracias!",
     },
+    export: {
+      title: "Exportar a Excel",
+      intro:
+        "Baja las ventas, los cobros o los gastos de un mes en un archivo que se abre en Excel, para mandárselo a tu contador.",
+      month: "Mes",
+      reports: {
+        ventas: "Ventas (pedidos entregados)",
+        cobros: "Cobros",
+        gastos: "Gastos",
+      },
+      empty: "No hay nada que exportar en ese mes.",
+      columns: {
+        date: "Fecha",
+        order: "Pedido",
+        client: "Cliente",
+        flavors: "Sabores",
+        pieces: "Piezas",
+        payment: "Forma de pago",
+        total: "Total",
+        reference: "Referencia",
+        amount: "Monto",
+        category: "Categoría",
+        note: "Nota",
+      },
+    },
     money: {
       title: "Dinero",
     },
@@ -517,6 +576,15 @@ export const spanishAmaiMessages = {
       phone_hint: "10 dígitos. Sirve para escribirle por WhatsApp.",
       invalid_phone: "Escribe 10 dígitos, o 12 con 52 al inicio.",
       zona_placeholder: "Guadalajara, Colima, Tepetitlán…",
+      history: {
+        title: "Historial del cliente",
+        bought: "Ha comprado",
+        orders: "Pedidos",
+        owes: "Debe",
+        latest: "Últimos pedidos",
+        none: "Todavía no tiene pedidos.",
+        data: "Datos",
+      },
     },
   },
   resources: {
