@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 import { fromIsoDate } from "../pedidos/fechaEntrega";
 import { formatoDinero } from "../pedidos/formatoPedido";
 import type { MetodoPago } from "../types";
-import { whatsappUrl } from "../amai/whatsapp";
 import { DIAS_ALERTA, type DeudaCliente } from "./cobranza";
+import { enlaceRecordatorio } from "./recordatorio";
 
 const METODOS: ReadonlyArray<MetodoPago> = ["efectivo", "transferencia"];
 
@@ -39,12 +39,7 @@ export const DeudaClienteCard = ({
   const total = deuda.tieneSinPrecio
     ? translate("amai.orders.no_price")
     : formatoDinero(deuda.total);
-  const mensaje = translate("amai.receivables.reminder", {
-    name: deuda.nombre,
-    total: formatoDinero(deuda.total),
-    smart_count: deuda.pedidos.length,
-  });
-  const recordar = whatsappUrl(deuda.telefono, mensaje);
+  const recordar = enlaceRecordatorio(deuda, translate);
 
   return (
     <li className="flex flex-col gap-3 rounded-xl border bg-card p-4">

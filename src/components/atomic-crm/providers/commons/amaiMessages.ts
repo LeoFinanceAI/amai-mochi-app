@@ -180,6 +180,16 @@ export const englishAmaiMessages = {
       undone: "Payment undone",
       collected_today: "Collected today",
       no_price_hint: "An order has no price yet: set prices to collect it.",
+      bulk: {
+        title: "Reminders",
+        start:
+          "Remind the client with orders older than %{days} days |||| Remind the %{smart_count} clients with orders older than %{days} days",
+        progress: "Reminder %{current} of %{total}",
+        send: "Send to %{name}",
+        skip: "Skip",
+        finish: "Finish",
+        done: "Done: you sent %{smart_count} of %{total} reminders.",
+      },
       reminder:
         "Hi %{name}, this is Amai Mochi. A friendly reminder of the pending payment of %{total} for %{smart_count} order. Thank you! |||| Hi %{name}, this is Amai Mochi. A friendly reminder of the pending payment of %{total} for %{smart_count} orders. Thank you!",
     },
@@ -486,6 +496,16 @@ export const spanishAmaiMessages = {
       collected_today: "Cobrado hoy",
       no_price_hint:
         "Hay un pedido sin precio: captura los precios para poder cobrarlo.",
+      bulk: {
+        title: "Recordatorios",
+        start:
+          "Recordar al cliente con pedidos de más de %{days} días |||| Recordar a los %{smart_count} clientes con pedidos de más de %{days} días",
+        progress: "Recordatorio %{current} de %{total}",
+        send: "Enviar a %{name}",
+        skip: "Saltar",
+        finish: "Terminar",
+        done: "Listo: mandaste %{smart_count} de %{total} recordatorios.",
+      },
       reminder:
         "Hola %{name}, te escribo de Amai Mochi. Te recuerdo el pago pendiente de %{total} por %{smart_count} pedido. ¡Muchas gracias! |||| Hola %{name}, te escribo de Amai Mochi. Te recuerdo el pago pendiente de %{total} por %{smart_count} pedidos. ¡Muchas gracias!",
     },

@@ -10,6 +10,7 @@ export const NOVEDADES: ReadonlyArray<Novedad> = [
   {
     fecha: "2026-11-04",
     cambios: [
+      "Por cobrar: el botón Recordar a los clientes con pedidos de más de 7 días te lleva uno por uno a su WhatsApp con el mensaje de cobro ya escrito.",
       "Exportar a Excel: baja las ventas, los cobros o los gastos de un mes para mandárselos a tu contador. Está en Ajustes → Dinero.",
       "Clientes: al abrir un cliente ves cuánto te ha comprado, cuántos pedidos lleva, cuánto te debe y sus últimos pedidos.",
       "Producción: cuántas piezas de cada sabor preparar para los pedidos de mañana (o de hoy, o de pasado mañana). Está en Pedidos.",
