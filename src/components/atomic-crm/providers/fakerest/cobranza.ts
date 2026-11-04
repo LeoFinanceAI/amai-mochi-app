@@ -1,6 +1,6 @@
 import type { CreateParams, DataProvider, GetListParams } from "ra-core";
 
-import type { CobranzaPendiente, Pago } from "../../types";
+import type { CobranzaPendiente, Pago, SaldoCliente } from "../../types";
 import { diasDesdeHoy } from "../../pedidos/fechaEntrega";
 import { getPedidoLista } from "./pedidos";
 
@@ -79,4 +79,22 @@ export const conDatosDelPedido = async (
     ...params,
     data: { ...params.data, cliente_id: pedido.cliente_id, monto },
   };
+};
+
+// v_saldo_cliente: delivered orders minus all payments of the client.
+export const saldoCliente = async (
+  dataProvider: DataProvider,
+  clienteId: number,
+): Promise<SaldoCliente> => {
+  const { data: entregados } = await getPedidoLista(dataProvider, {
+    ...ALL,
+    filter: { estado: "entregado", cliente_id: clienteId },
+  });
+  const { data: pagos } = await dataProvider.getList<Pago>("pago", {
+    ...ALL,
+    filter: { cliente_id: clienteId },
+  });
+  const cargos = entregados.reduce((total, p) => total + Number(p.total), 0);
+  const abonos = pagos.reduce((total, p) => total + Number(p.monto), 0);
+  return { cargos, abonos, saldo: cargos - abonos };
 };

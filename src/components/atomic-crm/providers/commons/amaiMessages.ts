@@ -245,6 +245,15 @@ export const englishAmaiMessages = {
       phone_hint: "10 digits. Used to message them on WhatsApp.",
       invalid_phone: "Write 10 digits, or 12 with 52 in front.",
       zona_placeholder: "Guadalajara, Colima, Tepetitlán…",
+      history: {
+        title: "Client history",
+        bought: "Bought",
+        orders: "Orders",
+        owes: "Owes",
+        latest: "Latest orders",
+        none: "No orders yet.",
+        data: "Details",
+      },
     },
   },
   resources: {
@@ -517,6 +526,15 @@ export const spanishAmaiMessages = {
       phone_hint: "10 dígitos. Sirve para escribirle por WhatsApp.",
       invalid_phone: "Escribe 10 dígitos, o 12 con 52 al inicio.",
       zona_placeholder: "Guadalajara, Colima, Tepetitlán…",
+      history: {
+        title: "Historial del cliente",
+        bought: "Ha comprado",
+        orders: "Pedidos",
+        owes: "Debe",
+        latest: "Últimos pedidos",
+        none: "Todavía no tiene pedidos.",
+        data: "Datos",
+      },
     },
   },
   resources: {

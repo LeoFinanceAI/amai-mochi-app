@@ -36,7 +36,11 @@ import {
   getPedidoLista,
   getPedidoListaOne,
 } from "./pedidos";
-import { conDatosDelPedido, getCobranzaPendiente } from "./cobranza";
+import {
+  conDatosDelPedido,
+  getCobranzaPendiente,
+  saldoCliente,
+} from "./cobranza";
 import { resumenSemana } from "./resumen";
 import type { CrmDataProvider } from "../types";
 import {
@@ -372,6 +376,9 @@ export const createDataProvider = ({
     },
     resumenSemana: async (fecha: string) => {
       return resumenSemana(baseDataProvider, fecha);
+    },
+    saldoCliente: async (clienteId: number) => {
+      return saldoCliente(baseDataProvider, clienteId);
     },
     getConfiguration: async (): Promise<ConfigurationContextValue> => {
       const { data } = await baseDataProvider.getOne("configuration", {

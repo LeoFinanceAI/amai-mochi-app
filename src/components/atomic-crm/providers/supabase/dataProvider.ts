@@ -10,6 +10,7 @@ import type {
   ContactNote,
   NuevoPedido,
   ResumenSemana,
+  SaldoCliente,
   Deal,
   DealNote,
   RAFile,
@@ -316,6 +317,23 @@ const getDataProviderWithCustomMethods = () => {
         throw new Error("Failed to update the order");
       }
       return { id: data as number };
+    },
+    // What a client has bought and still owes, computed by v_saldo_cliente.
+    async saldoCliente(clienteId: number): Promise<SaldoCliente> {
+      const { data, error } = await getSupabaseClient()
+        .from("v_saldo_cliente")
+        .select("cargos, abonos, saldo")
+        .eq("cliente_id", clienteId)
+        .maybeSingle();
+      if (error) {
+        console.error("saldo_cliente.error", error);
+        throw new Error("Failed to load the client balance");
+      }
+      return {
+        cargos: Number(data?.cargos ?? 0),
+        abonos: Number(data?.abonos ?? 0),
+        saldo: Number(data?.saldo ?? 0),
+      };
     },
     // The weekly summary of the week that contains `fecha` (YYYY-MM-DD).
     async resumenSemana(fecha: string): Promise<ResumenSemana> {
