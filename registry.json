@@ -444,6 +444,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/pedidos/produccion.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/pedidos/nuevoPedidoForm.ts",
           "type": "registry:component"
         },
@@ -457,6 +461,10 @@
         },
         {
           "path": "src/components/atomic-crm/pedidos/SaborCantidades.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/pedidos/ProduccionPage.tsx",
           "type": "registry:component"
         },
         {
