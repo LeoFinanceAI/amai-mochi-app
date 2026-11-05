@@ -145,6 +145,15 @@ export const englishAmaiMessages = {
       overdue: "Overdue",
       empty: "No deliveries for today.",
       all_orders: "See all orders",
+      route: {
+        open: "Open route (%{smart_count} stop) |||| Open route (%{smart_count} stops)",
+        with_link:
+          "%{smart_count} with a Maps link: open it from its order |||| %{smart_count} with a Maps link: open them from their orders",
+        no_address:
+          "%{smart_count} with no address |||| %{smart_count} with no address",
+        over_limit:
+          "%{smart_count} more did not fit in the route |||| %{smart_count} more did not fit in the route",
+      },
     },
     summary: {
       title: "Your week",
@@ -512,6 +521,15 @@ export const spanishAmaiMessages = {
       overdue: "Atrasados",
       empty: "No hay entregas para hoy.",
       all_orders: "Ver todos los pedidos",
+      route: {
+        open: "Abrir ruta (%{smart_count} parada) |||| Abrir ruta (%{smart_count} paradas)",
+        with_link:
+          "%{smart_count} con link de Maps: ábrelo desde su pedido |||| %{smart_count} con link de Maps: ábrelos desde sus pedidos",
+        no_address:
+          "%{smart_count} sin dirección |||| %{smart_count} sin dirección",
+        over_limit:
+          "%{smart_count} más no cupo en la ruta |||| %{smart_count} más no cupieron en la ruta",
+      },
     },
     summary: {
       title: "Tu semana",

@@ -122,6 +122,21 @@ describe("today's deliveries", () => {
     expect(href.searchParams.get("query")).toBe("Av. Juárez 100, Guadalajara");
   });
 
+  it("opens a Maps route through the pending addresses", async () => {
+    // Act
+    const screen = await openDeliveries();
+
+    // Assert: only Tienda Centro has an address; the overdue order has none.
+    const ruta = screen.getByRole("link", { name: "Abrir ruta (1 parada)" });
+    await expect.element(ruta).toBeVisible();
+    const url = new URL(ruta.element().getAttribute("href") ?? "");
+    expect(url.pathname).toBe("/maps/dir/");
+    expect(url.searchParams.get("destination")).toBe(
+      "Av. Juárez 100, Guadalajara",
+    );
+    await expect.element(screen.getByText("1 sin dirección")).toBeVisible();
+  });
+
   it("counts an order as delivered once it is marked", async () => {
     // Arrange
     const screen = await openDeliveries();
