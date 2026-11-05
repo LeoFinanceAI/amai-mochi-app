@@ -1,5 +1,8 @@
 import { useGetList, useLocaleState, useTranslate } from "ra-core";
 import { Link } from "react-router";
+import { Route } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { AmaiPage } from "../amai/AmaiPage";
@@ -7,6 +10,7 @@ import { AMAI_PATHS } from "../amai/paths";
 import type { PedidoLista } from "../types";
 import { toIsoDate } from "./fechaEntrega";
 import { formatoFecha } from "./formatoPedido";
+import { rutaDeEntregas } from "./ruta";
 import { PedidoCard } from "./PedidoCard";
 
 const MAX_ORDERS = 200;
@@ -18,6 +22,7 @@ const porEntregar = (a: PedidoLista, b: PedidoLista) =>
 
 // "Entregas de hoy": today's deliveries with their address (tap for Maps),
 // plus pending orders whose day already passed. "Today" is the phone's date.
+// "Abrir ruta" opens Google Maps with every pending address as a stop.
 export const EntregasHoyPage = () => {
   const translate = useTranslate();
   const [locale] = useLocaleState();
@@ -66,6 +71,7 @@ export const EntregasHoyPage = () => {
               })}
             </p>
           ) : null}
+          <AbrirRuta pedidos={[...(atrasados.data ?? []), ...pedidosHoy]} />
           {atrasados.data?.length ? (
             <Seccion
               titulo={translate("amai.deliveries.overdue")}
@@ -110,3 +116,44 @@ const Seccion = ({
     </ul>
   </section>
 );
+
+const AbrirRuta = ({ pedidos }: { pedidos: PedidoLista[] }) => {
+  const translate = useTranslate();
+  const ruta = rutaDeEntregas(pedidos);
+  const avisos = [
+    ruta.conEnlace
+      ? translate("amai.deliveries.route.with_link", {
+          smart_count: ruta.conEnlace,
+        })
+      : null,
+    ruta.sinDireccion
+      ? translate("amai.deliveries.route.no_address", {
+          smart_count: ruta.sinDireccion,
+        })
+      : null,
+    ruta.fueraDelLimite
+      ? translate("amai.deliveries.route.over_limit", {
+          smart_count: ruta.fueraDelLimite,
+        })
+      : null,
+  ].filter(Boolean);
+  if (!ruta.url) return null;
+  return (
+    <div className="flex flex-col gap-1">
+      <a
+        href={ruta.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(buttonVariants(), "min-h-11 gap-2 self-start")}
+      >
+        <Route className="size-5" />
+        {translate("amai.deliveries.route.open", {
+          smart_count: ruta.paradas,
+        })}
+      </a>
+      {avisos.length ? (
+        <p className="text-xs text-muted-foreground">{avisos.join(" · ")}</p>
+      ) : null}
+    </div>
+  );
+};

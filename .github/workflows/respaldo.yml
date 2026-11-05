@@ -32,9 +32,11 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" > /dev/null
           echo "Ping OK"
 
+      # Pinned, like migraciones.yml: "latest" moved to CLI 3.0, and a new major
+      # version could change "db dump" and break the backup without warning.
       - uses: supabase/setup-cli@v1
         with:
-          version: latest
+          version: 2.122.1
 
       - name: Volcar roles, esquema y datos
         env:

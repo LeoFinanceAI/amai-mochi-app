@@ -464,6 +464,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/pedidos/ruta.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/pedidos/produccion.ts",
           "type": "registry:component"
         },
