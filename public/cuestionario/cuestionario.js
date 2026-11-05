@@ -39,6 +39,11 @@ const FLAVORS = [
       { id: "gastos_hoy", q: "¿Anotas tus gastos hoy?", type: "radio", opts: ["Sí, todos", "Algunos", "No"] },
       { id: "gastos_cat", q: "¿En qué gastas para el negocio?", hint: "Marca todos los que apliquen.", type: "check", opts: ["Ingredientes", "Empaque", "Gasolina", "Hielo o refrigeración", "Renta", "Sueldos"], extra: "¿Otro gasto?" },
     ]},
+    { title: "Empaque y etiquetas", items: [
+      { id: "caducidad_dias", q: "¿Cuánto dura un mochi congelado? ¿Es igual para todos los sabores?", type: "radio", opts: ["Igual para todos", "Cambia según el sabor"], extra: "¿Cuántos días o meses? Si cambia, ¿cuánto dura cada sabor?" },
+      { id: "etiqueta_hoy", q: "¿Cómo pones hoy la fecha de elaboración y de caducidad?", type: "radio", opts: ["Etiqueta impresa", "Etiqueta escrita a mano", "Sello", "No la pongo"], extra: "Si imprimes, ¿en qué impresora y de qué tamaño es la etiqueta?" },
+      { id: "etiqueta_texto", q: "¿Qué más dice tu empaque además de las fechas?", type: "text", area: true, placeholder: "Ej.: ingredientes, «Mantener congelado», tu Instagram…" },
+    ]},
     { title: "La app que usas hoy", items: [
       { id: "app", q: "¿Qué app usas hoy para tu administración?", type: "radio", opts: ["Treinta", "Otra", "Ninguna"], extra: "Si es otra, ¿cuál? ¿Usas también libreta o Excel?" },
       { id: "app_usos", q: "¿Para qué la usas?", hint: "Marca todos los que apliquen.", type: "check", opts: ["Ventas", "Gastos", "Deudas o fiados", "Inventario", "Clientes", "Proveedores"] },
@@ -54,7 +59,7 @@ const FLAVORS = [
     { title: "Más adelante", note: "Opcional. Son ideas para después; contesta solo las que quieras.", items: [
       { id: "inventario", q: "¿Llevas la cuenta de cuántos mochis tienes hechos por sabor?", type: "radio", opts: ["Sí", "A veces", "No"], optional: true },
       { id: "produccion", q: "¿Cada cuándo produces y cuántas piezas por tanda?", type: "text", placeholder: "Ej.: lunes y jueves, 300 piezas", optional: true },
-      { id: "caducidad", q: "¿Cuánto dura un mochi congelado? ¿Se te ha caducado producto?", type: "text", placeholder: "Ej.: 2 meses; a veces se me pasa", optional: true },
+      { id: "caducidad", q: "¿Se te ha caducado producto?", type: "text", placeholder: "Ej.: a veces se me pasa un sabor", optional: true },
       { id: "costo", q: "¿Sabes cuánto te cuesta hacer cada mochi?", type: "radio", opts: ["Sí", "Más o menos", "No"], optional: true },
       { id: "avisos", q: "¿Qué avisos te gustaría que te diera la app?", hint: "Marca todos los que apliquen.", type: "check", opts: ["Producto por caducar", "Poco de un sabor", "Clientes que me deben", "Pedidos de mañana"], optional: true },
       { id: "pegar", q: "¿Te serviría pegar el mensaje de WhatsApp del cliente y que la app arme el pedido sola?", type: "radio", opts: ["Sí", "No", "No sé"], optional: true },
