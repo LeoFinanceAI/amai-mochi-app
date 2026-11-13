@@ -15,8 +15,38 @@ React no es su stack diario: explica las decisiones de frontend y mantén el có
 - Sabores: fresa, mango, taro, chocolate, oreo, vainilla. Empaque con fecha de elaboración y caducidad.
 - Ya lleva su administración en una app, probablemente **Treinta** (ventas, gastos, deudas, clientes). Por confirmar:
   qué usa de ella, qué plan paga y si permite exportar sus datos. Hay que migrar lo que necesite.
-- **Aún no contesta el cuestionario** (formulario en https://amai-mochi.pages.dev/cuestionario/).
-  Todo lo anterior viene de su Instagram y de Leo; trátalo como hipótesis.
+- **No terminó el cuestionario** (https://amai-mochi.pages.dev/cuestionario/): lo dejó a tres cuartos y prefiere
+  platicarlo. Lo anterior viene de su Instagram y de Leo; trátalo como hipótesis, salvo lo que corrige el audio de abajo.
+
+## Lo que dijo Eduardo (audio del 12 nov 2026)
+
+Es la única fuente directa hasta ahora y **corrige varias hipótesis de arriba**:
+
+- **Ya no tienen repartidor ni venden directo a clientes.** Hoy venden solo a distribuidores: cinco, con los que
+  trabajan cómodamente. Con el crecimiento quieren volver a vender directo.
+- **Decide junto con Marifer** (nombre tomado de la transcripción automática; confirmarlo). Les falta sentarse a
+  definir qué quieren que tenga la app.
+- **Lo que quieren:** que cada distribuidor lleve en la app sus tiendas y ubicaciones, sus clientes, las ventas que
+  hace y el inventario que recibe cuando compra un pedido, y que vea su propio reporte. Amai ve el global de todos.
+- **Crecimiento:** piensan crear su red de distribución en otra ciudad; preguntan si se trabaja desde ahora o después.
+  Respuesta acordada: no construirlo ahora, pero diseñar para que sumar una ciudad o un distribuidor sea un alta.
+- **Prefieren una junta** en lugar del cuestionario: Eduardo y Marifer platican y Leo toma nota. Puede ser en persona
+  o por videollamada.
+
+Consecuencias para el proyecto:
+
+- El alcance pasa de una app de un solo usuario a una plataforma para la red (varias empresas adentro).
+  **No construyas nada de esto antes de la junta.**
+- Entregas de hoy, la ruta en Maps y la venta rápida suponían reparto y venta al público: quedan guardadas para
+  cuando vuelvan a hacerlo; no les agregues funciones.
+- Antes de crear la cuenta de cualquier distribuidor hay que rehacer los permisos: hoy cualquier usuario con
+  sesión ve todo (ver «Modelo de datos»).
+- Riesgo de canal: un distribuidor puede no querer que Amai vea a sus clientes, más si Amai volverá a vender
+  directo. Propuesta: Amai ve totales por tienda y por sabor; los datos de contacto son solo del distribuidor.
+- Etapas propuestas: 1) arranque de Amai con datos reales, 2) prueba con uno o dos distribuidores, 3) tablero
+  global y alta del resto, 4) crecimiento (otra ciudad, lotes y caducidad, venta directa).
+- **Materiales para Eduardo y Marifer:** en primera persona (habla Leo), muy visuales y **sin mencionar pagos ni
+  honorarios**; eso lo platica Leo directamente con Eduardo.
 
 ## Stack (decidido) y regla de costo
 
@@ -77,7 +107,12 @@ inventario por lotes y alertas, costos/recetas, más usuarios.
 
 ## Pendiente de confirmar con Eduardo
 
-Cada respuesta puede requerir una migración nueva. No construyas estas partes sin confirmarlas:
+Cada respuesta puede requerir una migración nueva. No construyas estas partes sin confirmarlas.
+Se resuelven en la junta con Eduardo y Marifer, no con el cuestionario:
+
+- ¿Con qué uno o dos distribuidores se hace la prueba? ¿Venden a tiendas, al público o a ambos?
+- ¿Amai ve los clientes de cada distribuidor o solo totales por tienda y sabor?
+- ¿Cuánto dura el producto congelado y qué pasa con lo dañado o caducado? (inventario del distribuidor)
 
 - ¿Consignación? (agregaría liquidaciones)
 - ¿Abonos parciales o pagos a cuenta del cliente? (hoy `pago.pedido_id` es opcional)
